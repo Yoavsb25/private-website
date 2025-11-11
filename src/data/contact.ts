@@ -23,12 +23,12 @@ export const contact: ContactInformation = {
     {
       type: 'email',
       label: 'Email',
-      value: 'hello@example.com',
+      value: 'Yoavsb25@gmail.com',
       icon: 'Mail',
       available: true,
     },
   ],
   responseTime: 'Usually within 24 hours',
-  availability: 'Available for consulting and full-time opportunities',
+  availability: 'Available for consulting and Talking about Automation, Python, and Software Development',
 }
 

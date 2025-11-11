@@ -4,7 +4,8 @@ import { Menu, X } from 'lucide-react'
 import { Button } from './ui/button'
 
 const navItems = [
-  { id: 'hero', label: 'Home' },
+  { id: 'education', label: 'Education' },
+  { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
   { id: 'contact', label: 'Contact' },
 ]
@@ -46,7 +47,7 @@ export function Navigation() {
               className="text-xl font-bold"
               aria-label="Home"
             >
-              Portfolio
+              Yoav Sborovsky
             </Link>
           </div>
 

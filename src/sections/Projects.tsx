@@ -19,6 +19,16 @@ export function Projects() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredProjects.map((project) => (
             <Card key={project.id} className="flex flex-col">
+              {project.imageUrl && (
+                <div className="w-full h-48 overflow-hidden rounded-t-lg">
+                  <img
+                    src={project.imageUrl}
+                    alt={project.imageAlt || project.title}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              )}
               <CardHeader>
                 <CardTitle>{project.title}</CardTitle>
                 <CardDescription>{project.description}</CardDescription>

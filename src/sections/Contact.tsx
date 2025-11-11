@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { contact } from '@/data/contact'
 import { Mail, Linkedin, Github, ExternalLink } from 'lucide-react'
-import * as Icons from 'lucide-react'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Mail,
