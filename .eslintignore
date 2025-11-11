@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+dist/
+build/
+coverage/
+
+# Config files
+*.config.js
+*.config.ts
+vite.config.ts
+
+# Generated files
+*.min.js
+*.bundle.js
+
+# Test files (if not linting tests)
+# tests/
+# __tests__/
+
+# Build outputs
+.next/
+.nuxt/
+out/
+

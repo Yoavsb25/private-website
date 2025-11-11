@@ -31,7 +31,13 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+**Code Quality**: Verify linting/formatting tools configured, documentation standards defined, naming conventions established.
+
+**Testing Standards**: Confirm test framework selected, coverage thresholds defined, CI/CD pipeline includes test execution, TDD approach documented.
+
+**User Experience Consistency**: Validate design system/components available, accessibility requirements defined, UX patterns documented, error handling standards established.
+
+**Performance Requirements**: Define performance budgets (load times, API latency, resource limits), establish monitoring/measurement approach, set performance testing strategy.
 
 ## Project Structure
 
