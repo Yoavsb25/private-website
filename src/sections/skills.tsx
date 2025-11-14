@@ -21,6 +21,14 @@ import {
 } from 'react-icons/si'
 import { FaJava } from 'react-icons/fa'
 
+const PlaywrightIcon = (props: { className?: string }) => (
+  <img
+    src="public/assets/Playwright--Streamline-Svg-Logos.svg"
+    alt="Playwright"
+    className={props.className}
+  />
+)
+
 type SkillItem = {
   name: string
   icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>
@@ -48,6 +56,7 @@ const skills: { category: string; items: SkillItem[] }[] = [
       { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
       { name: 'Django', icon: SiDjango, color: '#092E20' },
       { name: 'Flask', icon: SiFlask, color: '#000000' },
+      {name: 'playwright', icon: PlaywrightIcon, color: '#000000'}
     ],
   },
   {

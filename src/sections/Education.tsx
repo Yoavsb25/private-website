@@ -1,5 +1,6 @@
 import { Section } from '@/components/Section'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 
 interface EducationItem {
   degree: string
@@ -12,7 +13,6 @@ interface EducationItem {
   developmentTools?: string[]
   majors?: string[]
   grades?: string[]
-  
 }
 
 const education: EducationItem[] = [
@@ -22,99 +22,151 @@ const education: EducationItem[] = [
     period: 'Graduated 2025',
     logoUrl: '/assets/reichman_logo.png',
     activities: [
-      'Code4Good – Developed technology solutions for nonprofit organizations across Israel, helping optimize operations, streamline processes, and create lasting social impact through innovative tools.',
-      'Reichman Futsal Team – Represented the university in national competitions; contributed to winning the 2023/24 championship.',
+      'Code4Good – Developed tech solutions for nonprofits, improving operations and impact.',
+      'Reichman Futsal Team – National competitions; 2023/24 champions.',
     ],
     programmingLanguages: ['Python', 'Java', 'C', 'JavaScript', 'HTML', 'CSS'],
     developmentTools: ['Git', 'GitHub', 'Flask', 'Django', 'React'],
     details: [
-      'Hands-on experience with programming, data analysis, and database management',
-
+      'Hands-on projects in programming, data analysis, and database management',
     ],
-    grades: ['Machine Learning course final grade: 88', 'Operating Systems course final grade: 92', 'Product Management course final grade: 94'],
+    grades: [
+      'Machine Learning final: 88',
+      'Operating Systems final: 92',
+      'Product Management final: 94',
+    ],
   },
   {
     degree: 'Biotechnology Major',
     institution: 'Rothberg High School',
     period: 'Graduated 2014',
     logoUrl: '/assets/rothberg_logo.png',
-    details: [
-    ],
     majors: ['Math', 'English', 'Biology', 'Biotechnology', 'Literature', 'Bible', 'History'],
-    grades: ['Matriculation GPA: 114.2', 'Psychometric grade: 721'],
+    grades: ['Matriculation GPA: 114.2', 'Psychometric: 721'],
   },
 ]
 
+// --- small helpers -----------------------------------------------------------
+function Logo({ src, alt }: { src?: string; alt: string }) {
+  if (!src) return null
+  return (
+    <div className="flex h-14 w-32 items-center justify-center overflow-hidden">
+      <img
+        src={src}
+        alt={alt}
+        className="max-h-[75%] max-w-[75%] object-contain"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  )
+}
+
+
+function PillList({ items }: { items?: string[] }) {
+  if (!items?.length) return null
+  return (
+    <div className="mt-3 flex flex-wrap gap-2">
+      {items.map((it) => (
+        <Badge key={it} variant="outline">
+          {it}
+        </Badge>
+      ))}
+    </div>
+  )
+}
+
+function BulletList({ items }: { items?: string[] }) {
+  if (!items?.length) return null
+  return (
+    <ul className="list-disc space-y-2 pl-5 text-sm">
+      {items.map((t, i) => (
+        <li key={i}>{t}</li>
+      ))}
+    </ul>
+  )
+}
+
+// --- main component ----------------------------------------------------------
 export function Education() {
   return (
     <Section id="education" className="bg-muted/30">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12">Education</h2>
+      <div className="mx-auto max-w-6xl">
+        <h2 className="mb-12 text-center text-3xl font-bold">Education</h2>
+
         <div className="space-y-6">
-          {education.map((item, index) => (
-            <Card key={index}>
-              <CardHeader>
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                  {item.logoUrl && (
-                    <img
-                      src={item.logoUrl}
-                      alt={`${item.institution} logo`}
-                      className="h-16 w-auto object-contain"
-                    />
-                  )}
-                  <div>
-                    <CardTitle>{item.degree}</CardTitle>
-                    <CardDescription className="flex justify-between w-full">
-                      <div>
-                        <CardDescription>{item.institution}</CardDescription>
-                      </div>
-                    </CardDescription>
+          {education.map((item, idx) => (
+            <Card key={idx} className="overflow-hidden">
+              <CardHeader className="pb-4">
+                <div className="grid items-start gap-4 sm:grid-cols-[auto,1fr,auto]">
+                  <Logo src={item.logoUrl} alt={`${item.institution} logo`} />
+
+                  <div className="min-w-0">
+                    <CardTitle className="truncate">{item.degree}</CardTitle>
+                    <CardDescription className="truncate">{item.institution}</CardDescription>
                   </div>
+
                   <div className="text-right">
-                    <CardDescription className="text-xs">{item.period}</CardDescription>
+                    {item.period && (
+                      <CardDescription className="text-xs">{item.period}</CardDescription>
+                    )}
                   </div>
                 </div>
               </CardHeader>
-              <CardContent>
-                {item.activities && (
-                  <ul className="space-y-2 text-sm">
-                    {item.activities.map((activity, i) => (
-                      <li key={i} className="flex items-start">
-                        <span className="mr-2">•</span>
-                        <span>{activity}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {item.details && (
-                  <ul className="space-y-2 text-sm">
-                    {item.details.map((detail, i) => (
-                      <li key={i} className="flex items-start">
-                        <span className="mr-2">•</span>
-                        <span>{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {item.grades && (
-                  <ul className="space-y-2 text-sm">
-                    {item.grades.map((grade, i) => (
-                      <li key={i} className="flex items-start">
-                        <span className="mr-2">•</span>
-                        <span>{grade}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {item.majors && (
-                  <ul className="space-y-2 text-sm">
-                    {item.majors.map((major, i) => (
-                      <li key={i} className="flex items-start">
-                        <span className="mr-2">•</span>
-                        <span>{major}</span>
-                      </li>
-                    ))}
-                  </ul>
+
+              <CardContent className="space-y-6">
+                {/* Details & Activities */}
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div>
+                    {item.details?.length ? (
+                      <>
+                        <h4 className="mb-2 text-sm font-semibold text-foreground/80">Highlights</h4>
+                        <BulletList items={item.details} />
+                      </>
+                    ) : null}
+
+                    {item.activities?.length ? (
+                      <>
+                        <h4 className="mb-2 mt-4 text-sm font-semibold text-foreground/80">Activities</h4>
+                        <BulletList items={item.activities} />
+                      </>
+                    ) : null}
+                  </div>
+
+                  <div>
+                    {item.grades?.length ? (
+                      <>
+                        <h4 className="mb-2 text-sm font-semibold text-foreground/80">Grades</h4>
+                        <BulletList items={item.grades} />
+                      </>
+                    ) : null}
+
+                    {item.majors?.length ? (
+                      <>
+                        <h4 className="mb-2 mt-4 text-sm font-semibold text-foreground/80">Majors</h4>
+                        <PillList items={item.majors} />
+                      </>
+                    ) : null}
+                  </div>
+                </div>
+
+                {/* Tech context (only for relevant entries) */}
+                {(item.programmingLanguages?.length || item.developmentTools?.length) && (
+                  <div>
+                    {item.programmingLanguages?.length ? (
+                      <>
+                        <h4 className="mb-2 text-sm font-semibold text-foreground/80">Programming Languages</h4>
+                        <PillList items={item.programmingLanguages} />
+                      </>
+                    ) : null}
+
+                    {item.developmentTools?.length ? (
+                      <>
+                        <h4 className="mb-2 mt-4 text-sm font-semibold text-foreground/80">Tools & Frameworks</h4>
+                        <PillList items={item.developmentTools} />
+                      </>
+                    ) : null}
+                  </div>
                 )}
               </CardContent>
             </Card>
@@ -124,4 +176,3 @@ export function Education() {
     </Section>
   )
 }
-

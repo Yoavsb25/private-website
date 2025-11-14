@@ -34,7 +34,6 @@ export function Hero() {
             <p className="text-2xl sm:text-3xl font-bold text-foreground">
               {portfolio.title}
             </p>
-            
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               {portfolio.cvUrl && (
@@ -42,7 +41,7 @@ export function Hero() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="w-full sm:w-auto"
+                    className="w-40 h-10"
                   >
                     Download CV
                   </Button>
@@ -52,7 +51,7 @@ export function Hero() {
                 <Button
                   variant="default"
                   size="lg"
-                  className="w-full sm:w-auto"
+                  className="w-40 h-10"
                 >
                   Contact Info
                 </Button>
@@ -68,9 +67,9 @@ export function Hero() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
-                    className="w-10 h-10 rounded-lg border border-border flex items-center justify-center hover:bg-accent transition-colors"
+                    className="w-40 h-10 rounded-lg border border-border flex items-center justify-center hover:bg-accent transition-colors"
                   >
-                    <Linkedin className="h-5 w-5" />
+                    <Linkedin className="w-10 h-8 text-blue-600" />
                   </a>
                 )}
                 {portfolio.socialLinks.github && (
@@ -79,9 +78,9 @@ export function Hero() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="GitHub"
-                    className="w-10 h-10 rounded-lg border border-border flex items-center justify-center hover:bg-accent transition-colors"
+                    className="w-40 h-10 rounded-lg border border-border flex items-center justify-center hover:bg-accent transition-colors"
                   >
-                    <Github className="h-5 w-5" />
+                    <Github className="h-10 w-8 text-600" />
                   </a>
                 )}
               </div>
