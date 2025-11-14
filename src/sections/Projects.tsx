@@ -1,5 +1,7 @@
 import { Section } from '@/components/Section'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
+} from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { projects } from '@/data/projects'
@@ -7,43 +9,54 @@ import { ExternalLink, Github } from 'lucide-react'
 
 export function Projects() {
   const featuredProjects = projects.filter((p) => p.featured)
-
-  if (projects.length === 0) {
-    return null
-  }
+  if (featuredProjects.length === 0) return null
 
   return (
     <Section id="projects" className="bg-muted/50">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12">Featured Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Centered container with consistent max width */}
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 className="mb-12 text-center text-3xl font-bold">Featured Projects</h2>
+
+        {/* Responsive, centered grid */}
+        <div
+          className="
+            grid gap-8
+            justify-center
+            [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]
+          "
+        >
           {featuredProjects.map((project) => (
-            <Card key={project.id} className="flex flex-col">
+            <Card key={project.id} className="flex h-full flex-col hover:shadow-lg transition-shadow">
               {project.imageUrl && (
-                <div className="w-full h-48 overflow-hidden rounded-t-lg">
+                <div className="overflow-hidden rounded-t-lg">
                   <img
                     src={project.imageUrl}
                     alt={project.imageAlt || project.title}
-                    className="w-full h-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
                     loading="lazy"
+                    style={{ aspectRatio: '16/9' }}
                   />
                 </div>
               )}
+
               <CardHeader>
-                <CardTitle>{project.title}</CardTitle>
+                <CardTitle className="text-lg font-bold">{project.title}</CardTitle>
                 <CardDescription>{project.description}</CardDescription>
               </CardHeader>
-              <CardContent className="flex-1 space-y-4">
+
+              <CardContent className="flex flex-1 flex-col gap-4">
                 <div>
-                  <h3 className="text-sm font-semibold mb-2">Problem</h3>
+                  <h3 className="mb-2 text-sm font-semibold">Problem</h3>
                   <p className="text-sm text-muted-foreground">{project.problem}</p>
                 </div>
+
                 <div>
-                  <h3 className="text-sm font-semibold mb-2">Solution</h3>
+                  <h3 className="mb-2 text-sm font-semibold">Solution</h3>
                   <p className="text-sm text-muted-foreground">{project.solution}</p>
                 </div>
+
                 <div>
-                  <h3 className="text-sm font-semibold mb-2">Technologies</h3>
+                  <h3 className="mb-2 text-sm font-semibold">Technologies</h3>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
                       <Badge key={tech} variant="outline">
@@ -52,13 +65,15 @@ export function Projects() {
                     ))}
                   </div>
                 </div>
+
                 {project.outcomes && (
                   <div>
-                    <h3 className="text-sm font-semibold mb-2">Outcomes</h3>
+                    <h3 className="mb-2 text-sm font-semibold">Outcomes</h3>
                     <p className="text-sm text-muted-foreground">{project.outcomes}</p>
                   </div>
                 )}
               </CardContent>
+
               <CardFooter className="flex gap-2">
                 {project.liveUrl && (
                   <a
@@ -94,4 +109,3 @@ export function Projects() {
     </Section>
   )
 }
-
