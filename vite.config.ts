@@ -10,7 +10,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  base: process.env.GITHUB_ACTIONS ? '/website/' : '/',
+  base: process.env.GITHUB_ACTIONS ? '/private-website/' : '/',
   build: {
     outDir: 'dist',
     sourcemap: false,
