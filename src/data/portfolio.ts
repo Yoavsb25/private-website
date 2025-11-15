@@ -38,7 +38,7 @@ export const portfolio: PortfolioContent = {
   imageAlt: 'Yoav Sborovsky - Automation Engineer & Software Developer',
   cvUrl: cvPath,
   socialLinks: {
-    linkedin: 'https://www.linkedin.com/in/yoav-sborovsky-5a85b41a1/',
+    linkedin: 'https://www.linkedin.com/in/yoav-sborovsky/',
     github: 'https://github.com/Yoavsb25',
   },
 }
