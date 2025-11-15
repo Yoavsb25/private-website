@@ -3,6 +3,8 @@
  * Core personal and professional information
  */
 
+const getAssetUrl = (path: string) => `${'/src/public'}${path}`
+const cvPath = getAssetUrl('/assets/cv.pdf')
 export interface PortfolioContent {
   name: string
   title: string
@@ -36,7 +38,7 @@ export const portfolio: PortfolioContent = {
   availableFor: ['Full-time Software Developer roles', 'Automation Engineering positions'],
   imageUrl: '/assets/profile.jpg',
   imageAlt: 'Yoav Sborovsky - Automation Engineer & Software Developer',
-  cvUrl: '/assets/cv.pdf',
+  cvUrl: cvPath,
   socialLinks: {
     linkedin: 'https://www.linkedin.com/in/yoav-sborovsky-5a85b41a1/',
     github: 'https://github.com/Yoavsb25',

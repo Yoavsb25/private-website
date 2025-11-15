@@ -19,6 +19,10 @@ export interface WorkItem {
   date?: string
 }
 
+const getAssetUrl = (path: string) => `${'/src/public'}${path}`
+const teamBalncerImg = getAssetUrl('/assets/Teamaker.png')
+const alertBuddyImg = getAssetUrl('/assets/alert_buddy.png')
+
 export const projects: WorkItem[] = [
   {
     id: 'alert-buddy',
@@ -28,7 +32,7 @@ export const projects: WorkItem[] = [
     solution: 'Developed a full-stack web application using Django, Python, MySQL, HTML, CSS, and JavaScript. Built real-time update system allowing users to mark themselves safe and view safety status of contacts.',
     technologies: ['Python', 'Django', 'MySQL', 'JavaScript', 'HTML', 'CSS'],
     outcomes: 'Created a functional emergency communication platform that enables real-time safety status updates for users and their networks.',
-    imageUrl: '/assets/alert_buddy.png',
+    imageUrl: alertBuddyImg,
     imageAlt: 'Alert Buddy - Emergency Safety Platform interface showing friend safety statuses',
     featured: true,
     date: '2024',
@@ -41,7 +45,7 @@ export const projects: WorkItem[] = [
     solution: 'Built a web application using Python, Flask, SQL, HTML, and CSS that automatically balances groups based on skill level inputs, ensuring fair and optimal team composition.',
     technologies: ['Python', 'Flask', 'SQL', 'HTML', 'CSS'],
     outcomes: 'Automated team balancing process, saving time and ensuring fair group distributions based on skill levels.',
-    imageUrl: '/assets/Teamaker.png',
+    imageUrl: teamBalncerImg,
     imageAlt: 'Team Balancer - Results page showing balanced teams with average scores',
     featured: true,
     date: '2024',

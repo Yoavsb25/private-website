@@ -23,7 +23,7 @@ import { FaJava } from 'react-icons/fa'
 
 const PlaywrightIcon = (props: { className?: string }) => (
   <img
-    src="public/assets/Playwright--Streamline-Svg-Logos.svg"
+    src="src/public/assets/Playwright--Streamline-Svg-Logos.svg"
     alt="Playwright"
     className={props.className}
   />

@@ -2,6 +2,10 @@ import { Section } from '@/components/Section'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
+const getAssetUrl = (path: string) => `${'/src/public'}${path}`
+const sysaidImg = getAssetUrl('/assets/sysaid_technologies_ltd_logo.jpeg')
+const affilomaniaImg = getAssetUrl('/assets/Affilomania.png')
+const airForceImg = getAssetUrl('/assets/IAF.png')
 interface ExperienceItem {
   title: string
   company: string
@@ -18,7 +22,7 @@ const experiences: ExperienceItem[] = [
     title: 'Automation Engineer',
     company: 'SysAid',
     period: 'Apr 2025 - Present',
-    logoUrl: 'assets/sysaid_technologies_ltd_logo.jpeg',
+    logoUrl: sysaidImg,
     location: 'Tel Aviv-Yafo',
     type: 'Full-time',
     achievements: [
@@ -34,7 +38,7 @@ const experiences: ExperienceItem[] = [
     title: 'Data Analyst',
     company: 'Affilomania',
     period: 'Oct 2020 - Oct 2021',
-    logoUrl: '/assets/Affilomania.png',
+    logoUrl: affilomaniaImg,
     location: 'Tel Aviv-Yafo',
     achievements: [
       'Analyzed and interpreted large-scale data sets to support business decisions and improve KPIs',
@@ -49,7 +53,7 @@ const experiences: ExperienceItem[] = [
     title: 'Commander of Flight Academy Cadets',
     company: 'Israeli Air Force',
     period: 'Military Service',
-    logoUrl: '/assets/IAF.png',
+    logoUrl: airForceImg,
     location: 'Israel',
     achievements: [
       'Led a team of 10 soldiers, ensuring their welfare',

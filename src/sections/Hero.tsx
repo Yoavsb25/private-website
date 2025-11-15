@@ -2,6 +2,8 @@ import { Section } from '@/components/Section'
 import { Button } from '@/components/ui/button'
 import { portfolio } from '@/data/portfolio'
 import { Linkedin, Github } from 'lucide-react'
+// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
+import profileImg from '@/public/assets/profile.jpg'
 
 export function Hero() {
   return (
@@ -9,19 +11,17 @@ export function Hero() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left Side - Profile Image */}
-          {portfolio.imageUrl && (
-            <div className="flex justify-center md:justify-start">
-              <div className="relative">
-                <div className="w-64 h-80 sm:w-72 sm:h-96 rounded-2xl overflow-hidden bg-[#C6D2FF] p-2 shadow-lg">
-                  <img
-                    src={portfolio.imageUrl}
-                    alt={portfolio.imageAlt || portfolio.name}
-                    className="w-full h-full object-cover rounded-xl"
-                  />
-                </div>
+          <div className="flex justify-center md:justify-start">
+            <div className="relative">
+              <div className="w-64 h-80 sm:w-72 sm:h-96 rounded-2xl overflow-hidden bg-[#C6D2FF] p-2 shadow-lg">
+                <img
+                  src={profileImg}
+                  alt={portfolio.imageAlt || portfolio.name}
+                  className="w-full h-full object-cover rounded-xl"
+                />
               </div>
             </div>
-          )}
+          </div>
 
           {/* Right Side - Content */}
           <div className="space-y-6 text-center md:text-left">
@@ -34,6 +34,7 @@ export function Hero() {
             <p className="text-2xl sm:text-3xl font-bold text-foreground">
               {portfolio.title}
             </p>
+
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               {portfolio.cvUrl && (
@@ -91,4 +92,3 @@ export function Hero() {
     </Section>
   )
 }
-

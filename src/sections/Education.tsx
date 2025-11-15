@@ -2,6 +2,10 @@ import { Section } from '@/components/Section'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
+const getAssetUrl = (path: string) => `${'/src/public'}${path}`
+const reichmanImg = getAssetUrl('/assets/reichman_logo.png')
+const rothbergImg = getAssetUrl('/assets/rothberg_logo.png')
+
 interface EducationItem {
   degree: string
   institution: string
@@ -20,7 +24,7 @@ const education: EducationItem[] = [
     degree: 'Computer Science & Entrepreneurship',
     institution: 'Reichman University',
     period: 'Graduated 2025',
-    logoUrl: '/assets/reichman_logo.png',
+    logoUrl: reichmanImg,
     activities: [
       'Code4Good – Developed tech solutions for nonprofits, improving operations and impact.',
       'Reichman Futsal Team – National competitions; 2023/24 champions.',
@@ -40,7 +44,7 @@ const education: EducationItem[] = [
     degree: 'Biotechnology Major',
     institution: 'Rothberg High School',
     period: 'Graduated 2014',
-    logoUrl: '/assets/rothberg_logo.png',
+    logoUrl: rothbergImg,
     majors: ['Math', 'English', 'Biology', 'Biotechnology', 'Literature', 'Bible', 'History'],
     grades: ['Matriculation GPA: 114.2', 'Psychometric: 721'],
   },
