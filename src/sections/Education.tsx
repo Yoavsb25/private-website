@@ -1,10 +1,10 @@
 import { Section } from '@/components/Section'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-
-const getAssetUrl = (path: string) => `${'/src/public'}${path}`
-const reichmanImg = getAssetUrl('/assets/reichman_logo.png')
-const rothbergImg = getAssetUrl('/assets/rothberg_logo.png')
+// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
+import reichmanImg from '@/public/assets/reichman_logo.png'
+// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
+import rothbergImg from '@/public/assets/rothberg_logo.png'
 
 interface EducationItem {
   degree: string

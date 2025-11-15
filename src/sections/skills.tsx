@@ -20,10 +20,12 @@ import {
   SiCss3,
 } from 'react-icons/si'
 import { FaJava } from 'react-icons/fa'
+// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
+import PlaywrightImg from '@/public/assets/Playwright--Streamline-Svg-Logos.svg'
 
 const PlaywrightIcon = (props: { className?: string }) => (
   <img
-    src="src/public/assets/Playwright--Streamline-Svg-Logos.svg"
+    src={PlaywrightImg}
     alt="Playwright"
     className={props.className}
   />

@@ -2,9 +2,8 @@
  * Portfolio Content Data
  * Core personal and professional information
  */
-
-const getAssetUrl = (path: string) => `${'/src/public'}${path}`
-const cvPath = getAssetUrl('/assets/cv.pdf')
+// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
+import cvPath from '@/public/assets/cv.pdf'
 export interface PortfolioContent {
   name: string
   title: string

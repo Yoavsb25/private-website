@@ -2,10 +2,13 @@ import { Section } from '@/components/Section'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
-const getAssetUrl = (path: string) => `${'/src/public'}${path}`
-const sysaidImg = getAssetUrl('/assets/sysaid_technologies_ltd_logo.jpeg')
-const affilomaniaImg = getAssetUrl('/assets/Affilomania.png')
-const airForceImg = getAssetUrl('/assets/IAF.png')
+// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
+import sysaidImg from '@/public/assets/sysaid_technologies_ltd_logo.jpeg'
+// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
+import affilomaniaImg from '@/public/assets/Affilomania.png'
+// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
+import airForceImg from '@/public/assets/IAF.png'
+
 interface ExperienceItem {
   title: string
   company: string
