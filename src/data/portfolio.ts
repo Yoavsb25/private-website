@@ -2,8 +2,7 @@
  * Portfolio Content Data
  * Core personal and professional information
  */
-// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
-import cvPath from '@/public/assets/cv.pdf'
+import cvPath from '@/assets/cv.pdf'
 export interface PortfolioContent {
   name: string
   title: string

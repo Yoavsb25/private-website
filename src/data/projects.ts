@@ -18,10 +18,8 @@ export interface WorkItem {
   featured: boolean
   date?: string
 }
-// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
-import teamBalncerImg from '@/public/assets/Teamaker.png'
-// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
-import alertBuddyImg from '@/public/assets/alert_buddy.png'
+import teamBalncerImg from '@/assets/Teamaker.png'
+import alertBuddyImg from '@/assets/alert_buddy.png'
 
 
 export const projects: WorkItem[] = [

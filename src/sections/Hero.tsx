@@ -2,8 +2,7 @@ import { Section } from '@/components/Section'
 import { Button } from '@/components/ui/button'
 import { portfolio } from '@/data/portfolio'
 import { Linkedin, Github } from 'lucide-react'
-// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
-import profileImg from '@/public/assets/profile.jpg'
+import profileImg from '@/assets/profile.jpg'
 
 export function Hero() {
   return (

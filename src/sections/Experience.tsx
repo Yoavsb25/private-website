@@ -1,13 +1,9 @@
 import { Section } from '@/components/Section'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-
-// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
-import sysaidImg from '@/public/assets/sysaid_technologies_ltd_logo.jpeg'
-// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
-import affilomaniaImg from '@/public/assets/Affilomania.png'
-// @ts-expect-error: Image import for usage with bundlers (handled in build pipeline)
-import airForceImg from '@/public/assets/IAF.png'
+import sysaidImg from '@/assets/sysaid_technologies_ltd_logo.jpeg'
+import affilomaniaImg from '@/assets/Affilomania.png'
+import airForceImg from '@/assets/IAF.png'
 
 interface ExperienceItem {
   title: string
