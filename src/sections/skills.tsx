@@ -28,16 +28,17 @@ export function Skills() {
           {skills.map((group, i) => (
             <motion.div
               key={i}
+              className="flex"
               {...createStaggerItemAnimation(staggerItem)}
               {...createCardHoverAnimation('small')}
             >
-              <Card className={`${COMPONENT_CLASSES.CARD.BACKDROP} ${COMPONENT_CLASSES.CARD.HOVER}`}>
+              <Card className={`${COMPONENT_CLASSES.CARD.BACKDROP} ${COMPONENT_CLASSES.CARD.HOVER} flex flex-col h-full`}>
                 <CardHeader>
                   <CardTitle className="text-lg font-semibold">{group.category}</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-1 flex flex-col">
                   <motion.div
-                    className="flex flex-wrap justify-center gap-5 pt-3"
+                    className="grid grid-cols-3 gap-4 sm:gap-5 pt-3 flex-1 content-start"
                     {...createStaggerContainerAnimation(staggerContainer)}
                   >
                     {group.items.map(({ name, icon: Icon, color }) => (
