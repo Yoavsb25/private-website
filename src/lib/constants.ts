@@ -94,6 +94,7 @@ export const SECTION_IDS = {
   SKILLS: 'skills',
   EDUCATION: 'education',
   EXPERIENCE: 'experience',
+  TIMELINE: 'timeline',
   PROJECTS: 'projects',
   CONTACT: 'contact',
 } as const
@@ -103,8 +104,7 @@ export const SECTION_IDS = {
  */
 export const NAVIGATION = {
   ITEMS: [
-    { id: SECTION_IDS.EDUCATION, label: 'Education' },
-    { id: SECTION_IDS.EXPERIENCE, label: 'Experience' },
+    { id: SECTION_IDS.TIMELINE, label: 'Timeline' },
     { id: SECTION_IDS.PROJECTS, label: 'Projects' },
     { id: SECTION_IDS.CONTACT, label: 'Contact' },
   ],
