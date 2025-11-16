@@ -49,12 +49,12 @@ export function Skills() {
                         onHoverEnd={() => setHoveredSkill(null)}
                       >
                         <motion.div
-                          className="flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-card shadow-sm cursor-pointer relative"
+                          className="flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 items-center justify-center rounded-xl border border-border bg-card shadow-sm cursor-pointer relative"
                           variants={getAnimationVariants(iconHover)}
                           whileHover="hover"
                           whileTap="tap"
                         >
-                          <Icon className="h-7 w-7" style={{ color }} />
+                          <Icon className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" style={{ color }} />
                         </motion.div>
                         <p className="text-sm text-foreground/80">{name}</p>
                         <AnimatePresence>

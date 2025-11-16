@@ -15,7 +15,7 @@ interface LogoProps {
 export function Logo({ src, alt, className }: LogoProps) {
   if (!src) return null
   return (
-    <div className={cn('flex h-14 w-32 items-center justify-center overflow-hidden', className)}>
+    <div className={cn('flex h-12 w-24 sm:h-14 sm:w-28 md:h-16 md:w-32 lg:h-20 lg:w-40 items-center justify-center overflow-hidden', className)}>
       <img
         src={src}
         alt={alt}

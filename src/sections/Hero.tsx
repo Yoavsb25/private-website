@@ -36,7 +36,7 @@ export function Hero() {
               transition={{ duration: ANIMATION_CONFIG.DURATION.NORMAL }}
             >
               <motion.div
-                className="w-64 h-80 sm:w-72 sm:h-96 rounded-2xl overflow-hidden bg-[#C6D2FF] p-2 shadow-lg"
+                className="w-48 h-64 sm:w-64 sm:h-80 md:w-72 md:h-96 lg:w-80 lg:h-[28rem] rounded-2xl overflow-hidden bg-[#C6D2FF] p-2 shadow-lg"
                 initial={ANIMATION_CONFIG.INITIAL.SCALE}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: ANIMATION_CONFIG.DURATION.SLOW, delay: ANIMATION_CONFIG.DELAY.SHORT }}
@@ -85,7 +85,7 @@ export function Hero() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="w-40 h-10"
+                    className="px-4 py-2 text-xs sm:px-6 sm:py-2 sm:text-sm md:px-8 md:py-3 md:text-base rounded-md"
                   >
                     Download CV
                   </Button>
@@ -103,7 +103,8 @@ export function Hero() {
                 <Button
                   variant="default"
                   size="lg"
-                  className="w-40 h-10"
+                  className="px-4 py-2 text-xs sm:px-6 sm:py-2 sm:text-sm md:px-8 md:py-3 md:text-base rounded-md"
+
                 >
                   Contact Info
                 </Button>
@@ -127,7 +128,7 @@ export function Hero() {
                     whileHover="hover"
                     whileTap="tap"
                   >
-                    <Linkedin className="w-6 h-6 text-blue-600" />
+                    <Linkedin className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-blue-600" />
                   </motion.a>
                 )}
                 {portfolio.socialLinks.github && (
@@ -141,7 +142,7 @@ export function Hero() {
                     whileHover="hover"
                     whileTap="tap"
                   >
-                    <Github className="h-6 w-6" />
+                    <Github className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
                   </motion.a>
                 )}
               </motion.div>

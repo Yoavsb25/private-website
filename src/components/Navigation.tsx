@@ -129,7 +129,7 @@ export function Navigation() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-9 w-9 p-0"
+                className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 p-0"
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle menu"
                 aria-expanded={isOpen}
@@ -138,7 +138,7 @@ export function Navigation() {
                   animate={{ rotate: isOpen ? 90 : 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                  {isOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />}
                 </motion.div>
               </Button>
             </div>

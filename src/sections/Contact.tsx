@@ -66,7 +66,7 @@ export function Contact() {
                           repeatDelay: 3,
                         }}
                       >
-                        <Icon className="h-6 w-6 text-primary" />
+                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-primary" />
                       </motion.div>
                       {method.label}
                     </motion.div>

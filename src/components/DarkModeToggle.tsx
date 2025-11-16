@@ -36,10 +36,10 @@ export function DarkModeToggle() {
       <Button
         variant="ghost"
         size="sm"
-        className="h-9 w-9 p-0"
+        className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 p-0"
         aria-label="Toggle dark mode"
       >
-        <Sun className="h-5 w-5" />
+        <Sun className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
       </Button>
     )
   }
@@ -54,7 +54,7 @@ export function DarkModeToggle() {
         variant="ghost"
         size="sm"
         onClick={toggleTheme}
-        className="h-9 w-9 p-0 relative"
+        className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 p-0 relative"
         aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       >
         <motion.div
@@ -70,7 +70,7 @@ export function DarkModeToggle() {
           }}
           className="absolute inset-0 flex items-center justify-center"
         >
-          <Moon className="h-5 w-5" />
+          <Moon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
         </motion.div>
         <motion.div
           initial={false}
@@ -85,7 +85,7 @@ export function DarkModeToggle() {
           }}
           className="absolute inset-0 flex items-center justify-center"
         >
-          <Sun className="h-5 w-5" />
+          <Sun className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
         </motion.div>
       </Button>
     </motion.div>

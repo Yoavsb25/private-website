@@ -193,7 +193,7 @@ export const COMPONENT_CLASSES = {
     BACKDROP: 'border-border/50 bg-background/40 backdrop-blur-sm',
   },
   BUTTON: {
-    SOCIAL: 'w-12 h-12 rounded-lg border border-border flex items-center justify-center hover:bg-accent transition-colors',
+    SOCIAL: 'w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg border border-border flex items-center justify-center hover:bg-accent transition-colors',
   },
   TOOLTIP: 'absolute -top-12 left-1/2 transform -translate-x-1/2 bg-foreground text-background px-2 py-1 rounded text-xs whitespace-nowrap z-10',
 } as const

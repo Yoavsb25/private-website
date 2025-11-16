@@ -41,7 +41,7 @@ export function Experience() {
                         <img
                           src={exp.logoUrl}
                           alt={`${exp.company} logo`}
-                          className="h-16 w-auto object-contain"
+                          className="h-12 w-auto sm:h-14 sm:w-auto md:h-16 md:w-auto lg:h-20 lg:w-auto object-contain"
                         />
                       </motion.div>
                     )}

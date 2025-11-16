@@ -103,7 +103,7 @@ export function Projects() {
                       {...createButtonAnimation()}
                     >
                       <Button variant="outline" size="sm">
-                        <ExternalLink className="mr-2 h-4 w-4" />
+                        <ExternalLink className="mr-2 w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
                         Live Site
                       </Button>
                     </motion.a>
@@ -117,7 +117,7 @@ export function Projects() {
                       {...createButtonAnimation()}
                     >
                       <Button variant="outline" size="sm">
-                        <Github className="mr-2 h-4 w-4" />
+                        <Github className="mr-2 w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
                         Source
                       </Button>
                     </motion.a>
