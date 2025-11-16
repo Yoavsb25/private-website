@@ -60,11 +60,11 @@ export const skills: SkillGroup[] = [
     category: 'Frameworks & Libraries',
     items: [
       { name: 'React', icon: SiReact, color: '#61DAFB' },
-      { name: 'Next.js', icon: SiNextdotjs, color: '#000000' },
+      { name: 'Next.js', icon: SiNextdotjs, color: 'currentColor' },
       { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
       { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
-      { name: 'Django', icon: SiDjango, color: '#092E20' },
-      { name: 'Flask', icon: SiFlask, color: '#000000' },
+      { name: 'Django', icon: SiDjango, color: '#0FA47A' },
+      { name: 'Flask', icon: SiFlask, color: 'currentColor' },
       { name: 'Playwright', icon: PlaywrightIcon, color: '#2EAD33' },
     ],
   },
@@ -73,7 +73,7 @@ export const skills: SkillGroup[] = [
     items: [
       { name: 'Git', icon: SiGit, color: '#F05032' },
       { name: 'Docker', icon: SiDocker, color: '#2496ED' },
-      { name: 'SQLite', icon: SiSqlite, color: '#003B57' },
+      { name: 'SQLite', icon: SiSqlite, color: '#0F80D5' },
       { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
       { name: 'PostgreSQL', icon: SiPostgresql, color: '#31648C' },
       { name: 'Jenkins', icon: SiJenkins, color: '#D24939' },

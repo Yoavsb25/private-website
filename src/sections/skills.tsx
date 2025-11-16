@@ -55,7 +55,10 @@ export function Skills() {
                           whileHover="hover"
                           whileTap="tap"
                         >
-                          <Icon className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" style={{ color }} />
+                          <Icon 
+                            className={`h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 ${color === 'currentColor' ? 'text-foreground' : ''}`}
+                            style={color !== 'currentColor' ? { color } : undefined}
+                          />
                         </motion.div>
                         <p className="text-sm text-foreground/80">{name}</p>
                         <AnimatePresence>
