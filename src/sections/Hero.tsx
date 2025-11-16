@@ -1,43 +1,87 @@
+import { motion } from 'framer-motion'
 import { Section } from '@/components/Section'
+import { Container } from '@/components/Container'
+import { Text } from '@/components/Text'
+import { Heading } from '@/components/Heading'
 import { Button } from '@/components/ui/button'
 import { portfolio } from '@/data/portfolio'
 import { Linkedin, Github } from 'lucide-react'
 import profileImg from '@/assets/profile.jpg'
+import { slideInLeft, slideInRight, iconHover, staggerContainer, staggerItem } from '@/lib/animations'
+import { createButtonAnimation } from '@/lib/animation-helpers'
+import { useScrollToSection } from '@/hooks/useScrollToSection'
+import { SECTION_IDS, ANIMATION_CONFIG, LAYOUT, SPACING, COMPONENT_CLASSES } from '@/lib/constants'
+import { getAnimationVariants } from '@/lib/animations'
 
 export function Hero() {
+  const scrollToSection = useScrollToSection()
+
   return (
-    <Section id="hero" className="flex items-center justify-center min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+    <Section id={SECTION_IDS.HERO} className={`${LAYOUT.FLEX.CENTER} min-h-screen`}>
+      <Container size="small">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center"
+          variants={getAnimationVariants(staggerContainer)}
+          initial="hidden"
+          animate="visible"
+        >
           {/* Left Side - Profile Image */}
-          <div className="flex justify-center md:justify-start">
-            <div className="relative">
-              <div className="w-64 h-80 sm:w-72 sm:h-96 rounded-2xl overflow-hidden bg-[#C6D2FF] p-2 shadow-lg">
-                <img
+          <motion.div
+            className="flex justify-center md:justify-start"
+            variants={getAnimationVariants(slideInLeft)}
+          >
+            <motion.div
+              className="relative"
+              whileHover={ANIMATION_CONFIG.HOVER.SCALE_UP}
+              transition={{ duration: ANIMATION_CONFIG.DURATION.NORMAL }}
+            >
+              <motion.div
+                className="w-64 h-80 sm:w-72 sm:h-96 rounded-2xl overflow-hidden bg-[#C6D2FF] p-2 shadow-lg"
+                initial={ANIMATION_CONFIG.INITIAL.SCALE}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: ANIMATION_CONFIG.DURATION.SLOW, delay: ANIMATION_CONFIG.DELAY.SHORT }}
+              >
+                <motion.img
                   src={profileImg}
                   alt={portfolio.imageAlt || portfolio.name}
                   className="w-full h-full object-cover rounded-xl"
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: ANIMATION_CONFIG.DURATION.SLOWER, delay: ANIMATION_CONFIG.DELAY.LONG }}
                 />
-              </div>
-            </div>
-          </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Side - Content */}
-          <div className="space-y-6 text-center md:text-left">
-            <p className="text-lg sm:text-xl text-foreground">
-              Hello, I'm
-            </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
-              {portfolio.name}
-            </h1>
-            <p className="text-2xl sm:text-3xl font-bold text-foreground">
-              {portfolio.title}
-            </p>
+          <motion.div
+            className={`${SPACING.SECTION.CONTENT} text-center md:text-left`}
+            variants={getAnimationVariants(slideInRight)}
+          >
+            <motion.div variants={getAnimationVariants(staggerItem)}>
+              <Text variant="bodyLarge">Hello, I'm</Text>
+            </motion.div>
+            <motion.div variants={getAnimationVariants(staggerItem)}>
+              <Heading level={1}>{portfolio.name}</Heading>
+            </motion.div>
+            <motion.div variants={getAnimationVariants(staggerItem)}>
+              <Text variant="bodyLarge" className="text-2xl sm:text-3xl font-bold">
+                {portfolio.title}
+              </Text>
+            </motion.div>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 pt-4"
+              variants={getAnimationVariants(staggerItem)}
+            >
               {portfolio.cvUrl && (
-                <a href={portfolio.cvUrl} download className="w-full sm:w-auto">
+                <motion.a
+                  href={portfolio.cvUrl}
+                  download
+                  className="w-full sm:w-auto"
+                  {...createButtonAnimation()}
+                >
                   <Button
                     variant="outline"
                     size="lg"
@@ -45,9 +89,17 @@ export function Hero() {
                   >
                     Download CV
                   </Button>
-                </a>
+                </motion.a>
               )}
-              <a href="#contact" className="w-full sm:w-auto">
+              <motion.a
+                href={`#${SECTION_IDS.CONTACT}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToSection(SECTION_IDS.CONTACT)
+                }}
+                className="w-full sm:w-auto"
+                {...createButtonAnimation()}
+              >
                 <Button
                   variant="default"
                   size="lg"
@@ -55,39 +107,48 @@ export function Hero() {
                 >
                   Contact Info
                 </Button>
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
 
             {/* Social Media Icons */}
             {portfolio.socialLinks && (
-              <div className="flex gap-4 justify-center md:justify-start pt-4">
+              <motion.div
+                className={`flex gap-4 justify-center md:justify-start pt-4`}
+                variants={getAnimationVariants(staggerItem)}
+              >
                 {portfolio.socialLinks.linkedin && (
-                  <a
+                  <motion.a
                     href={portfolio.socialLinks.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
-                    className="w-40 h-10 rounded-lg border border-border flex items-center justify-center hover:bg-accent transition-colors"
+                    className={COMPONENT_CLASSES.BUTTON.SOCIAL}
+                    variants={getAnimationVariants(iconHover)}
+                    whileHover="hover"
+                    whileTap="tap"
                   >
-                    <Linkedin className="w-10 h-8 text-blue-600" />
-                  </a>
+                    <Linkedin className="w-6 h-6 text-blue-600" />
+                  </motion.a>
                 )}
                 {portfolio.socialLinks.github && (
-                  <a
+                  <motion.a
                     href={portfolio.socialLinks.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="GitHub"
-                    className="w-40 h-10 rounded-lg border border-border flex items-center justify-center hover:bg-accent transition-colors"
+                    className={COMPONENT_CLASSES.BUTTON.SOCIAL}
+                    variants={getAnimationVariants(iconHover)}
+                    whileHover="hover"
+                    whileTap="tap"
                   >
-                    <Github className="h-10 w-8 text-600" />
-                  </a>
+                    <Github className="h-6 w-6" />
+                  </motion.a>
                 )}
-              </div>
+              </motion.div>
             )}
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </Container>
     </Section>
   )
 }

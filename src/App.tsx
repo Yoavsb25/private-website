@@ -1,6 +1,8 @@
 import { HashRouter } from 'react-router-dom'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { Navigation } from './components/Navigation'
+import { ScrollProgress } from './components/ScrollProgress'
+import { ScrollToTop } from './components/ScrollToTop'
 import { Hero } from './sections/Hero'
 import { Education } from './sections/Education'
 import { Experience } from './sections/Experience'
@@ -12,7 +14,8 @@ function App() {
   return (
     <ErrorBoundary>
       <HashRouter>
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background transition-colors duration-300">
+          <ScrollProgress />
           <Navigation />
           <main>
             <Hero />
@@ -22,6 +25,7 @@ function App() {
             <Projects />
             <Contact />
           </main>
+          <ScrollToTop />
         </div>
       </HashRouter>
     </ErrorBoundary>

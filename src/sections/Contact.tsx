@@ -1,40 +1,42 @@
+import { motion } from 'framer-motion'
 import { Section } from '@/components/Section'
+import { SectionHeader } from '@/components/SectionHeader'
+import { Container } from '@/components/Container'
+import { Text } from '@/components/Text'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { contact } from '@/data/contact'
-import { Mail, Linkedin, Github, ExternalLink } from 'lucide-react'
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Mail,
-  Linkedin,
-  Github,
-  ExternalLink,
-}
-
-function getIcon(iconName?: string) {
-  return iconMap[iconName || 'ExternalLink'] || ExternalLink
-}
+import { hasItems } from '@/lib/data-helpers'
+import { staggerContainer, staggerItem, iconHover } from '@/lib/animations'
+import {
+  createStaggerContainerAnimation,
+  createStaggerItemAnimation,
+  createCardHoverAnimation,
+  createButtonAnimation,
+  createFadeInAnimation,
+} from '@/lib/animation-helpers'
+import { SECTION_TITLES, SECTION_IDS, ANIMATION_CONFIG, LAYOUT, SPACING, COMPONENT_CLASSES } from '@/lib/constants'
+import { getAnimationVariants } from '@/lib/animations'
+import { getIcon } from '@/lib/icon-helpers'
 
 export function Contact() {
-  if (contact.methods.length === 0) return null
+  if (!hasItems(contact.methods)) return null
 
   return (
-    <Section id="contact" className="bg-muted/30">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 text-center space-y-10">
+    <Section id={SECTION_IDS.CONTACT} background="mutedLight">
+      <Container size="small" className={`text-center ${SPACING.SECTION.LARGE}`}>
         {/* Header */}
         <div>
-          <h2 className="text-3xl font-bold mb-4">Get In Touch</h2>
+          <SectionHeader className="mb-4">{SECTION_TITLES.CONTACT}</SectionHeader>
           {contact.availability && (
-            <p className="text-muted-foreground text-lg">{contact.availability}</p>
+            <Text variant="bodyLarge" color="muted">{contact.availability}</Text>
           )}
         </div>
 
         {/* Contact Cards */}
-        <div
-          className="
-            grid gap-6 justify-center
-            [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]
-          "
+        <motion.div
+          className={LAYOUT.GRID.CONTACT}
+          {...createStaggerContainerAnimation(staggerContainer)}
         >
           {contact.methods.map((method, index) => {
             const Icon = getIcon(method.icon)
@@ -42,53 +44,76 @@ export function Contact() {
               method.type === 'email' ? `mailto:${method.value}` : method.value
 
             return (
-              <Card
+              <motion.div
                 key={index}
-                className="flex flex-col items-center justify-between hover:shadow-lg transition-shadow"
+                {...createStaggerItemAnimation(staggerItem)}
+                {...createCardHoverAnimation('medium')}
               >
-                <CardHeader className="flex flex-col items-center">
-                  <div className="flex items-center gap-2 text-lg font-semibold">
-                    <Icon className="h-6 w-6 text-primary" />
-                    {method.label}
-                  </div>
-                  {method.available !== undefined && (
-                    <CardDescription className="text-sm text-muted-foreground">
-                      {method.available ? 'Available' : 'Not available'}
-                    </CardDescription>
-                  )}
-                </CardHeader>
-
-                <CardContent className="w-full">
-                  <a
-                    href={href}
-                    target={method.type === 'email' ? undefined : '_blank'}
-                    rel={
-                      method.type === 'email'
-                        ? undefined
-                        : 'noopener noreferrer'
-                    }
-                    aria-label={`Contact via ${method.label}`}
-                  >
-                    <Button
-                      variant="outline"
-                      className="w-full hover:scale-[1.03] transition-transform"
+                <Card className={`${LAYOUT.FLEX.COL_CENTER} justify-between ${COMPONENT_CLASSES.CARD.HOVER_LARGE}`}>
+                  <CardHeader className={LAYOUT.FLEX.COL_CENTER}>
+                    <motion.div
+                      className="flex items-center gap-2 text-lg font-semibold"
+                      whileHover="hover"
+                      variants={getAnimationVariants(iconHover)}
                     >
-                      {method.type === 'email' ? 'Send Email' : 'Visit Profile'}
-                    </Button>
-                  </a>
-                </CardContent>
-              </Card>
+                      <motion.div
+                        animate={{
+                          scale: [1, 1.2, 1],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          repeatDelay: 3,
+                        }}
+                      >
+                        <Icon className="h-6 w-6 text-primary" />
+                      </motion.div>
+                      {method.label}
+                    </motion.div>
+                    {method.available !== undefined && (
+                      <CardDescription>
+                        <Text color="muted">
+                          {method.available ? 'Available' : 'Not available'}
+                        </Text>
+                      </CardDescription>
+                    )}
+                  </CardHeader>
+
+                  <CardContent className="w-full">
+                    <motion.a
+                      href={href}
+                      target={method.type === 'email' ? undefined : '_blank'}
+                      rel={
+                        method.type === 'email'
+                          ? undefined
+                          : 'noopener noreferrer'
+                      }
+                      aria-label={`Contact via ${method.label}`}
+                      {...createButtonAnimation()}
+                    >
+                      <Button
+                        variant="outline"
+                        className="w-full"
+                      >
+                        {method.type === 'email' ? 'Send Email' : 'Visit Profile'}
+                      </Button>
+                    </motion.a>
+                  </CardContent>
+                </Card>
+              </motion.div>
             )
           })}
-        </div>
+        </motion.div>
 
         {/* Response Time */}
         {contact.responseTime && (
-          <p className="text-sm text-muted-foreground">
-            Response time: {contact.responseTime}
-          </p>
+          <motion.div {...createFadeInAnimation(ANIMATION_CONFIG.DELAY.MEDIUM)}>
+            <Text color="muted">
+              Response time: {contact.responseTime}
+            </Text>
+          </motion.div>
         )}
-      </div>
+      </Container>
     </Section>
   )
 }

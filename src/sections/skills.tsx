@@ -1,34 +1,84 @@
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
 import { Section } from '@/components/Section'
+import { SectionHeader } from '@/components/SectionHeader'
+import { Container } from '@/components/Container'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { skills } from '@/data/skills'
+import { staggerContainer, staggerItem, iconHover } from '@/lib/animations'
+import {
+  createStaggerContainerAnimation,
+  createStaggerItemAnimation,
+  createCardHoverAnimation,
+} from '@/lib/animation-helpers'
+import { SECTION_TITLES, SECTION_IDS, LAYOUT, COMPONENT_CLASSES } from '@/lib/constants'
+import { getAnimationVariants } from '@/lib/animations'
 
 export function Skills() {
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null)
+
   return (
-    <Section id="skills">
-      <div className="mx-auto max-w-6xl text-center">
-        <h2 className="mb-12 text-3xl font-bold">Programming Languages &amp; Tools</h2>
-        <div className="grid gap-8 md:grid-cols-3">
+    <Section id={SECTION_IDS.SKILLS}>
+      <Container size="small" className="text-center">
+        <SectionHeader>{SECTION_TITLES.SKILLS}</SectionHeader>
+        <motion.div
+          className={`${LAYOUT.GRID.RESPONSIVE_3}`}
+          {...createStaggerContainerAnimation(staggerContainer)}
+        >
           {skills.map((group, i) => (
-            <Card key={i} className="border-border/50 bg-background/40 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold">{group.category}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap justify-center gap-5 pt-3">
-                  {group.items.map(({ name, icon: Icon, color }) => (
-                    <div key={name} className="flex flex-col items-center space-y-2 text-center">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-card shadow-sm transition-transform hover:scale-105">
-                        <Icon className="h-7 w-7" style={{ color }} />
-                      </div>
-                      <p className="text-sm text-foreground/80">{name}</p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <motion.div
+              key={i}
+              {...createStaggerItemAnimation(staggerItem)}
+              {...createCardHoverAnimation('small')}
+            >
+              <Card className={`${COMPONENT_CLASSES.CARD.BACKDROP} ${COMPONENT_CLASSES.CARD.HOVER}`}>
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold">{group.category}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <motion.div
+                    className="flex flex-wrap justify-center gap-5 pt-3"
+                    {...createStaggerContainerAnimation(staggerContainer)}
+                  >
+                    {group.items.map(({ name, icon: Icon, color }) => (
+                      <motion.div
+                        key={name}
+                        className="relative flex flex-col items-center space-y-2 text-center"
+                        variants={getAnimationVariants(staggerItem)}
+                        onHoverStart={() => setHoveredSkill(name)}
+                        onHoverEnd={() => setHoveredSkill(null)}
+                      >
+                        <motion.div
+                          className="flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-card shadow-sm cursor-pointer relative"
+                          variants={getAnimationVariants(iconHover)}
+                          whileHover="hover"
+                          whileTap="tap"
+                        >
+                          <Icon className="h-7 w-7" style={{ color }} />
+                        </motion.div>
+                        <p className="text-sm text-foreground/80">{name}</p>
+                        <AnimatePresence>
+                          {hoveredSkill === name && (
+                            <motion.div
+                              className={COMPONENT_CLASSES.TOOLTIP}
+                              initial={{ opacity: 0, y: 5 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: 5 }}
+                            >
+                              {name}
+                              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-foreground" />
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </Container>
     </Section>
   )
 }

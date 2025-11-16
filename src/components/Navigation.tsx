@@ -1,25 +1,47 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from './ui/button'
-
-const navItems = [
-  { id: 'education', label: 'Education' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'contact', label: 'Contact' },
-]
+import { DarkModeToggle } from './DarkModeToggle'
+import { useScrollPosition } from '@/hooks/useScrollAnimation'
+import { useScrollToSection } from '@/hooks/useScrollToSection'
+import { mobileMenuSlide, backdropFade, getAnimationVariants } from '@/lib/animations'
+import { NAVIGATION, SECTION_IDS } from '@/lib/constants'
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
+  const hasScrolled = useScrollPosition(NAVIGATION.SCROLL_THRESHOLD)
+  const scrollToSection = useScrollToSection()
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setIsOpen(false)
-    }
+  const handleScrollToSection = (id: string) => {
+    scrollToSection(id)
+    setIsOpen(false)
   }
+
+  // Track active section on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = Object.values(SECTION_IDS)
+      const scrollPosition = window.scrollY + 100
+
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const { offsetTop, offsetHeight } = element
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll() // Check initial position
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -34,75 +56,149 @@ export function Navigation() {
   }, [])
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center">
-            <Link
-              to="#hero"
-              onClick={(e) => {
-                e.preventDefault()
-                scrollToSection('hero')
-              }}
-              className="text-xl font-bold"
-              aria-label="Home"
+    <>
+      <motion.nav
+        className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${
+          hasScrolled
+            ? 'bg-background/95 backdrop-blur-nav shadow-sm'
+            : 'bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60'
+        }`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex h-16 items-center justify-between">
+            <motion.div
+              className="flex items-center"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Yoav Sborovsky
-            </Link>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
-            {navItems.map((item) => (
               <Link
-                key={item.id}
-                to={`#${item.id}`}
+                to={`#${SECTION_IDS.HERO}`}
                 onClick={(e) => {
                   e.preventDefault()
-                  scrollToSection(item.id)
+                  handleScrollToSection(SECTION_IDS.HERO)
                 }}
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className="text-xl font-bold transition-colors hover:text-primary"
+                aria-label="Home"
               >
-                {item.label}
+                Yoav Sborovsky
               </Link>
-            ))}
-          </div>
+            </motion.div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isOpen}
-          >
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden border-t">
-            <div className="flex flex-col space-y-2 py-4">
-              {navItems.map((item) => (
-                <Link
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-6">
+              {NAVIGATION.ITEMS.map((item, index) => (
+                <motion.div
                   key={item.id}
-                  to={`#${item.id}`}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    scrollToSection(item.id)
-                  }}
-                  className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
                 >
-                  {item.label}
-                </Link>
+                  <Link
+                    to={`#${item.id}`}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleScrollToSection(item.id)
+                    }}
+                    className={`text-sm font-medium transition-all duration-200 relative px-2 py-1 ${
+                      activeSection === item.id
+                        ? 'text-primary'
+                        : 'text-foreground/70 hover:text-primary'
+                    }`}
+                  >
+                    {item.label}
+                    {activeSection === item.id && (
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                        layoutId="activeSection"
+                        initial={false}
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                </motion.div>
               ))}
+              <DarkModeToggle />
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center gap-2">
+              <DarkModeToggle />
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-9 w-9 p-0"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label="Toggle menu"
+                aria-expanded={isOpen}
+              >
+                <motion.div
+                  animate={{ rotate: isOpen ? 90 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                </motion.div>
+              </Button>
             </div>
           </div>
+        </div>
+      </motion.nav>
+
+      {/* Mobile Navigation Backdrop */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 md:hidden"
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={getAnimationVariants(backdropFade)}
+            onClick={() => setIsOpen(false)}
+          />
         )}
-      </div>
-    </nav>
+      </AnimatePresence>
+
+      {/* Mobile Navigation Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="fixed top-16 right-0 bottom-0 w-64 bg-background border-l z-40 md:hidden shadow-xl"
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={getAnimationVariants(mobileMenuSlide)}
+          >
+            <div className="flex flex-col space-y-1 p-4">
+              {NAVIGATION.ITEMS.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link
+                    to={`#${item.id}`}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleScrollToSection(item.id)
+                    }}
+                    className={`block px-4 py-3 text-sm font-medium rounded-md transition-colors ${
+                      activeSection === item.id
+                        ? 'bg-primary text-primary-foreground'
+                        : 'hover:bg-accent hover:text-accent-foreground'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
