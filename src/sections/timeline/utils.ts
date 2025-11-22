@@ -32,7 +32,7 @@ export function parseYear(period: string | undefined): number {
 }
 
 /**
- * Merge and sort education and experience by year
+ * Merge and sort education and experience by manual order or year
  */
 export function createTimelineItems(): TimelineItem[] {
   const items: TimelineItem[] = []
@@ -59,6 +59,22 @@ export function createTimelineItems(): TimelineItem[] {
     })
   })
 
-  return items.sort((a, b) => b.year - a.year)
+  // Sort by manual order if provided, otherwise by year (descending)
+  return items.sort((a, b) => {
+    const aOrder = (a.data as { order?: number }).order
+    const bOrder = (b.data as { order?: number }).order
+
+    // If both have manual order, use that
+    if (aOrder !== undefined && bOrder !== undefined) {
+      return aOrder - bOrder
+    }
+
+    // If only one has order, prioritize it
+    if (aOrder !== undefined) return -1
+    if (bOrder !== undefined) return 1
+
+    // Otherwise, sort by year (descending)
+    return b.year - a.year
+  })
 }
 

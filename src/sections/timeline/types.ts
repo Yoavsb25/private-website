@@ -12,6 +12,7 @@ export interface EducationData {
   developmentTools?: string[]
   majors?: string[]
   grades?: string[]
+  order?: number // Manual order for timeline (lower numbers appear first)
 }
 
 export interface ExperienceData {
@@ -23,6 +24,7 @@ export interface ExperienceData {
   type?: string
   achievements: string[]
   technologies?: string[]
+  order?: number // Manual order for timeline (lower numbers appear first)
 }
 
 export interface TimelineItem {

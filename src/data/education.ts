@@ -12,6 +12,7 @@ interface EducationItem {
   developmentTools?: string[]
   majors?: string[]
   grades?: string[]
+  order?: number // Manual order for timeline (lower numbers appear first)
 }
 
 export const education: EducationItem[] = [
@@ -34,6 +35,7 @@ export const education: EducationItem[] = [
       'Operating Systems final: 92',
       'Product Management final: 94',
     ],
+    order: 2,
   },
   {
     degree: 'Biotechnology Major',
@@ -42,5 +44,6 @@ export const education: EducationItem[] = [
     logoUrl: rothbergImg,
     majors: ['Math', 'English', 'Biology', 'Biotechnology', 'Literature', 'Bible', 'History'],
     grades: ['Matriculation GPA: 114.2', 'Psychometric: 721'],
+    order: 5,
   },
 ]
