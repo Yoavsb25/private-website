@@ -14,7 +14,7 @@ import {
   createStaggerItemAnimation,
   createCardHoverAnimation,
 } from '@/lib/helpers'
-import { SECTION_TITLES, SECTION_IDS, LAYOUT, COMPONENT_CLASSES } from '@/lib/constants'
+import { SECTION_TITLES, SECTION_IDS, LAYOUT, COMPONENT_CLASSES, SKILLS_CONFIG } from '@/lib/constants'
 
 export function Skills() {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null)
@@ -40,7 +40,7 @@ export function Skills() {
                 </CardHeader>
                 <CardContent className="flex-1 flex flex-col">
                   <motion.div
-                    className="grid grid-cols-3 gap-4 sm:gap-5 pt-3 flex-1 content-start"
+                    className={`grid ${SKILLS_CONFIG.GRID.COLS} ${SKILLS_CONFIG.GRID.GAP} pt-3 flex-1 content-start`}
                     {...createStaggerContainerAnimation(staggerContainer)}
                   >
                     {group.items.map(({ name, icon: Icon, color }) => (
@@ -52,13 +52,13 @@ export function Skills() {
                         onHoverEnd={() => setHoveredSkill(null)}
                       >
                         <motion.div
-                          className="flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 items-center justify-center rounded-xl border border-border bg-card shadow-sm cursor-pointer relative"
+                          className={`flex ${SKILLS_CONFIG.CONTAINER_SIZES.FULL} items-center justify-center rounded-xl border border-border bg-card shadow-sm cursor-pointer relative`}
                           variants={getAnimationVariants(iconHover)}
                           whileHover="hover"
                           whileTap="tap"
                         >
                           <Icon 
-                            className={`h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 ${color === 'currentColor' ? 'text-foreground' : ''}`}
+                            className={`${SKILLS_CONFIG.ICON_SIZES.FULL} ${color === 'currentColor' ? 'text-foreground' : ''}`}
                             style={color !== 'currentColor' ? { color } : undefined}
                           />
                         </motion.div>

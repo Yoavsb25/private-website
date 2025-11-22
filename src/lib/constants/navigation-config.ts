@@ -29,5 +29,6 @@ export const SECTION_TITLES = {
   SKILLS: 'Programming Languages & Tools',
   PROJECTS: 'Featured Projects',
   CONTACT: 'Get In Touch',
+  TIMELINE: 'Timeline',
 } as const
 

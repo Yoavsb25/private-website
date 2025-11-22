@@ -8,7 +8,7 @@ import profileImg from '@/assets/images/profile.jpg'
 import { slideInLeft, slideInRight, staggerContainer, staggerItem, getAnimationVariants } from '@/lib/animations'
 import { createButtonAnimation } from '@/lib/helpers'
 import { useScrollToSection } from '@/hooks'
-import { SECTION_IDS, ANIMATION_CONFIG, HERO } from '@/lib/constants'
+import { SECTION_IDS, ANIMATION_CONFIG, HERO, HERO_LABELS } from '@/lib/constants'
 
 export function Hero() {
   const scrollToSection = useScrollToSection()
@@ -62,7 +62,7 @@ export function Hero() {
             variants={getAnimationVariants(slideInRight)}
           >
             <motion.div variants={getAnimationVariants(staggerItem)}>
-              <Text variant="bodyLarge">Hello, I'm</Text>
+              <Text variant="bodyLarge">{HERO_LABELS.GREETING}</Text>
             </motion.div>
 
             <motion.div variants={getAnimationVariants(staggerItem)}>
@@ -95,7 +95,7 @@ export function Hero() {
                     size="lg"
                     className={HERO.BUTTONS.CLASS_NAME}
                   >
-                    Download CV
+                    {HERO_LABELS.BUTTONS.DOWNLOAD_CV}
                   </Button>
                 </motion.a>
               )}
@@ -114,7 +114,7 @@ export function Hero() {
                   size="lg"
                   className={HERO.BUTTONS.CLASS_NAME}
                 >
-                  Contact Info
+                  {HERO_LABELS.BUTTONS.CONTACT_INFO}
                 </Button>
               </motion.a>
             </motion.div>

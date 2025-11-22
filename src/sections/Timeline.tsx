@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Section, SectionHeader, Container } from '@/components/layout'
-import { SECTION_IDS } from '@/lib/constants'
+import { SECTION_IDS, SECTION_TITLES, TIMELINE_LABELS, SECTION_CLASSES, SECTION_SPACING } from '@/lib/constants'
 import { createTimelineItems } from '@/lib/helpers'
 import { ANIMATION, STYLES } from '@/lib/constants'
 import type { FilterType } from '@/lib/types'
@@ -25,16 +25,16 @@ export function Timeline() {
     <Section id={SECTION_IDS.TIMELINE} background="mutedLight">
       <Container size="small">
         <SectionHeader>
-          Timeline
+          {SECTION_TITLES.TIMELINE}
         </SectionHeader>
 
-        <p className="mb-8 text-center text-muted-foreground">
-          A single track that connects my education and experience into one story—hover or tap each milestone to dive into that chapter.
+        <p className={`${SECTION_SPACING.TIMELINE_DESCRIPTION} text-center text-muted-foreground`}>
+          {TIMELINE_LABELS.DESCRIPTION}
         </p>
 
         <FilterChips activeFilter={filter} onChange={setFilter} />
 
-        <div className="relative py-10">
+        <div className={`relative ${SECTION_SPACING.TIMELINE_CONTAINER}`}>
           {/* Animated timeline line */}
           <motion.div
             className={STYLES.TIMELINE_LINE}
@@ -57,7 +57,7 @@ export function Timeline() {
           </motion.div>
 
           {/* Items */}
-          <div className="relative space-y-20 md:space-y-28">
+          <div className={`relative ${SECTION_SPACING.TIMELINE_ITEMS}`}>
             {filteredItems.map((item, idx) => {
               const isEven = idx % 2 === 0
               const isHovered = hoveredItem === item.id
@@ -66,7 +66,7 @@ export function Timeline() {
               return (
                 <motion.div
                   key={item.id}
-                  className="relative flex flex-col items-center md:flex-row md:items-start"
+                  className={SECTION_CLASSES.TIMELINE_ITEM_CONTAINER}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-120px' }}

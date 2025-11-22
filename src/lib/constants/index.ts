@@ -8,4 +8,5 @@ export * from './layout-config'
 export * from './navigation-config'
 export * from './content-config'
 export * from './timeline-config'
+export * from './sections-config'
 

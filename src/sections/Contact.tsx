@@ -14,7 +14,7 @@ import {
   createButtonAnimation,
   createFadeInAnimation,
 } from '@/lib/helpers'
-import { SECTION_TITLES, SECTION_IDS, ANIMATION_CONFIG, LAYOUT, SPACING, COMPONENT_CLASSES } from '@/lib/constants'
+import { SECTION_TITLES, SECTION_IDS, ANIMATION_CONFIG, LAYOUT, SPACING, COMPONENT_CLASSES, CONTACT_LABELS, ICON_SIZES, SECTION_CLASSES, SECTION_SPACING } from '@/lib/constants'
 
 export function Contact() {
   if (!hasItems(contact.methods)) return null
@@ -24,7 +24,7 @@ export function Contact() {
       <Container size="small" className={`text-center ${SPACING.SECTION.LARGE}`}>
         {/* Header */}
         <div>
-          <SectionHeader className="mb-4">{SECTION_TITLES.CONTACT}</SectionHeader>
+          <SectionHeader className={SECTION_SPACING.CONTACT_HEADER}>{SECTION_TITLES.CONTACT}</SectionHeader>
           {contact.availability && (
             <Text variant="bodyLarge" color="muted">{contact.availability}</Text>
           )}
@@ -49,7 +49,7 @@ export function Contact() {
                 <Card className={`${LAYOUT.FLEX.COL_CENTER} justify-between ${COMPONENT_CLASSES.CARD.HOVER_LARGE}`}>
                   <CardHeader className={LAYOUT.FLEX.COL_CENTER}>
                     <motion.div
-                      className="flex items-center gap-2 text-lg font-semibold"
+                      className={SECTION_CLASSES.CONTACT_CARD_HEADER}
                       whileHover="hover"
                       variants={getAnimationVariants(iconHover)}
                     >
@@ -63,14 +63,14 @@ export function Contact() {
                           repeatDelay: 3,
                         }}
                       >
-                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-primary" />
+                        <Icon className={`${ICON_SIZES.MEDIUM_RESPONSIVE} text-primary`} />
                       </motion.div>
                       {method.label}
                     </motion.div>
                     {method.available !== undefined && (
                       <CardDescription>
                         <Text color="muted">
-                          {method.available ? 'Available' : 'Not available'}
+                          {method.available ? CONTACT_LABELS.AVAILABILITY.AVAILABLE : CONTACT_LABELS.AVAILABILITY.NOT_AVAILABLE}
                         </Text>
                       </CardDescription>
                     )}
@@ -85,14 +85,14 @@ export function Contact() {
                           ? undefined
                           : 'noopener noreferrer'
                       }
-                      aria-label={`Contact via ${method.label}`}
+                      aria-label={CONTACT_LABELS.ARIA_LABEL(method.label)}
                       {...createButtonAnimation()}
                     >
                       <Button
                         variant="outline"
                         className="w-full"
                       >
-                        {method.type === 'email' ? 'Send Email' : 'Visit Profile'}
+                        {method.type === 'email' ? CONTACT_LABELS.BUTTONS.SEND_EMAIL : CONTACT_LABELS.BUTTONS.VISIT_PROFILE}
                       </Button>
                     </motion.a>
                   </CardContent>
@@ -106,7 +106,7 @@ export function Contact() {
         {contact.responseTime && (
           <motion.div {...createFadeInAnimation(ANIMATION_CONFIG.DELAY.MEDIUM)}>
             <Text color="muted">
-              Response time: {contact.responseTime}
+              {CONTACT_LABELS.RESPONSE_TIME_PREFIX} {contact.responseTime}
             </Text>
           </motion.div>
         )}
