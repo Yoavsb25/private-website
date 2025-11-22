@@ -5,4 +5,6 @@
 export * from './data-helpers'
 export * from './icon-helpers'
 export * from './component-helpers'
+export * from './animation-helpers'
+export * from './timeline-helpers'
 

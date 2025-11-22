@@ -1,7 +1,7 @@
 /**
- * Animation variants and utilities
- * Re-export all animation-related exports for easier imports
+ * Animation variants
+ * Re-export animation variants for easier imports
+ * Note: Animation helper functions are in @/lib/helpers
  */
 export * from './variants'
-export * from './helpers'
 

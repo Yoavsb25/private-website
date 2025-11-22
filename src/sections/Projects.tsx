@@ -1,9 +1,6 @@
 import { motion } from 'framer-motion'
-import { Section } from '@/components/Section'
-import { SectionHeader } from '@/components/SectionHeader'
-import { Container } from '@/components/Container'
-import { Heading } from '@/components/Heading'
-import { Text } from '@/components/Text'
+import { Section, SectionHeader, Container } from '@/components/layout'
+import { Heading, Text } from '@/components/typography'
 import {
   Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
 } from '@/components/ui/card'
@@ -13,13 +10,13 @@ import { projects } from '@/data/projects'
 import { ExternalLink, Github } from 'lucide-react'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 import {
+  getFeaturedItems,
   createStaggerContainerAnimation,
   createStaggerItemAnimation,
   createCardHoverAnimation,
   createButtonAnimation,
   createBadgeAnimation,
-} from '@/lib/animations'
-import { getFeaturedItems } from '@/lib/helpers'
+} from '@/lib/helpers'
 import { SECTION_TITLES, SECTION_IDS, ASPECT_RATIOS, ANIMATION_CONFIG, LAYOUT, SPACING, COMPONENT_CLASSES } from '@/lib/constants'
 
 export function Projects() {

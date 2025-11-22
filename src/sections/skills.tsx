@@ -1,8 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import { Section } from '@/components/Section'
-import { SectionHeader } from '@/components/SectionHeader'
-import { Container } from '@/components/Container'
+import { Section, SectionHeader, Container } from '@/components/layout'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { skills } from '@/data/skills'
 import {
@@ -10,10 +8,12 @@ import {
   staggerItem,
   iconHover,
   getAnimationVariants,
+} from '@/lib/animations'
+import {
   createStaggerContainerAnimation,
   createStaggerItemAnimation,
   createCardHoverAnimation,
-} from '@/lib/animations'
+} from '@/lib/helpers'
 import { SECTION_TITLES, SECTION_IDS, LAYOUT, COMPONENT_CLASSES } from '@/lib/constants'
 
 export function Skills() {

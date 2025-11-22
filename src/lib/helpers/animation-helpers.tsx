@@ -1,6 +1,6 @@
 import { Variants } from 'framer-motion'
 import { ANIMATION_CONFIG } from '../constants'
-import { getAnimationVariants } from './variants'
+import { getAnimationVariants } from '../animations/variants'
 
 /**
  * Creates a standard section header animation configuration

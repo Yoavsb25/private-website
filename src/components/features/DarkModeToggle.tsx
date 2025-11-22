@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Moon, Sun } from 'lucide-react'
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 import { prefersReducedMotion } from '@/lib/animations'
 
 export function DarkModeToggle() {

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useScrollProgress } from '@/hooks/useScrollAnimation'
+import { useScrollProgress } from '@/hooks'
 import { prefersReducedMotion } from '@/lib/animations'
 
 export function ScrollProgress() {

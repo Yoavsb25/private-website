@@ -37,6 +37,6 @@ export function Typography({
   )
 }
 
-// Export as Text for backward compatibility (but prefer Typography)
+// Export as Text for backward compatibility
 export const Text = Typography
 

@@ -1,20 +1,19 @@
 import { motion } from 'framer-motion'
-import { Section } from '@/components/Section'
-import { SectionHeader } from '@/components/SectionHeader'
-import { Container } from '@/components/Container'
-import { Text } from '@/components/Text'
+import { Section, SectionHeader, Container } from '@/components/layout'
+import { Text } from '@/components/typography'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { contact } from '@/data/contact'
 import { staggerContainer, staggerItem, iconHover, getAnimationVariants } from '@/lib/animations'
 import {
+  hasItems,
+  getIcon,
   createStaggerContainerAnimation,
   createStaggerItemAnimation,
   createCardHoverAnimation,
   createButtonAnimation,
   createFadeInAnimation,
-} from '@/lib/animations'
-import { hasItems, getIcon } from '@/lib/helpers'
+} from '@/lib/helpers'
 import { SECTION_TITLES, SECTION_IDS, ANIMATION_CONFIG, LAYOUT, SPACING, COMPONENT_CLASSES } from '@/lib/constants'
 
 export function Contact() {

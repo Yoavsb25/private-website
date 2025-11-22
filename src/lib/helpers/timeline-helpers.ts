@@ -1,4 +1,4 @@
-import type { TimelineItem } from './types'
+import type { TimelineItem } from '@/sections/timeline/types'
 import { education } from '@/data/education'
 import { experiences } from '@/data/experience'
 

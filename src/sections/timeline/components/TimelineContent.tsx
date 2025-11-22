@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
-import { Heading } from '@/components/Heading'
+import { Heading } from '@/components/typography'
 import { TYPOGRAPHY } from '@/lib/constants'
 import { STYLES } from '../constants'
 import type { EducationData, ExperienceData } from '../types'

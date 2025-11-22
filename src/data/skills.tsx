@@ -19,7 +19,7 @@ import {
   SiCss3,
 } from 'react-icons/si'
 import { FaJava } from 'react-icons/fa'
-import PlaywrightImg from '@/assets/images/Playwright--Streamline-Svg-Logos.svg'
+import PlaywrightImg from '@/assets/icons/Playwright--Streamline-Svg-Logos.svg'
 
 const PlaywrightIcon: React.FC<{ className?: string; style?: React.CSSProperties }> = ({ 
   className, 
