@@ -63,8 +63,6 @@ export const UI_CONFIG = {
  */
 export const SECTION_TITLES = {
   SKILLS: 'Programming Languages & Tools',
-  EDUCATION: 'Education',
-  EXPERIENCE: 'Experience',
   PROJECTS: 'Featured Projects',
   CONTACT: 'Get In Touch',
 } as const
@@ -92,8 +90,6 @@ export const CONTACT_ICON_MAP = {
 export const SECTION_IDS = {
   HERO: 'hero',
   SKILLS: 'skills',
-  EDUCATION: 'education',
-  EXPERIENCE: 'experience',
   TIMELINE: 'timeline',
   PROJECTS: 'projects',
   CONTACT: 'contact',

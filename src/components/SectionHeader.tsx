@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { TYPOGRAPHY, SPACING, UI_CONFIG } from '@/lib/constants'
-import { createSectionHeaderAnimation } from '@/lib/animation-helpers'
+import { createSectionHeaderAnimation } from '@/lib/animations'
 import { cn } from '@/lib/utils'
 
 interface SectionHeaderProps {

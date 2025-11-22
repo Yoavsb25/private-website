@@ -1,9 +1,9 @@
+import React from 'react'
 import { motion } from 'framer-motion'
 import { Linkedin, Github } from 'lucide-react'
 import { portfolio } from '@/data/portfolio'
-import { iconHover, staggerItem } from '@/lib/animations'
+import { iconHover, staggerItem, getAnimationVariants } from '@/lib/animations'
 import { COMPONENT_CLASSES, HERO } from '@/lib/constants'
-import { getAnimationVariants } from '@/lib/animations'
 
 interface SocialIconsProps {
   className?: string

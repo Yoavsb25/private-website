@@ -1,43 +1,4 @@
 import { useEffect, useState } from 'react'
-import { prefersReducedMotion } from '@/lib/animations'
-
-interface UseScrollAnimationOptions {
-  threshold?: number
-  offset?: number
-}
-
-/**
- * Hook to trigger animations based on scroll position
- */
-export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
-  const { threshold = 0.1, offset = 0 } = options
-  const [hasScrolled, setHasScrolled] = useState(false)
-
-  useEffect(() => {
-    if (prefersReducedMotion()) {
-      setHasScrolled(true)
-      return
-    }
-
-    const handleScroll = () => {
-      const scrollY = window.scrollY + offset
-      const windowHeight = window.innerHeight
-      const thresholdPosition = windowHeight * threshold
-
-      if (scrollY > thresholdPosition) {
-        setHasScrolled(true)
-      }
-    }
-
-    // Check initial position
-    handleScroll()
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [threshold, offset])
-
-  return hasScrolled
-}
 
 /**
  * Hook to get scroll progress (0 to 1)

@@ -1,5 +1,5 @@
 import { Mail, Linkedin, Github, ExternalLink } from 'lucide-react'
-import { CONTACT_ICON_MAP } from './constants'
+import { CONTACT_ICON_MAP } from '../constants'
 
 /**
  * Icon component type

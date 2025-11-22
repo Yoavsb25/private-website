@@ -5,14 +5,16 @@ import { SectionHeader } from '@/components/SectionHeader'
 import { Container } from '@/components/Container'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { skills } from '@/data/skills'
-import { staggerContainer, staggerItem, iconHover } from '@/lib/animations'
 import {
+  staggerContainer,
+  staggerItem,
+  iconHover,
+  getAnimationVariants,
   createStaggerContainerAnimation,
   createStaggerItemAnimation,
   createCardHoverAnimation,
-} from '@/lib/animation-helpers'
+} from '@/lib/animations'
 import { SECTION_TITLES, SECTION_IDS, LAYOUT, COMPONENT_CLASSES } from '@/lib/constants'
-import { getAnimationVariants } from '@/lib/animations'
 
 export function Skills() {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null)

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { CardHeader, CardDescription, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Logo } from '@/helpers/helpers'
+import { Logo } from '@/lib/helpers'
 import type { TimelineItem } from '../types'
 import { STYLES } from '../constants'
 

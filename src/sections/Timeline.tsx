@@ -9,7 +9,7 @@ import { createTimelineItems } from './timeline/utils'
 import { ANIMATION, STYLES } from './timeline/constants'
 import { FilterChips } from './timeline/components/FilterChips'
 import { TimelinePoint } from './timeline/components/TimelinePoint'
-import { YearLabelMobile, YearBadgeDesktop } from './timeline/components/YearLabel'
+import { YearLabelMobile } from './timeline/components/YearLabel'
 import { TimelineCard } from './timeline/components/TimelineCard'
 
 export function Timeline() {

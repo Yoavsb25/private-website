@@ -10,7 +10,6 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { projects } from '@/data/projects'
-import { getFeaturedItems } from '@/lib/data-helpers'
 import { ExternalLink, Github } from 'lucide-react'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 import {
@@ -19,7 +18,8 @@ import {
   createCardHoverAnimation,
   createButtonAnimation,
   createBadgeAnimation,
-} from '@/lib/animation-helpers'
+} from '@/lib/animations'
+import { getFeaturedItems } from '@/lib/helpers'
 import { SECTION_TITLES, SECTION_IDS, ASPECT_RATIOS, ANIMATION_CONFIG, LAYOUT, SPACING, COMPONENT_CLASSES } from '@/lib/constants'
 
 export function Projects() {

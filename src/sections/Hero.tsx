@@ -7,11 +7,9 @@ import { Button } from '@/components/ui/button'
 import { SocialIcons } from '@/components/SocialIcons'
 import { portfolio } from '@/data/portfolio'
 import profileImg from '@/assets/profile.jpg'
-import { slideInLeft, slideInRight, staggerContainer, staggerItem } from '@/lib/animations'
-import { createButtonAnimation } from '@/lib/animation-helpers'
+import { slideInLeft, slideInRight, staggerContainer, staggerItem, getAnimationVariants, createButtonAnimation } from '@/lib/animations'
 import { useScrollToSection } from '@/hooks/useScrollToSection'
 import { SECTION_IDS, ANIMATION_CONFIG, HERO } from '@/lib/constants'
-import { getAnimationVariants } from '@/lib/animations'
 
 export function Hero() {
   const scrollToSection = useScrollToSection()

@@ -6,18 +6,16 @@ import { Text } from '@/components/Text'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { contact } from '@/data/contact'
-import { hasItems } from '@/lib/data-helpers'
-import { staggerContainer, staggerItem, iconHover } from '@/lib/animations'
+import { staggerContainer, staggerItem, iconHover, getAnimationVariants } from '@/lib/animations'
 import {
   createStaggerContainerAnimation,
   createStaggerItemAnimation,
   createCardHoverAnimation,
   createButtonAnimation,
   createFadeInAnimation,
-} from '@/lib/animation-helpers'
+} from '@/lib/animations'
+import { hasItems, getIcon } from '@/lib/helpers'
 import { SECTION_TITLES, SECTION_IDS, ANIMATION_CONFIG, LAYOUT, SPACING, COMPONENT_CLASSES } from '@/lib/constants'
-import { getAnimationVariants } from '@/lib/animations'
-import { getIcon } from '@/lib/icon-helpers'
 
 export function Contact() {
   if (!hasItems(contact.methods)) return null
