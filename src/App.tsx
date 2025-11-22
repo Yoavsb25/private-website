@@ -1,14 +1,11 @@
 import { HashRouter } from 'react-router-dom'
 import { ErrorBoundary } from './components/ErrorBoundary'
-import { Navigation } from './components/Navigation'
-import { ScrollProgress } from './components/ScrollProgress'
-import { ScrollToTop } from './components/ScrollToTop'
+import { Navigation, ScrollProgress, ScrollToTop } from './components/features'
 import { Hero } from './sections/Hero'
-import { Education } from './sections/Education'
-import { Experience } from './sections/Experience'
+import { Timeline } from './sections/Timeline'
 import { Projects } from './sections/Projects'
 import { Contact } from './sections/Contact'
-import { Skills } from './sections/skills'
+import { Skills } from './sections/Skills'
 
 function App() {
   return (
@@ -20,8 +17,7 @@ function App() {
           <main>
             <Hero />
             <Skills />
-            <Education />
-            <Experience />
+            <Timeline />
             <Projects />
             <Contact />
           </main>

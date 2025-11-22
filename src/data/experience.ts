@@ -1,6 +1,6 @@
-import sysaidImg from '@/assets/sysaid_technologies_ltd_logo.jpeg'
-import affilomaniaImg from '@/assets/Affilomania.png'
-import airForceImg from '@/assets/IAF.png'
+import sysaidImg from '@/assets/icons/sysaid_technologies_ltd_logo.jpeg'
+import affilomaniaImg from '@/assets/icons/Affilomania.png'
+import airForceImg from '@/assets/icons/IAF.png'
 
 interface ExperienceItem {
     title: string
@@ -11,6 +11,7 @@ interface ExperienceItem {
     type?: string
     achievements: string[]
     technologies?: string[]
+    order?: number // Manual order for timeline (lower numbers appear first)
   }
   
 export const experiences: ExperienceItem[] = [
@@ -29,6 +30,7 @@ export const experiences: ExperienceItem[] = [
         'Automated internal workflows, including release notes generation, to streamline deployment processes',
       ],
       technologies: ['Python', 'Test Automation', 'CI/CD', 'API Testing', 'UI Testing'],
+      order: 1,
     },
     {
       title: 'Data Analyst',
@@ -44,11 +46,12 @@ export const experiences: ExperienceItem[] = [
         'Conducted AB testing to assess the effectiveness of the lead distribution system',
       ],
       technologies: ['Python', 'SQL', 'Data Analysis', 'Tableau', 'AB Testing'],
+      order: 3,
     },
     {
       title: 'Commander of Flight Academy Cadets',
       company: 'Israeli Air Force',
-      period: 'Military Service',
+      period: 'Nov 2014 - Feb 2018',
       logoUrl: airForceImg,
       location: 'Israel',
       achievements: [
@@ -57,5 +60,6 @@ export const experiences: ExperienceItem[] = [
         'Planned and executed different types of military drills',
         'Handled unexpected events while making decisions and prioritizing under pressure',
       ],
+      order: 4,
     },
   ]

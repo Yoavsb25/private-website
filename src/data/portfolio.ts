@@ -2,7 +2,7 @@
  * Portfolio Content Data
  * Core personal and professional information
  */
-import cvPath from '@/assets/cv.pdf'
+import cvPath from '@/assets/CV/CV.pdf'
 export interface PortfolioContent {
   name: string
   title: string

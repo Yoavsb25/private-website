@@ -18,8 +18,8 @@ export interface WorkItem {
   featured: boolean
   date?: string
 }
-import teamBalncerImg from '@/assets/Teamaker.png'
-import alertBuddyImg from '@/assets/alert_buddy.png'
+import teamBalncerImg from '@/assets/images/Teamaker.png'
+import alertBuddyImg from '@/assets/images/alert_buddy.png'
 
 
 export const projects: WorkItem[] = [
