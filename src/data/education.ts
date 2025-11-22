@@ -1,5 +1,5 @@
-import reichmanImg from '@/assets/reichman_logo.png'
-import rothbergImg from '@/assets/rothberg_logo.png'
+import reichmanImg from '@/assets/icons/reichman_logo.png'
+import rothbergImg from '@/assets/icons/rothberg_logo.png'
 
 interface EducationItem {
   degree: string

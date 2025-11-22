@@ -84,3 +84,7 @@ out/
 tmp/
 temp/
 
+.specify/
+.cursor/
+specs/
+

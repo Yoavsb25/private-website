@@ -1,6 +1,6 @@
-import sysaidImg from '@/assets/sysaid_technologies_ltd_logo.jpeg'
-import affilomaniaImg from '@/assets/Affilomania.png'
-import airForceImg from '@/assets/IAF.png'
+import sysaidImg from '@/assets/icons/sysaid_technologies_ltd_logo.jpeg'
+import affilomaniaImg from '@/assets/icons/Affilomania.png'
+import airForceImg from '@/assets/icons/IAF.png'
 
 interface ExperienceItem {
     title: string
