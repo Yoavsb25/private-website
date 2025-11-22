@@ -27,21 +27,19 @@ export function YearLabelMobile({ yearDisplay, index }: YearLabelMobileProps) {
 
 interface YearBadgeDesktopProps {
   yearDisplay: string
-  isEven: boolean
   index: number
 }
 
-export function YearBadgeDesktop({ yearDisplay, isEven, index }: YearBadgeDesktopProps) {
+export function YearBadgeDesktop({ yearDisplay, index }: YearBadgeDesktopProps) {
   return (
     <motion.div
-      className={`hidden w-[calc(50%-3rem)] items-center md:flex ${
-        isEven ? 'justify-end pr-12' : 'justify-start pl-12'
-      }`}
-      initial={{ opacity: 0, x: isEven ? 24 : -24 }}
-      animate={{ opacity: 1, x: 0 }}
+      className="mb-2 hidden w-full justify-center md:flex"
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{
         delay: index * ANIMATION.ITEM_STAGGER + 0.2,
         duration: 0.5,
+        ...ANIMATION.SPRING_FAST,
       }}
     >
       <Badge className="whitespace-nowrap rounded-full bg-primary px-4 py-2 text-base font-semibold text-primary-foreground shadow-lg">

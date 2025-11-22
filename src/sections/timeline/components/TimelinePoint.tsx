@@ -1,9 +1,11 @@
 import { motion, AnimatePresence } from 'framer-motion'
+import { Briefcase, GraduationCap } from 'lucide-react'
 import type { TimelinePointProps } from '../types'
 import { ANIMATION } from '../constants'
 
-export function TimelinePoint({ isActive, isHovered, index, onClick }: TimelinePointProps) {
+export function TimelinePoint({ isActive, isHovered, index, type, onClick }: TimelinePointProps) {
   const glow = isActive || isHovered
+  const Icon = type === 'education' ? GraduationCap : Briefcase
 
   return (
     <motion.button
@@ -21,7 +23,7 @@ export function TimelinePoint({ isActive, isHovered, index, onClick }: TimelineP
       <AnimatePresence>
         {glow && (
           <motion.div
-            className="absolute h-9 w-9 rounded-full bg-primary/25 blur-md"
+            className="absolute h-12 w-12 rounded-full bg-primary/25 blur-md"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1.6, opacity: [0, 0.7, 0] }}
             exit={{ scale: 0.8, opacity: 0 }}
@@ -31,21 +33,16 @@ export function TimelinePoint({ isActive, isHovered, index, onClick }: TimelineP
       </AnimatePresence>
 
       <motion.div
-        className={`relative h-7 w-7 rounded-full border-[3px] border-background shadow-xl transition-all duration-300 ${
+        className={`relative flex h-10 w-10 items-center justify-center rounded-full border-[3px] border-background shadow-xl transition-all duration-300 ${
           isActive
             ? 'bg-primary ring-4 ring-primary/35'
             : 'bg-primary/90 hover:bg-primary'
         }`}
-        whileHover={{ scale: 1.4 }}
-        animate={isActive ? { scale: 1.35 } : { scale: 1 }}
+        whileHover={{ scale: 1.2 }}
+        animate={isActive ? { scale: 1.15 } : { scale: 1 }}
         transition={ANIMATION.SPRING_FAST}
       >
-        <motion.span
-          className="absolute inset-0 rounded-full bg-gradient-to-br from-white/70 to-transparent opacity-80"
-          animate={glow ? { opacity: [0.3, 0.8, 0.3] } : { opacity: 0.5 }}
-          transition={{ duration: 1.5, repeat: Infinity, repeatType: 'reverse' }}
-        />
-        <span className="absolute inset-[6px] rounded-full bg-background/90" />
+        <Icon className="h-5 w-5 text-primary-foreground" />
       </motion.div>
     </motion.button>
   )

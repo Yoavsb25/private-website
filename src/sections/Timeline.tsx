@@ -83,47 +83,17 @@ export function Timeline() {
                 >
                   <YearLabelMobile yearDisplay={item.yearDisplay} index={idx} />
 
-                  <div className="relative w-full md:flex md:items-start md:gap-0">
-                    {isEven ? (
-                      <>
-                        <TimelineCard
-                          item={item}
-                          isEven={isEven}
-                          isHovered={isHovered}
-                          isActive={isActive}
-                          index={idx}
-                          onHoverChange={setHoveredItem}
-                          onToggleActive={id =>
-                            setActiveItem(prev => (prev === id ? null : id))
-                          }
-                        />
-                        <YearBadgeDesktop
-                          yearDisplay={item.yearDisplay}
-                          isEven={isEven}
-                          index={idx}
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <YearBadgeDesktop
-                          yearDisplay={item.yearDisplay}
-                          isEven={isEven}
-                          index={idx}
-                        />
-                        <TimelineCard
-                          item={item}
-                          isEven={isEven}
-                          isHovered={isHovered}
-                          isActive={isActive}
-                          index={idx}
-                          onHoverChange={setHoveredItem}
-                          onToggleActive={id =>
-                            setActiveItem(prev => (prev === id ? null : id))
-                          }
-                        />
-                      </>
-                    )}
-                  </div>
+                  <TimelineCard
+                    item={item}
+                    isEven={isEven}
+                    isHovered={isHovered}
+                    isActive={isActive}
+                    index={idx}
+                    onHoverChange={setHoveredItem}
+                    onToggleActive={id =>
+                      setActiveItem(prev => (prev === id ? null : id))
+                    }
+                  />
 
                   <div
                     onMouseEnter={() => setHoveredItem(item.id)}
@@ -133,6 +103,7 @@ export function Timeline() {
                       isActive={isActive}
                       isHovered={isHovered}
                       index={idx}
+                      type={item.type}
                       onClick={() =>
                         setActiveItem(prev => (prev === item.id ? null : item.id))
                       }

@@ -38,6 +38,7 @@ export interface TimelinePointProps {
   isActive: boolean
   isHovered: boolean
   index: number
+  type: TimelineType
   onClick: () => void
 }
 
