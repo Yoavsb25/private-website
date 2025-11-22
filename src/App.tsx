@@ -5,7 +5,7 @@ import { Hero } from './sections/Hero'
 import { Timeline } from './sections/Timeline'
 import { Projects } from './sections/Projects'
 import { Contact } from './sections/Contact'
-import { Skills } from './sections/Skills'
+import { Skills } from './sections/skills'
 
 function App() {
   return (
