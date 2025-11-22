@@ -2,13 +2,10 @@ import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Section, SectionHeader, Container } from '@/components/layout'
 import { SECTION_IDS } from '@/lib/constants'
-import type { FilterType } from './timeline/types'
 import { createTimelineItems } from '@/lib/helpers'
-import { ANIMATION, STYLES } from './timeline/constants'
-import { FilterChips } from './timeline/components/FilterChips'
-import { TimelinePoint } from './timeline/components/TimelinePoint'
-import { YearLabelMobile } from './timeline/components/YearLabel'
-import { TimelineCard } from './timeline/components/TimelineCard'
+import { ANIMATION, STYLES } from '@/lib/constants'
+import type { FilterType } from '@/lib/types'
+import { FilterChips, TimelinePoint, YearLabelMobile, TimelineCard } from '@/components/timeline'
 
 export function Timeline() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)

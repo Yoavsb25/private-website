@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import type { FilterType } from '../types'
+import type { FilterType } from '@/lib/types'
 
 interface FilterChipsProps {
   activeFilter: FilterType

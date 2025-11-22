@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Briefcase, GraduationCap } from 'lucide-react'
-import type { TimelinePointProps } from '../types'
-import { ANIMATION } from '../constants'
+import type { TimelinePointProps } from '@/lib/types'
+import { ANIMATION } from '@/lib/constants'
 
 export function TimelinePoint({ isActive, isHovered, index, type, onClick }: TimelinePointProps) {
   const glow = isActive || isHovered

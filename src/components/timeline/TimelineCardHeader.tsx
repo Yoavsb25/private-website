@@ -2,8 +2,8 @@ import { motion } from 'framer-motion'
 import { CardHeader, CardDescription, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Logo } from '@/lib/helpers'
-import type { TimelineItem } from '../types'
-import { STYLES } from '../constants'
+import type { TimelineItem, EducationData, ExperienceData } from '@/lib/types'
+import { STYLES } from '@/lib/constants'
 
 interface TimelineCardHeaderProps {
   item: TimelineItem
@@ -12,6 +12,8 @@ interface TimelineCardHeaderProps {
 
 export function TimelineCardHeader({ item, isEven }: TimelineCardHeaderProps) {
   const { data, type } = item
+  const educationData = type === 'education' ? (data as EducationData) : null
+  const experienceData = type === 'experience' ? (data as ExperienceData) : null
 
   return (
     <CardHeader className="pb-5 pt-6">
@@ -29,7 +31,7 @@ export function TimelineCardHeader({ item, isEven }: TimelineCardHeaderProps) {
             <div className={STYLES.LOGO_WRAPPER}>
               <Logo
                 src={data.logoUrl}
-                alt={`${type === 'education' ? data.institution : data.company} logo`}
+                alt={`${educationData ? educationData.institution : experienceData?.company} logo`}
               />
             </div>
           </motion.div>
@@ -43,22 +45,22 @@ export function TimelineCardHeader({ item, isEven }: TimelineCardHeaderProps) {
           >
             <div className="min-w-0 flex-1">
               <CardTitle className="mb-1.5 text-xl font-bold leading-tight md:text-2xl">
-                {type === 'education' ? data.degree : data.title}
+                {educationData ? educationData.degree : experienceData?.title}
               </CardTitle>
               <CardDescription className="mb-1 text-base font-medium md:text-lg">
-                {type === 'education' ? data.institution : data.company}
+                {educationData ? educationData.institution : experienceData?.company}
               </CardDescription>
-              {type === 'experience' && data.location && (
+              {experienceData?.location && (
                 <CardDescription className="mt-1.5 flex items-center gap-1.5 text-sm md:text-base">
                   <span>📍</span>
-                  <span>{data.location}</span>
+                  <span>{experienceData.location}</span>
                 </CardDescription>
               )}
             </div>
 
-            {type === 'experience' && data.type && (
+            {experienceData?.type && (
               <Badge variant="secondary" className="flex-shrink-0 px-3 py-1.5 text-sm font-semibold">
-                {data.type}
+                {experienceData.type}
               </Badge>
             )}
           </div>

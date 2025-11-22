@@ -2,8 +2,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { COMPONENT_CLASSES } from '@/lib/constants'
-import type { TimelineCardProps } from '../types'
-import { ANIMATION, STYLES } from '../constants'
+import type { TimelineCardProps, EducationData, ExperienceData } from '@/lib/types'
+import { ANIMATION, STYLES } from '@/lib/constants'
 import { TimelineCardHeader } from './TimelineCardHeader'
 import { EducationContent, ExperienceContent } from './TimelineContent'
 
@@ -125,9 +125,9 @@ export function TimelineCard({
                   />
 
                   {item.type === 'education' ? (
-                    <EducationContent data={item.data} />
+                    <EducationContent data={item.data as EducationData} />
                   ) : (
-                    <ExperienceContent data={item.data} />
+                    <ExperienceContent data={item.data as ExperienceData} />
                   )}
                 </CardContent>
               </motion.div>

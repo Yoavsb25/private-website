@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
-import { ANIMATION, STYLES } from '../constants'
+import { ANIMATION, STYLES } from '@/lib/constants'
 
 interface YearLabelMobileProps {
   yearDisplay: string

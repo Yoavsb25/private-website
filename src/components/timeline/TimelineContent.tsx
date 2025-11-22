@@ -2,8 +2,8 @@ import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { Heading } from '@/components/typography'
 import { TYPOGRAPHY } from '@/lib/constants'
-import { STYLES } from '../constants'
-import type { EducationData, ExperienceData } from '../types'
+import { STYLES } from '@/lib/constants'
+import type { EducationData, ExperienceData } from '@/lib/types'
 
 interface BulletListProps {
   items: string[]
@@ -88,33 +88,34 @@ interface EducationContentProps {
 export function EducationContent({ data }: EducationContentProps) {
   return (
     <>
-      {data.details?.length > 0 && (
+      {data.details && data.details.length > 0 && (
         <ContentSection title="Highlights" delay={0.3}>
           <BulletList items={data.details} delay={0.3} />
         </ContentSection>
       )}
 
-      {data.activities?.length > 0 && (
+      {data.activities && data.activities.length > 0 && (
         <ContentSection title="Activities" delay={0.4}>
           <BulletList items={data.activities} delay={0.4} />
         </ContentSection>
       )}
 
-      {data.grades?.length > 0 && (
+      {data.grades && data.grades.length > 0 && (
         <ContentSection title="Grades" delay={0.5}>
           <BulletList items={data.grades} delay={0.5} />
         </ContentSection>
       )}
 
-      {data.majors?.length > 0 && (
+      {data.majors && data.majors.length > 0 && (
         <ContentSection title="Majors" delay={0.6}>
           <BadgeGrid items={data.majors} delay={0.6} />
         </ContentSection>
       )}
 
-      {(data.programmingLanguages?.length > 0 || data.developmentTools?.length > 0) && (
+      {((data.programmingLanguages && data.programmingLanguages.length > 0) || 
+        (data.developmentTools && data.developmentTools.length > 0)) && (
         <div className="space-y-4">
-          {data.programmingLanguages?.length > 0 && (
+          {data.programmingLanguages && data.programmingLanguages.length > 0 && (
             <ContentSection title="Programming Languages" delay={0.7}>
               <BadgeGrid
                 items={data.programmingLanguages}
@@ -123,7 +124,7 @@ export function EducationContent({ data }: EducationContentProps) {
               />
             </ContentSection>
           )}
-          {data.developmentTools?.length > 0 && (
+          {data.developmentTools && data.developmentTools.length > 0 && (
             <ContentSection title="Tools & Frameworks" delay={0.8}>
               <BadgeGrid
                 items={data.developmentTools}
@@ -145,13 +146,13 @@ interface ExperienceContentProps {
 export function ExperienceContent({ data }: ExperienceContentProps) {
   return (
     <>
-      {data.achievements?.length > 0 && (
+      {data.achievements && data.achievements.length > 0 && (
         <ContentSection title="Achievements" delay={0.3}>
           <BulletList items={data.achievements} delay={0.3} />
         </ContentSection>
       )}
 
-      {data.technologies?.length > 0 && (
+      {data.technologies && data.technologies.length > 0 && (
         <ContentSection title="Technologies" delay={0.4}>
           <BadgeGrid items={data.technologies} delay={0.4} variant="outline" />
         </ContentSection>
