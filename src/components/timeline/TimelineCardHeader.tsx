@@ -16,11 +16,9 @@ export function TimelineCardHeader({ item, isEven }: TimelineCardHeaderProps) {
   const experienceData = type === 'experience' ? (data as ExperienceData) : null
 
   return (
-    <CardHeader className="pb-5 pt-6">
+    <CardHeader className="pb-[clamp(1rem,3vw,1.5rem)] pt-[clamp(1.25rem,4vw,1.5rem)] px-[clamp(1rem,3vw,1.5rem)]">
       <div
-        className={`flex items-start gap-5 ${
-          isEven && !data.logoUrl ? 'md:flex-row-reverse' : ''
-        }`}
+        className="flex items-start gap-[clamp(0.75rem,2vw,1.25rem)]"
       >
         {data.logoUrl && (
           <motion.div
@@ -37,21 +35,19 @@ export function TimelineCardHeader({ item, isEven }: TimelineCardHeaderProps) {
           </motion.div>
         )}
 
-        <div className={`min-w-0 flex-1 ${isEven ? 'md:text-right' : ''}`}>
+        <div className="min-w-0 flex-1">
           <div
-            className={`flex items-start gap-3 ${
-              isEven ? 'md:flex-row-reverse md:justify-end' : 'justify-between'
-            }`}
+            className="flex items-start gap-[clamp(0.75rem,2vw,1rem)] justify-between"
           >
             <div className="min-w-0 flex-1">
-              <CardTitle className="mb-1.5 text-xl font-bold leading-tight md:text-2xl">
+              <CardTitle className="mb-[clamp(0.25rem,1vw,0.375rem)] text-[clamp(1.125rem,3vw,1.5rem)] font-bold leading-tight">
                 {educationData ? educationData.degree : experienceData?.title}
               </CardTitle>
-              <CardDescription className="mb-1 text-base font-medium md:text-lg">
+              <CardDescription className="mb-1 text-[clamp(0.875rem,2.5vw,1.125rem)] font-medium">
                 {educationData ? educationData.institution : experienceData?.company}
               </CardDescription>
               {experienceData?.location && (
-                <CardDescription className="mt-1.5 flex items-center gap-1.5 text-sm md:text-base">
+                <CardDescription className="mt-[clamp(0.25rem,1vw,0.375rem)] flex items-center gap-1.5 text-[clamp(0.75rem,2vw,1rem)]">
                   <span>📍</span>
                   <span>{experienceData.location}</span>
                 </CardDescription>
@@ -59,7 +55,7 @@ export function TimelineCardHeader({ item, isEven }: TimelineCardHeaderProps) {
             </div>
 
             {experienceData?.type && (
-              <Badge variant="secondary" className="flex-shrink-0 px-3 py-1.5 text-sm font-semibold">
+              <Badge variant="secondary" className="flex-shrink-0 px-[clamp(0.625rem,2vw,0.75rem)] py-[clamp(0.25rem,1vw,0.375rem)] text-[clamp(0.75rem,2vw,0.875rem)] font-semibold">
                 {experienceData.type}
               </Badge>
             )}

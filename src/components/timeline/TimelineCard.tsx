@@ -20,15 +20,15 @@ export function TimelineCard({
 
   return (
     <div
-      className={`relative w-full md:w-[calc(50%-3rem)] ${
-        isEven ? 'md:mr-auto' : 'md:ml-auto'
+      className={`relative w-full max-w-full sm:max-w-[calc(50%-3rem)] sm:w-[calc(50%-3rem)] ${
+        isEven ? 'sm:mr-auto' : 'sm:ml-auto'
       }`}
       onMouseEnter={() => onHoverChange(item.id)}
       onMouseLeave={() => onHoverChange(null)}
     >
       {/* Date Badge - Above the card */}
       <motion.div
-        className="mb-2 hidden w-full justify-center md:flex"
+        className="mb-2 hidden w-full justify-center sm:flex"
         initial={{ opacity: 0, y: -8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -45,7 +45,7 @@ export function TimelineCard({
 
       {/* Circuit Connector Line */}
       <motion.div
-        className={`absolute top-5 hidden h-[2px] w-[3rem] bg-border md:block ${
+        className={`absolute top-5 hidden h-[2px] w-[3rem] bg-border sm:block ${
           isEven ? '-right-[3rem]' : '-left-[3rem]'
         }`}
         initial={{ scaleX: 0 }}
@@ -116,7 +116,7 @@ export function TimelineCard({
                 transition={ANIMATION.EXPAND}
                 className="overflow-hidden"
               >
-                <CardContent className="space-y-6 px-6 pb-6 pt-0">
+                <CardContent className="space-y-[clamp(1rem,3vw,1.5rem)] px-[clamp(1rem,3vw,1.5rem)] pb-[clamp(1rem,3vw,1.5rem)] pt-0">
                   <motion.div
                     className={STYLES.DIVIDER}
                     initial={{ scaleX: 0 }}

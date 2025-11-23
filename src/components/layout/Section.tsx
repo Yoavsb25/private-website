@@ -27,7 +27,6 @@ export function Section({
       className={cn(
         'min-h-screen',
         SPACING.PADDING.SECTION,
-        SPACING.PADDING.CONTAINER,
         backgroundClass,
         className
       )}

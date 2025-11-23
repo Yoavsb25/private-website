@@ -54,8 +54,8 @@ export function Projects() {
                 )}
 
                 <CardHeader>
-                  <CardTitle className="text-lg font-bold">{project.title}</CardTitle>
-                  <CardDescription>{project.description}</CardDescription>
+                  <CardTitle className="text-base sm:text-lg font-bold">{project.title}</CardTitle>
+                  <CardDescription className="text-sm sm:text-base">{project.description}</CardDescription>
                 </CardHeader>
 
                 <CardContent className={`flex flex-1 flex-col ${SPACING.CARD.INTERNAL}`}>

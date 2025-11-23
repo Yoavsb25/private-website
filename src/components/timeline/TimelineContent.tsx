@@ -16,7 +16,7 @@ function BulletList({ items, delay }: BulletListProps) {
       {items.map((item, i) => (
         <motion.li
           key={i}
-          className="flex items-start text-sm leading-relaxed md:text-base"
+          className="flex items-start text-[clamp(0.75rem,2vw,1rem)] leading-relaxed"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: delay + i * 0.06 }}
@@ -37,7 +37,7 @@ interface BadgeGridProps {
 
 function BadgeGrid({ items, delay, variant = 'secondary' }: BadgeGridProps) {
   return (
-    <div className="flex flex-wrap gap-2.5">
+    <div className="flex flex-wrap gap-[clamp(0.5rem,1.5vw,0.625rem)]">
       {items.map((item, i) => (
         <motion.div
           key={i}
@@ -47,7 +47,7 @@ function BadgeGrid({ items, delay, variant = 'secondary' }: BadgeGridProps) {
         >
           <Badge
             variant={variant}
-            className="rounded-full px-3 py-1.5 text-xs font-medium md:text-sm"
+            className="rounded-full px-[clamp(0.625rem,2vw,0.75rem)] py-[clamp(0.25rem,1vw,0.375rem)] text-[clamp(0.75rem,2vw,0.875rem)] font-medium"
           >
             {item}
           </Badge>
@@ -72,7 +72,7 @@ function ContentSection({ title, delay, children }: ContentSectionProps) {
     >
       <Heading
         level={4}
-        className={`mb-3 text-base font-bold md:text-lg ${TYPOGRAPHY.COLOR.MUTED_OPACITY}`}
+        className={`mb-[clamp(0.5rem,1.5vw,0.75rem)] text-[clamp(0.875rem,2.5vw,1.125rem)] font-bold ${TYPOGRAPHY.COLOR.MUTED_OPACITY}`}
       >
         {title}
       </Heading>

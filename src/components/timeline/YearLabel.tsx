@@ -9,7 +9,7 @@ interface YearLabelMobileProps {
 
 export function YearLabelMobile({ yearDisplay, index }: YearLabelMobileProps) {
   return (
-    <div className="mb-6 w-full text-center md:hidden">
+    <div className="mb-[clamp(1rem,3vw,1.5rem)] w-full text-center sm:hidden">
       <motion.div
         className={STYLES.YEAR_BADGE_MOBILE}
         initial={{ opacity: 0, scale: 0.85, y: 8 }}
@@ -33,7 +33,7 @@ interface YearBadgeDesktopProps {
 export function YearBadgeDesktop({ yearDisplay, index }: YearBadgeDesktopProps) {
   return (
     <motion.div
-      className="mb-2 hidden w-full justify-center md:flex"
+      className="mb-2 hidden w-full justify-center sm:flex"
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{

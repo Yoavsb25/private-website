@@ -6,7 +6,7 @@ interface ExperienceItem {
     title: string
     company: string
     period: string
-    location: string
+    location?: string
     logoUrl?: string
     type?: string
     achievements: string[]
@@ -20,8 +20,6 @@ export const experiences: ExperienceItem[] = [
       company: 'SysAid',
       period: 'Apr 2025 - Present',
       logoUrl: sysaidImg,
-      location: 'Tel Aviv-Yafo',
-      type: 'Full-time',
       achievements: [
         'Built scalable UI and API test infrastructures to support continuous testing across multiple environments',
         'Designed and maintained automated test coverage for functional, regression, and API flows',
@@ -37,7 +35,6 @@ export const experiences: ExperienceItem[] = [
       company: 'Affilomania',
       period: 'Oct 2020 - Oct 2021',
       logoUrl: affilomaniaImg,
-      location: 'Tel Aviv-Yafo',
       achievements: [
         'Analyzed and interpreted large-scale data sets to support business decisions and improve KPIs',
         'Enhanced lead distribution processes, achieving a 15% increase in sales through data-driven strategies',
@@ -53,7 +50,6 @@ export const experiences: ExperienceItem[] = [
       company: 'Israeli Air Force',
       period: 'Nov 2014 - Feb 2018',
       logoUrl: airForceImg,
-      location: 'Israel',
       achievements: [
         'Led a team of 10 soldiers, ensuring their welfare',
         'Promoted to Company Sergeant Major, overseeing 60 soldiers and commanders',

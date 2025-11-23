@@ -25,15 +25,15 @@ export function ScrollToTop() {
             duration: prefersReducedMotion() ? 0 : 0.2,
             ease: 'easeOut',
           }}
-          className="fixed bottom-8 right-8 z-50"
+          className="fixed bottom-[clamp(1rem,3vw,2rem)] right-[clamp(1rem,3vw,2rem)] z-50"
         >
           <Button
             onClick={scrollToTop}
             size="lg"
-            className="rounded-full h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 p-0 shadow-lg hover:shadow-xl transition-shadow"
+            className="rounded-full h-[clamp(3rem,8vw,4rem)] w-[clamp(3rem,8vw,4rem)] p-0 shadow-lg hover:shadow-xl transition-shadow"
             aria-label="Scroll to top"
           >
-            <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />
+            <ArrowUp className="w-[clamp(1.25rem,4vw,1.75rem)] h-[clamp(1.25rem,4vw,1.75rem)]" />
           </Button>
         </motion.div>
       )}

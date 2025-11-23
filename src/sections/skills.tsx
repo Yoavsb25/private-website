@@ -21,26 +21,26 @@ export function Skills() {
 
   return (
     <Section id={SECTION_IDS.SKILLS}>
-      <Container size="small" className="text-center">
+      <Container size="small" className="text-center w-full">
         <SectionHeader>{SECTION_TITLES.SKILLS}</SectionHeader>
         <motion.div
-          className={`${LAYOUT.GRID.RESPONSIVE_3}`}
+          className={`${LAYOUT.GRID.SKILLS} w-full`}
           {...createStaggerContainerAnimation(staggerContainer)}
         >
           {skills.map((group, i) => (
             <motion.div
               key={i}
-              className="flex"
+              className="flex w-full"
               {...createStaggerItemAnimation(staggerItem)}
               {...createCardHoverAnimation('small')}
             >
-              <Card className={`${COMPONENT_CLASSES.CARD.BACKDROP} ${COMPONENT_CLASSES.CARD.HOVER} flex flex-col h-full`}>
+              <Card className={`${COMPONENT_CLASSES.CARD.BACKDROP} ${COMPONENT_CLASSES.CARD.HOVER} flex flex-col h-full w-full`}>
                 <CardHeader>
                   <CardTitle className="text-lg font-semibold">{group.category}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1 flex flex-col">
                   <motion.div
-                    className={`grid ${SKILLS_CONFIG.GRID.COLS} ${SKILLS_CONFIG.GRID.GAP} pt-3 flex-1 content-start`}
+                    className={`grid ${SKILLS_CONFIG.GRID.COLS} ${SKILLS_CONFIG.GRID.GAP} pt-2 sm:pt-3 flex-1 content-start`}
                     {...createStaggerContainerAnimation(staggerContainer)}
                   >
                     {group.items.map(({ name, icon: Icon, color }) => (
@@ -62,7 +62,7 @@ export function Skills() {
                             style={color !== 'currentColor' ? { color } : undefined}
                           />
                         </motion.div>
-                        <p className="text-sm text-foreground/80">{name}</p>
+                        <p className="text-xs sm:text-sm text-foreground/80">{name}</p>
                         <AnimatePresence>
                           {hoveredSkill === name && (
                             <motion.div

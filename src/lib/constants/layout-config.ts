@@ -9,10 +9,18 @@ export const LAYOUT = {
     FULL: 'mx-auto w-full',
   },
   GRID: {
-    RESPONSIVE_2: 'grid gap-6 md:grid-cols-2',
-    RESPONSIVE_3: 'grid gap-8 md:grid-cols-3',
-    AUTO_FIT: 'grid gap-8 justify-center [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]',
-    CONTACT: 'grid gap-6 justify-center [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]',
+    // Modern fluid grids using auto-fit (preferred approach)
+    // Automatically adapts to container width - no explicit breakpoints needed
+    AUTO_FIT: 'grid gap-[clamp(1rem,3vw,2rem)] [grid-template-columns:repeat(auto-fit,minmax(340px,1fr))]',
+    AUTO_FIT_SMALL: 'grid gap-[clamp(1rem,2.5vw,1.5rem)] [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]',
+    AUTO_FIT_LARGE: 'grid gap-[clamp(1rem,3vw,2rem)] [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]',
+    // Skills grid: 1 column on mobile, always 3 on desktop (768px+)
+    // Forces exactly 3 columns for the category cards (Languages, Frameworks, DevOps)
+    SKILLS: 'grid gap-[clamp(1rem,3vw,2rem)] [grid-template-columns:repeat(auto-fit,minmax(250px,1fr))] md:[grid-template-columns:repeat(3,1fr)]',
+    CONTACT: 'grid gap-[clamp(1rem,2.5vw,1.5rem)] [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]',
+    // Legacy - kept for backward compatibility, but prefer AUTO_FIT variants
+    RESPONSIVE_2: 'grid gap-[clamp(1rem,2.5vw,1.5rem)] [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))]',
+    RESPONSIVE_3: 'grid gap-[clamp(1rem,3vw,2rem)] [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]',
   },
   FLEX: {
     CENTER: 'flex items-center justify-center',
@@ -42,8 +50,9 @@ export const SPACING = {
     LIST: 'space-y-2',
   },
   PADDING: {
-    CONTAINER: 'px-4 sm:px-6 lg:px-8',
-    SECTION: 'py-16',
+    // Using clamp for fluid padding - adapts smoothly to screen size
+    CONTAINER: 'px-[clamp(1rem,4vw,2rem)]',
+    SECTION: 'py-[clamp(3rem,8vw,5rem)]',
   },
 } as const
 

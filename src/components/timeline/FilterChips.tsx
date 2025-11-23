@@ -15,7 +15,7 @@ export function FilterChips({ activeFilter, onChange }: FilterChipsProps) {
 
   return (
     <motion.div
-      className="mb-8 flex flex-wrap items-center justify-center gap-3"
+      className="mb-[clamp(1.5rem,4vw,2rem)] flex flex-wrap items-center justify-center gap-[clamp(0.5rem,1.5vw,0.75rem)]"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
@@ -27,7 +27,7 @@ export function FilterChips({ activeFilter, onChange }: FilterChipsProps) {
             key={chip.value}
             onClick={() => onChange(chip.value)}
             className={[
-              'relative rounded-full px-4 py-1.5 text-sm font-medium transition-all',
+              'relative rounded-full px-[clamp(0.75rem,2vw,1rem)] py-[clamp(0.375rem,1vw,0.5rem)] text-[clamp(0.75rem,2vw,0.875rem)] font-medium transition-all',
               'border border-border/60 backdrop-blur-sm',
               isActive
                 ? 'bg-primary text-primary-foreground shadow-lg border-primary'

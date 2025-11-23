@@ -63,20 +63,22 @@ export const TIMELINE_LABELS = {
  */
 export const SKILLS_CONFIG = {
   ICON_SIZES: {
-    BASE: 'h-6 w-6',
-    SM: 'sm:h-7 sm:w-7',
-    MD: 'md:h-8 md:w-8',
-    FULL: 'h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8',
+    BASE: 'h-5 w-5',
+    SM: 'h-[clamp(1.25rem,3vw,1.75rem)] w-[clamp(1.25rem,3vw,1.75rem)]',
+    MD: 'h-[clamp(1.5rem,4vw,2rem)] w-[clamp(1.5rem,4vw,2rem)]',
+    FULL: 'h-[clamp(1.25rem,3vw,2rem)] w-[clamp(1.25rem,3vw,2rem)]',
   },
   CONTAINER_SIZES: {
-    BASE: 'h-12 w-12',
-    SM: 'sm:h-14 sm:w-14',
-    MD: 'md:h-16 md:w-16',
-    FULL: 'h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16',
+    BASE: 'h-10 w-10',
+    SM: 'h-[clamp(2.5rem,6vw,3.5rem)] w-[clamp(2.5rem,6vw,3.5rem)]',
+    MD: 'h-[clamp(3rem,8vw,4rem)] w-[clamp(3rem,8vw,4rem)]',
+    FULL: 'h-[clamp(2.5rem,6vw,4rem)] w-[clamp(2.5rem,6vw,4rem)]',
   },
   GRID: {
-    COLS: 'grid-cols-3',
-    GAP: 'gap-4 sm:gap-5',
+    // Skill items grid: 1 column on mobile, 2 on tablet, always 3 on desktop (1024px+)
+    // This controls the individual skill icons within each category card
+    COLS: 'grid [grid-template-columns:repeat(auto-fit,minmax(80px,1fr))] md:[grid-template-columns:repeat(2,1fr)] lg:[grid-template-columns:repeat(3,1fr)]',
+    GAP: 'gap-[clamp(0.75rem,2vw,1.25rem)]',
   },
 } as const
 
@@ -85,31 +87,32 @@ export const SKILLS_CONFIG = {
  */
 export const ICON_SIZES = {
   SMALL: 'w-3 h-3',
-  SMALL_RESPONSIVE: 'w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5',
+  SMALL_RESPONSIVE: 'w-[clamp(0.75rem,2vw,1.25rem)] h-[clamp(0.75rem,2vw,1.25rem)]',
   MEDIUM: 'w-5 h-5',
-  MEDIUM_RESPONSIVE: 'w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7',
-  LARGE: 'w-7 h-7',
+  MEDIUM_RESPONSIVE: 'w-[clamp(1.25rem,3vw,1.75rem)] h-[clamp(1.25rem,3vw,1.75rem)]',
+  LARGE: 'w-[clamp(1.5rem,4vw,2rem)] h-[clamp(1.5rem,4vw,2rem)]',
 } as const
 
 /**
  * Common spacing values
  */
 export const SECTION_SPACING = {
-  TIMELINE_DESCRIPTION: 'mb-8',
-  TIMELINE_CONTAINER: 'py-10',
-  TIMELINE_ITEMS: 'space-y-20 md:space-y-28',
-  CONTACT_HEADER: 'mb-4',
-  PROJECTS_FOOTER: 'gap-2',
+  // Using clamp for fluid spacing - adapts smoothly to screen size
+  TIMELINE_DESCRIPTION: 'mb-[clamp(1.5rem,4vw,2rem)]',
+  TIMELINE_CONTAINER: 'py-[clamp(1.5rem,4vw,2.5rem)]',
+  TIMELINE_ITEMS: 'space-y-[clamp(3rem,8vw,7rem)]',
+  CONTACT_HEADER: 'mb-[clamp(1rem,3vw,1.5rem)]',
+  PROJECTS_FOOTER: 'gap-[clamp(0.5rem,1.5vw,0.75rem)]',
 } as const
 
 /**
  * Common class combinations
  */
 export const SECTION_CLASSES = {
-  TIMELINE_ITEM_CONTAINER: 'relative flex flex-col items-center md:flex-row md:items-start',
+  TIMELINE_ITEM_CONTAINER: 'relative flex flex-col items-center sm:flex-row sm:items-start w-full',
   PROJECTS_IMAGE_WRAPPER: 'overflow-hidden rounded-t-lg relative',
   PROJECTS_IMAGE: 'h-full w-full object-cover',
-  CONTACT_CARD_HEADER: 'flex items-center gap-2 text-lg font-semibold',
-  SKILLS_ICON_CONTAINER: 'flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 items-center justify-center rounded-xl border border-border bg-card shadow-sm cursor-pointer relative',
+  CONTACT_CARD_HEADER: 'flex items-center gap-2 text-[clamp(1rem,2.5vw,1.125rem)] font-semibold',
+  SKILLS_ICON_CONTAINER: 'flex h-[clamp(3rem,6vw,4rem)] w-[clamp(3rem,6vw,4rem)] items-center justify-center rounded-xl border border-border bg-card shadow-sm cursor-pointer relative',
 } as const
 

@@ -129,16 +129,16 @@
   /* Responsive typography scaling */
   @media (max-width: 640px) {
     h1 {
-      font-size: 2rem;
-      line-height: 2.5rem;
-    }
-    h2 {
-      font-size: 1.75rem;
+      font-size: 1.875rem;
       line-height: 2.25rem;
     }
-    h3 {
+    h2 {
       font-size: 1.5rem;
       line-height: 2rem;
+    }
+    h3 {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
     }
   }
   
@@ -157,6 +157,17 @@
       padding-left: 1rem;
       padding-right: 1rem;
     }
+  }
+  
+  /* Prevent horizontal scroll on mobile */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Better image responsiveness */
+  img {
+    max-width: 100%;
+    height: auto;
   }
 }
 

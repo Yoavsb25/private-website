@@ -7,11 +7,9 @@ import { portfolio } from '@/data/portfolio'
 import profileImg from '@/assets/images/profile.jpg'
 import { slideInLeft, slideInRight, staggerContainer, staggerItem, getAnimationVariants } from '@/lib/animations'
 import { createButtonAnimation } from '@/lib/helpers'
-import { useScrollToSection } from '@/hooks'
 import { SECTION_IDS, ANIMATION_CONFIG, HERO, HERO_LABELS } from '@/lib/constants'
 
 export function Hero() {
-  const scrollToSection = useScrollToSection()
 
   return (
     <Section id={SECTION_IDS.HERO} className={HERO.SECTION.CLASS_NAME}>
@@ -75,14 +73,15 @@ export function Hero() {
               </Text>
             </motion.div>
 
-            {/* Social Icons */}
-            <SocialIcons className={HERO.SOCIAL_ICONS.IN_CONTENT} />
-
-            {/* Buttons */}
+            {/* Buttons Row: LinkedIn, GitHub, Download CV */}
             <motion.div
               className={HERO.BUTTONS.CONTAINER}
               variants={getAnimationVariants(staggerItem)}
             >
+              {/* Social Icons */}
+              <SocialIcons className={HERO.SOCIAL_ICONS.IN_CONTENT} />
+
+              {/* Download CV Button */}
               {portfolio.cvUrl && (
                 <motion.a
                   href={portfolio.cvUrl}
@@ -92,31 +91,12 @@ export function Hero() {
                 >
                   <Button
                     variant="outline"
-                    size="lg"
                     className={HERO.BUTTONS.CLASS_NAME}
                   >
                     {HERO_LABELS.BUTTONS.DOWNLOAD_CV}
                   </Button>
                 </motion.a>
               )}
-
-              <motion.a
-                href={`#${SECTION_IDS.CONTACT}`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  scrollToSection(SECTION_IDS.CONTACT)
-                }}
-                className={HERO.BUTTONS.LINK}
-                {...createButtonAnimation()}
-              >
-                <Button
-                  variant="default"
-                  size="lg"
-                  className={HERO.BUTTONS.CLASS_NAME}
-                >
-                  {HERO_LABELS.BUTTONS.CONTACT_INFO}
-                </Button>
-              </motion.a>
             </motion.div>
           </motion.div>
         </motion.div>

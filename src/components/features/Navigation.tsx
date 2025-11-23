@@ -66,8 +66,8 @@ export function Navigation() {
         animate={{ y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="container mx-auto px-4">
-          <div className="flex h-16 items-center justify-between">
+        <div className="container mx-auto px-[clamp(0.75rem,2vw,1rem)]">
+          <div className="flex h-[clamp(3.5rem,4vw,4rem)] items-center justify-between">
             <motion.div
               className="flex items-center"
               whileHover={{ scale: 1.05 }}
@@ -79,7 +79,7 @@ export function Navigation() {
                   e.preventDefault()
                   handleScrollToSection(SECTION_IDS.HERO)
                 }}
-                className="text-xl font-bold transition-colors hover:text-primary"
+                className="text-[clamp(1.125rem,2.5vw,1.25rem)] font-bold transition-colors hover:text-primary"
                 aria-label="Home"
               >
                 Yoav Sborovsky
@@ -87,7 +87,7 @@ export function Navigation() {
             </motion.div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-6">
+            <div className="hidden sm:flex items-center gap-[clamp(1rem,2vw,1.5rem)]">
               {NAVIGATION.ITEMS.map((item, index) => (
                 <motion.div
                   key={item.id}
@@ -123,12 +123,12 @@ export function Navigation() {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center gap-2">
+            <div className="sm:hidden flex items-center gap-2">
               <DarkModeToggle />
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 p-0"
+                className="h-[clamp(2rem,5vw,2.5rem)] w-[clamp(2rem,5vw,2.5rem)] p-0"
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle menu"
                 aria-expanded={isOpen}
@@ -137,7 +137,7 @@ export function Navigation() {
                   animate={{ rotate: isOpen ? 90 : 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {isOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />}
+                  {isOpen ? <X className="w-[clamp(1rem,3vw,1.5rem)] h-[clamp(1rem,3vw,1.5rem)]" /> : <Menu className="w-[clamp(1rem,3vw,1.5rem)] h-[clamp(1rem,3vw,1.5rem)]" />}
                 </motion.div>
               </Button>
             </div>
@@ -149,7 +149,7 @@ export function Navigation() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 md:hidden"
+            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 sm:hidden"
             initial="closed"
             animate="open"
             exit="closed"
@@ -163,7 +163,7 @@ export function Navigation() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed top-16 right-0 bottom-0 w-64 bg-background border-l z-40 md:hidden shadow-xl"
+            className="fixed top-[clamp(3.5rem,4vw,4rem)] right-0 bottom-0 w-[clamp(16rem,40vw,18rem)] bg-background border-l z-40 sm:hidden shadow-xl"
             initial="closed"
             animate="open"
             exit="closed"
