@@ -19,7 +19,7 @@ export interface ExperienceData {
   title: string
   company: string
   period: string
-  location: string
+  location?: string
   logoUrl?: string
   type?: string
   achievements: string[]

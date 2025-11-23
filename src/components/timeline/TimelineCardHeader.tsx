@@ -7,10 +7,9 @@ import { STYLES } from '@/lib/constants'
 
 interface TimelineCardHeaderProps {
   item: TimelineItem
-  isEven: boolean
 }
 
-export function TimelineCardHeader({ item, isEven }: TimelineCardHeaderProps) {
+export function TimelineCardHeader({ item }: TimelineCardHeaderProps) {
   const { data, type } = item
   const educationData = type === 'education' ? (data as EducationData) : null
   const experienceData = type === 'experience' ? (data as ExperienceData) : null

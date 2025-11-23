@@ -105,7 +105,7 @@ export function TimelineCard({
             )}
           </AnimatePresence>
 
-          <TimelineCardHeader item={item} isEven={isEven} />
+          <TimelineCardHeader item={item} />
 
           <AnimatePresence initial={false}>
             {expanded && (
