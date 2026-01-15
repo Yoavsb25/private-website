@@ -5,7 +5,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { CardContent } from '@/components/ui/card'
 import { timelineExpand } from '../variants'
-import { getEducationData, getExperienceData } from '../helpers'
+import { getEducationData, getExperienceData } from '../utils'
 import { EducationContent, ExperienceContent } from './TimelineContent'
 import type { TimelineCardContentProps } from './types'
 

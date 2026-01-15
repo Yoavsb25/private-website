@@ -4,7 +4,7 @@
  */
 import type { EducationData, ExperienceData } from '@/lib/types'
 import { BulletList, BadgeGrid, ContentSection } from './shared'
-import { ANIMATION_DELAYS, CONTENT_SECTIONS } from './constants'
+import { ANIMATION_DELAYS, CONTENT_SECTIONS } from '../constants'
 
 interface EducationContentProps {
   data: EducationData

@@ -4,7 +4,7 @@
  */
 import { CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import type { TimelineCardHeaderProps } from './types'
-import { getEducationData, getExperienceData } from '../helpers'
+import { getEducationData, getExperienceData } from '../utils'
 
 export function TimelineCardHeader({ item }: TimelineCardHeaderProps) {
   const title =
