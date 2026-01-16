@@ -1,51 +1,34 @@
+/**
+ * YearLabel components
+ * Display year badges for timeline items (mobile and desktop variants)
+ */
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
-import { ANIMATION, STYLES } from '@/lib/constants'
 
-interface YearLabelMobileProps {
+export interface YearLabelProps {
   yearDisplay: string
-  index: number
 }
 
-export function YearLabelMobile({ yearDisplay, index }: YearLabelMobileProps) {
+/**
+ * Year label for mobile view
+ */
+export function YearLabelMobile({ yearDisplay }: YearLabelProps) {
   return (
-    <div className="mb-[clamp(1rem,3vw,1.5rem)] w-full text-center sm:hidden">
-      <motion.div
-        className={STYLES.YEAR_BADGE_MOBILE}
-        initial={{ opacity: 0, scale: 0.85, y: 8 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{
-          delay: index * ANIMATION.ITEM_STAGGER,
-          ...ANIMATION.SPRING_FAST,
-        }}
-      >
-        {yearDisplay}
+    <div className="mb-6 text-center sm:hidden">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <Badge className="px-4 py-2">{yearDisplay}</Badge>
       </motion.div>
     </div>
   )
 }
 
-interface YearBadgeDesktopProps {
-  yearDisplay: string
-  index: number
-}
-
-export function YearBadgeDesktop({ yearDisplay, index }: YearBadgeDesktopProps) {
+/**
+ * Year badge for desktop view
+ */
+export function YearBadgeDesktop({ yearDisplay }: YearLabelProps) {
   return (
-    <motion.div
-      className="mb-2 hidden w-full justify-center sm:flex"
-      initial={{ opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        delay: index * ANIMATION.ITEM_STAGGER + 0.2,
-        duration: 0.5,
-        ...ANIMATION.SPRING_FAST,
-      }}
-    >
-      <Badge className="whitespace-nowrap rounded-full bg-primary px-4 py-2 text-base font-semibold text-primary-foreground shadow-lg">
-        {yearDisplay}
-      </Badge>
+    <motion.div className="mb-2 hidden justify-center sm:flex">
+      <Badge className="px-4 py-2">{yearDisplay}</Badge>
     </motion.div>
   )
 }
-

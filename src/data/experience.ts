@@ -27,7 +27,7 @@ export const experiences: ExperienceItem[] = [
         'Integrated test automation into CI/CD pipelines to support continuous delivery',
         'Automated internal workflows, including release notes generation, to streamline deployment processes',
       ],
-      technologies: ['Python', 'Test Automation', 'CI/CD', 'API Testing', 'UI Testing'],
+      technologies: ['Python', 'Typescript', 'Playwright', 'Test Automation', 'CI/CD', 'API Testing', 'UI Testing'],
       order: 1,
     },
     {

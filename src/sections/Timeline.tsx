@@ -3,9 +3,9 @@ import { motion } from 'framer-motion'
 import { Section, SectionHeader, Container } from '@/components/layout'
 import { SECTION_IDS, SECTION_TITLES, TIMELINE_LABELS, SECTION_CLASSES, SECTION_SPACING } from '@/lib/constants'
 import { createTimelineItems } from '@/lib/helpers'
-import { ANIMATION, STYLES } from '@/lib/constants'
+import { ANIMATION } from '@/lib/constants'
 import type { FilterType } from '@/lib/types'
-import { FilterChips, TimelinePoint, YearLabelMobile, TimelineCard } from '@/components/timeline'
+import { FilterChips, TimelinePoint, YearLabelMobile, TimelineCard, TimelineSpine } from '@/components/timeline'
 
 export function Timeline() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
@@ -35,26 +35,7 @@ export function Timeline() {
         <FilterChips activeFilter={filter} onChange={setFilter} />
 
         <div className={`relative ${SECTION_SPACING.TIMELINE_CONTAINER}`}>
-          {/* Animated timeline line */}
-          <motion.div
-            className={STYLES.TIMELINE_LINE}
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
-            transition={ANIMATION.TIMELINE_LINE}
-            style={{ transformOrigin: 'top' }}
-          >
-            {/* Moving glow travelling down the line */}
-            <motion.div
-              className={STYLES.TIMELINE_LINE_GLOW}
-              initial={{ y: '-20%' }}
-              animate={{ y: '120%' }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-            />
-          </motion.div>
+          <TimelineSpine />
 
           {/* Items */}
           <div className={`relative ${SECTION_SPACING.TIMELINE_ITEMS}`}>
@@ -76,7 +57,7 @@ export function Timeline() {
                     ...ANIMATION.SPRING,
                   }}
                 >
-                  <YearLabelMobile yearDisplay={item.yearDisplay} index={idx} />
+                  <YearLabelMobile yearDisplay={item.yearDisplay} />
 
                   <TimelineCard
                     item={item}
