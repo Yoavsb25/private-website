@@ -1,61 +1,19 @@
-import React from 'react'
 import { motion } from 'framer-motion'
 import { Section, Container } from '@/components/layout'
-import { Button } from '@/components/ui'
+import { Text, Heading } from '@/components/typography'
+import { Button } from '@/components/ui/button'
 import { SocialIcons } from '@/components/features'
 import { portfolio } from '@/data/portfolio'
-import { prefersReducedMotion } from '@/lib/animations'
-import { SECTION_IDS, HERO_LABELS } from '@/lib/constants'
 import profileImg from '@/assets/images/profile.jpg'
-import { useMagnetic } from '@/hooks'
-
-function AnimatedText({
-  text,
-  delay = 0,
-  className,
-}: {
-  text: string
-  delay?: number
-  className?: string
-}) {
-  const reduced = prefersReducedMotion()
-  return (
-    <span aria-label={text} className={className}>
-      {text.split('').map((char, i) => (
-        <motion.span
-          key={i}
-          aria-hidden
-          initial={reduced ? false : { opacity: 0, y: 40, rotateX: -30 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          transition={
-            reduced
-              ? { duration: 0 }
-              : {
-                  duration: 0.4,
-                  delay: delay + i * 0.03,
-                  ease: [0.2, 0.65, 0.3, 0.9],
-                }
-          }
-          style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : undefined }}
-        >
-          {char}
-        </motion.span>
-      ))}
-    </span>
-  )
-}
-
-function DotGrid() {
-  return (
-    <div
-      className="pointer-events-none absolute inset-0"
-      style={{
-        backgroundImage: `radial-gradient(circle, hsl(var(--accent) / 0.05) 1px, transparent 1px)`,
-        backgroundSize: '28px 28px',
-      }}
-    />
-  )
-}
+import {
+  slideInLeft,
+  slideInRight,
+  staggerContainer,
+  staggerItem,
+  getAnimationVariants,
+} from '@/lib/animations'
+import { createButtonAnimation } from '@/lib/helpers'
+import { SECTION_IDS, ANIMATION_CONFIG, HERO, HERO_LABELS } from '@/lib/constants'
 
 function splitNameForDisplay(fullName: string): { firstPart: string; lastPart: string } {
   const lastSpace = fullName.lastIndexOf(' ')
@@ -67,105 +25,97 @@ function splitNameForDisplay(fullName: string): { firstPart: string; lastPart: s
 }
 
 export function Hero() {
-  const reduced = prefersReducedMotion()
-  const magnetic = useMagnetic()
   const { firstPart, lastPart } = splitNameForDisplay(portfolio.name)
-  const lastNameDelay = 0.1 + firstPart.length * 0.03
-
-  const fadeIn = (delay: number) =>
-    ({
-      initial: { opacity: 0, y: reduced ? 0 : 16 },
-      animate: { opacity: 1, y: 0 },
-      transition: {
-        duration: reduced ? 0 : 0.6,
-        delay: reduced ? 0 : delay,
-        ease: [0.0, 0.0, 0.2, 1.0],
-      },
-    }) as const
 
   return (
-    <Section id={SECTION_IDS.HERO} className="relative min-h-screen flex items-center">
-      {/* Background */}
-      <DotGrid />
-      <div
-        className="pointer-events-none absolute -top-32 right-0 h-[600px] w-[600px] rounded-full opacity-20 blur-3xl"
-        style={{ background: `hsl(var(--accent))` }}
-      />
-
-      <Container>
-        <div className="relative z-10 flex flex-row items-center gap-12 py-32">
-          {/* Left — text content */}
-          <div className="flex flex-1 flex-col gap-6">
-            {/* Name — last name in nowrap so it never breaks (e.g. "Sborovsk" + "y") */}
-            <h1
-              className="font-extrabold leading-none tracking-tight"
-              style={{ fontSize: 'clamp(3.5rem, 8vw, 7rem)' }}
+    <Section id={SECTION_IDS.HERO} className={HERO.SECTION.CLASS_NAME}>
+      <Container size={HERO.CONTAINER.SIZE}>
+        <motion.div
+          className={HERO.GRID.CONTAINER}
+          variants={getAnimationVariants(staggerContainer)}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Left Side - Profile Image */}
+          <motion.div
+            className={HERO.LEFT_SIDE.CONTAINER}
+            variants={getAnimationVariants(slideInLeft)}
+          >
+            <motion.div
+              className={HERO.IMAGE.WRAPPER}
+              whileHover={ANIMATION_CONFIG.HOVER.SCALE_UP}
+              transition={{ duration: ANIMATION_CONFIG.DURATION.NORMAL }}
             >
-              {firstPart && <AnimatedText text={firstPart} delay={0.1} />}
-              <span className="whitespace-nowrap">
-                <AnimatedText text={lastPart} delay={lastNameDelay} />
-              </span>
-            </h1>
+              <motion.div
+                className={HERO.IMAGE.FRAME}
+                initial={ANIMATION_CONFIG.INITIAL.SCALE}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: ANIMATION_CONFIG.DURATION.SLOW,
+                  delay: ANIMATION_CONFIG.DELAY.SHORT,
+                }}
+              >
+                <motion.img
+                  src={profileImg}
+                  alt={portfolio.imageAlt || portfolio.name}
+                  className={HERO.IMAGE.CLASS_NAME}
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    duration: ANIMATION_CONFIG.DURATION.SLOWER,
+                    delay: ANIMATION_CONFIG.DELAY.LONG,
+                  }}
+                />
+              </motion.div>
+            </motion.div>
+          </motion.div>
 
-            {/* Role */}
-            <p
-              className="font-semibold"
-              style={{
-                fontSize: 'clamp(1.125rem, 3vw, 1.75rem)',
-                color: `hsl(var(--accent))`,
-              }}
+          {/* Right Side - Content */}
+          <motion.div
+            className={HERO.RIGHT_SIDE.CONTENT}
+            variants={getAnimationVariants(slideInRight)}
+          >
+            <motion.div variants={getAnimationVariants(staggerItem)}>
+              <Text variant="bodyLarge">{HERO_LABELS.GREETING}</Text>
+            </motion.div>
+
+            <motion.div variants={getAnimationVariants(staggerItem)}>
+              <Heading level={1}>
+                {firstPart}
+                <span className="whitespace-nowrap">{lastPart}</span>
+              </Heading>
+            </motion.div>
+
+            <motion.div variants={getAnimationVariants(staggerItem)}>
+              <Text variant="bodyLarge" className={HERO.RIGHT_SIDE.TITLE}>
+                {portfolio.title}
+              </Text>
+            </motion.div>
+
+            {/* Buttons Row: LinkedIn, GitHub, Download CV */}
+            <motion.div
+              className={HERO.BUTTONS.CONTAINER}
+              variants={getAnimationVariants(staggerItem)}
             >
-              <AnimatedText text={portfolio.title} delay={0.5} />
-            </p>
+              {/* Social Icons */}
+              <SocialIcons className={HERO.SOCIAL_ICONS.IN_CONTENT} />
 
-            {/* Tagline */}
-            <motion.p
-              {...fadeIn(1.0)}
-              className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
-            >
-              {portfolio.bio}
-            </motion.p>
-
-            {/* CTA row */}
-            <motion.div {...fadeIn(1.2)} className="flex flex-wrap items-center gap-4 pt-2">
-              <SocialIcons className="flex gap-4 items-center" />
+              {/* Download CV Button */}
               {portfolio.cvUrl && (
                 <motion.a
-                  ref={magnetic.ref as React.RefObject<HTMLAnchorElement>}
                   href={portfolio.cvUrl}
                   download
-                  style={{ x: magnetic.x, y: magnetic.y, display: 'inline-block' }}
+                  className={HERO.BUTTONS.LINK}
+                  {...createButtonAnimation()}
                 >
-                  <Button
-                    className="h-10 rounded-lg px-6 sm:h-12"
-                    style={{
-                      background: `hsl(var(--accent))`,
-                      color: `hsl(var(--accent-foreground))`,
-                    }}
-                  >
+                  <Button variant="outline" className={HERO.BUTTONS.CLASS_NAME}>
                     {HERO_LABELS.BUTTONS.DOWNLOAD_CV}
                   </Button>
                 </motion.a>
               )}
             </motion.div>
-          </div>
-
-          {/* Right — profile photo */}
-          <motion.div {...fadeIn(0.3)} className="flex-shrink-0">
-            <div className="relative h-64 w-64">
-              {/* Accent ring */}
-              <div
-                className="absolute inset-0 rounded-2xl opacity-30 blur-xl"
-                style={{ background: `hsl(var(--accent))` }}
-              />
-              <img
-                src={profileImg}
-                alt={portfolio.imageAlt ?? portfolio.name}
-                className="relative h-full w-full rounded-2xl object-cover"
-              />
-            </div>
           </motion.div>
-        </div>
+        </motion.div>
       </Container>
     </Section>
   )
