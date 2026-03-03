@@ -54,5 +54,5 @@ The agent will read changed files (`git diff --cached`), check each item on the 
 
 ## Approval Protocol
 
-- If **all checks pass**: run `touch /tmp/arch-review-approved` and report "Approved — commit may proceed."
+- If **all checks pass**: run `touch /tmp/production-review-approved` and report "Approved — architecture checks passed."
 - If **any check fails**: report each violation with file path and line number. Do NOT create the approval token. The commit will remain blocked until violations are fixed and the agent is re-run.
