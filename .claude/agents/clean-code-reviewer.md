@@ -42,3 +42,13 @@ Run `git diff --cached` to see all staged changes. Review each changed file agai
 
 - If **all checks pass**: run `touch /tmp/production-review-approved` and report "Approved — clean code checks passed."
 - If **any check fails**: report each violation with file path and line number. Do NOT create the approval token.
+
+## Learning Protocol
+
+After reporting violations, for each distinct type of violation found:
+1. Open `.claude/skills/clean-code-expert/SKILL.md`
+2. Find the most relevant existing section and add a specific rule that would have prevented it
+3. Write it as a concrete "never do X" or "always do Y" with a brief code example if helpful
+4. Report: "Added rule to clean-code-expert: [what was added and why]"
+
+This keeps the expert skill up-to-date with real mistakes so future code avoids them.
