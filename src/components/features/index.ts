@@ -7,4 +7,3 @@ export { DarkModeToggle } from './DarkModeToggle'
 export { ScrollProgress } from './ScrollProgress'
 export { ScrollToTop } from './ScrollToTop'
 export { SocialIcons } from './SocialIcons'
-

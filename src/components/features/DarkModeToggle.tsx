@@ -13,7 +13,7 @@ export function DarkModeToggle() {
     // Check for saved theme preference or default to system preference
     const savedTheme = localStorage.getItem('theme')
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    
+
     if (savedTheme) {
       setIsDark(savedTheme === 'dark')
       document.documentElement.classList.toggle('dark', savedTheme === 'dark')
@@ -91,4 +91,3 @@ export function DarkModeToggle() {
     </motion.div>
   )
 }
-

@@ -32,4 +32,3 @@ export const theme = {
     '2xl': '1536px',
   },
 } as const
-
