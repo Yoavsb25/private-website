@@ -57,9 +57,20 @@ function DotGrid() {
   )
 }
 
+function splitNameForDisplay(fullName: string): { firstPart: string; lastPart: string } {
+  const lastSpace = fullName.lastIndexOf(' ')
+  if (lastSpace === -1) return { firstPart: '', lastPart: fullName }
+  return {
+    firstPart: fullName.slice(0, lastSpace + 1),
+    lastPart: fullName.slice(lastSpace + 1),
+  }
+}
+
 export function Hero() {
   const reduced = prefersReducedMotion()
   const magnetic = useMagnetic()
+  const { firstPart, lastPart } = splitNameForDisplay(portfolio.name)
+  const lastNameDelay = 0.1 + firstPart.length * 0.03
 
   const fadeIn = (delay: number) =>
     ({
@@ -85,12 +96,15 @@ export function Hero() {
         <div className="relative z-10 flex flex-row items-center gap-12 py-32">
           {/* Left — text content */}
           <div className="flex flex-1 flex-col gap-6">
-            {/* Name */}
+            {/* Name — last name in nowrap so it never breaks (e.g. "Sborovsk" + "y") */}
             <h1
               className="font-extrabold leading-none tracking-tight"
               style={{ fontSize: 'clamp(3.5rem, 8vw, 7rem)' }}
             >
-              <AnimatedText text={portfolio.name} delay={0.1} />
+              {firstPart && <AnimatedText text={firstPart} delay={0.1} />}
+              <span className="whitespace-nowrap">
+                <AnimatedText text={lastPart} delay={lastNameDelay} />
+              </span>
             </h1>
 
             {/* Role */}
