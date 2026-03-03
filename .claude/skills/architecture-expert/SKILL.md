@@ -81,3 +81,31 @@ Each section is in `src/sections/` and imports data directly from `src/data/`.
 - Zero ESLint warnings allowed
 - Path alias `@` maps to `src/`
 - TypeScript strict mode — no `any`, explicit return types on exported functions
+
+## Common Mistakes to Avoid
+
+### Imports — always use barrel files
+Never import from a deep path inside a barrel directory:
+```ts
+// ❌ Wrong
+import { Button } from '@/components/ui/button'
+// ✅ Correct
+import { Button } from '@/components/ui'
+```
+This applies to all barrel directories: `@/components/ui`, `@/components/layout`, `@/components/features`, `@/lib/helpers`, `@/lib/constants`, `@/lib/animations`.
+
+### Return types — required on every exported function and component
+Every exported function must have an explicit return type. Use type-only imports to keep it clean:
+```ts
+// Hooks
+export function useLenis(): void { ... }
+export function useMagnetic(): MagneticReturn { ... }  // define a type alias if inline is too long
+
+// Components (import ReactElement, not JSX.Element, to avoid adding a React namespace import)
+import { type ReactElement } from 'react'
+export function Footer(): ReactElement { ... }
+export function LoadingScreen(...): ReactElement | null { ... }
+```
+
+### Dependencies — no pre-release versions in production
+Never use `-dev`, `-alpha`, `-beta`, or `-rc` suffixes in `dependencies` in `package.json`. Always pin to the latest stable release tag.

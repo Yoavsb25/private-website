@@ -1,5 +1,7 @@
-import { motion } from 'framer-motion'
+import React, { useRef } from 'react'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Section, SectionHeader, Container } from '@/components/layout'
+import { prefersReducedMotion } from '@/lib/animations'
 import { Heading, Text } from '@/components/typography'
 import {
   Card,
@@ -18,7 +20,6 @@ import {
   getFeaturedItems,
   createStaggerContainerAnimation,
   createStaggerItemAnimation,
-  createCardHoverAnimation,
   createButtonAnimation,
   createBadgeAnimation,
 } from '@/lib/helpers'
@@ -36,6 +37,56 @@ import {
   SECTION_SPACING,
 } from '@/lib/constants'
 
+function TiltCard({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), {
+    stiffness: 300,
+    damping: 30,
+  })
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), {
+    stiffness: 300,
+    damping: 30,
+  })
+  const glareX = useTransform(mouseX, [-0.5, 0.5], [0, 100])
+  const glareY = useTransform(mouseY, [-0.5, 0.5], [0, 100])
+  const glare = useTransform(
+    [glareX, glareY],
+    ([x, y]) => `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.08), transparent 60%)`
+  )
+
+  if (prefersReducedMotion()) {
+    return <div>{children}</div>
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ rotateX, rotateY, transformPerspective: 1000, transformStyle: 'preserve-3d' }}
+      onMouseMove={e => {
+        const rect = ref.current?.getBoundingClientRect()
+        if (!rect) return
+        mouseX.set((e.clientX - rect.left) / rect.width - 0.5)
+        mouseY.set((e.clientY - rect.top) / rect.height - 0.5)
+      }}
+      onMouseLeave={() => {
+        mouseX.set(0)
+        mouseY.set(0)
+      }}
+      className="relative"
+    >
+      {children}
+      {/* Glare */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 hover:opacity-100"
+        style={{ background: glare }}
+      />
+    </motion.div>
+  )
+}
+
 export function Projects() {
   const featuredProjects = getFeaturedItems(projects)
   if (featuredProjects.length === 0) return null
@@ -50,98 +101,98 @@ export function Projects() {
           {...createStaggerContainerAnimation(staggerContainer)}
         >
           {featuredProjects.map(project => (
-            <motion.div
-              key={project.id}
-              {...createStaggerItemAnimation(staggerItem)}
-              {...createCardHoverAnimation('medium')}
-            >
-              <Card
-                className={`flex h-full flex-col overflow-hidden ${COMPONENT_CLASSES.CARD.HOVER_LARGE}`}
-              >
-                {project.imageUrl && (
-                  <div className={SECTION_CLASSES.PROJECTS_IMAGE_WRAPPER}>
-                    <motion.img
-                      src={project.imageUrl}
-                      alt={project.imageAlt || project.title}
-                      className={SECTION_CLASSES.PROJECTS_IMAGE}
-                      loading="lazy"
-                      style={{ aspectRatio: ASPECT_RATIOS.PROJECT_IMAGE }}
-                      whileHover={ANIMATION_CONFIG.HOVER.SCALE_UP_LARGE}
-                      transition={{ duration: ANIMATION_CONFIG.DURATION.MEDIUM }}
-                    />
-                  </div>
-                )}
-
-                <CardHeader>
-                  <CardTitle className="text-base sm:text-lg font-bold">{project.title}</CardTitle>
-                  <CardDescription className="text-sm sm:text-base">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
-
-                <CardContent className={`flex flex-1 flex-col ${SPACING.CARD.INTERNAL}`}>
-                  <div>
-                    <Heading level={4}>{PROJECTS_LABELS.SECTIONS.PROBLEM}</Heading>
-                    <Text color="muted">{project.problem}</Text>
-                  </div>
-
-                  <div>
-                    <Heading level={4}>{PROJECTS_LABELS.SECTIONS.SOLUTION}</Heading>
-                    <Text color="muted">{project.solution}</Text>
-                  </div>
-
-                  <div>
-                    <Heading level={4}>{PROJECTS_LABELS.SECTIONS.TECHNOLOGIES}</Heading>
-                    <div className={`${LAYOUT.FLEX.WRAP} ${SPACING.CARD.SMALL}`}>
-                      {project.technologies.map(tech => (
-                        <motion.div key={tech} {...createBadgeAnimation()}>
-                          <Badge variant="outline" className="cursor-default">
-                            {tech}
-                          </Badge>
-                        </motion.div>
-                      ))}
+            <motion.div key={project.id} {...createStaggerItemAnimation(staggerItem)}>
+              <TiltCard>
+                <Card
+                  className={`flex h-full flex-col overflow-hidden ${COMPONENT_CLASSES.CARD.HOVER_LARGE}`}
+                >
+                  {project.imageUrl && (
+                    <div className={SECTION_CLASSES.PROJECTS_IMAGE_WRAPPER}>
+                      <motion.img
+                        src={project.imageUrl}
+                        alt={project.imageAlt || project.title}
+                        className={SECTION_CLASSES.PROJECTS_IMAGE}
+                        loading="lazy"
+                        style={{ aspectRatio: ASPECT_RATIOS.PROJECT_IMAGE }}
+                        whileHover={ANIMATION_CONFIG.HOVER.SCALE_UP_LARGE}
+                        transition={{ duration: ANIMATION_CONFIG.DURATION.MEDIUM }}
+                      />
                     </div>
-                  </div>
+                  )}
 
-                  {project.outcomes && (
+                  <CardHeader>
+                    <CardTitle className="text-base sm:text-lg font-bold">
+                      {project.title}
+                    </CardTitle>
+                    <CardDescription className="text-sm sm:text-base">
+                      {project.description}
+                    </CardDescription>
+                  </CardHeader>
+
+                  <CardContent className={`flex flex-1 flex-col ${SPACING.CARD.INTERNAL}`}>
                     <div>
-                      <Heading level={4}>{PROJECTS_LABELS.SECTIONS.OUTCOMES}</Heading>
-                      <Text color="muted">{project.outcomes}</Text>
+                      <Heading level={4}>{PROJECTS_LABELS.SECTIONS.PROBLEM}</Heading>
+                      <Text color="muted">{project.problem}</Text>
                     </div>
-                  )}
-                </CardContent>
 
-                <CardFooter className={`flex ${SECTION_SPACING.PROJECTS_FOOTER}`}>
-                  {project.liveUrl && (
-                    <motion.a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={PROJECTS_LABELS.ARIA_LABELS.LIVE_SITE(project.title)}
-                      {...createButtonAnimation()}
-                    >
-                      <Button variant="outline" size="sm">
-                        <ExternalLink className={`mr-2 ${ICON_SIZES.SMALL_RESPONSIVE}`} />
-                        {PROJECTS_LABELS.BUTTONS.LIVE_SITE}
-                      </Button>
-                    </motion.a>
-                  )}
-                  {project.sourceUrl && (
-                    <motion.a
-                      href={project.sourceUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={PROJECTS_LABELS.ARIA_LABELS.SOURCE_CODE(project.title)}
-                      {...createButtonAnimation()}
-                    >
-                      <Button variant="outline" size="sm">
-                        <Github className={`mr-2 ${ICON_SIZES.SMALL_RESPONSIVE}`} />
-                        {PROJECTS_LABELS.BUTTONS.SOURCE}
-                      </Button>
-                    </motion.a>
-                  )}
-                </CardFooter>
-              </Card>
+                    <div>
+                      <Heading level={4}>{PROJECTS_LABELS.SECTIONS.SOLUTION}</Heading>
+                      <Text color="muted">{project.solution}</Text>
+                    </div>
+
+                    <div>
+                      <Heading level={4}>{PROJECTS_LABELS.SECTIONS.TECHNOLOGIES}</Heading>
+                      <div className={`${LAYOUT.FLEX.WRAP} ${SPACING.CARD.SMALL}`}>
+                        {project.technologies.map(tech => (
+                          <motion.div key={tech} {...createBadgeAnimation()}>
+                            <Badge variant="outline" className="cursor-default">
+                              {tech}
+                            </Badge>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {project.outcomes && (
+                      <div>
+                        <Heading level={4}>{PROJECTS_LABELS.SECTIONS.OUTCOMES}</Heading>
+                        <Text color="muted">{project.outcomes}</Text>
+                      </div>
+                    )}
+                  </CardContent>
+
+                  <CardFooter className={`flex ${SECTION_SPACING.PROJECTS_FOOTER}`}>
+                    {project.liveUrl && (
+                      <motion.a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={PROJECTS_LABELS.ARIA_LABELS.LIVE_SITE(project.title)}
+                        {...createButtonAnimation()}
+                      >
+                        <Button variant="outline" size="sm">
+                          <ExternalLink className={`mr-2 ${ICON_SIZES.SMALL_RESPONSIVE}`} />
+                          {PROJECTS_LABELS.BUTTONS.LIVE_SITE}
+                        </Button>
+                      </motion.a>
+                    )}
+                    {project.sourceUrl && (
+                      <motion.a
+                        href={project.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={PROJECTS_LABELS.ARIA_LABELS.SOURCE_CODE(project.title)}
+                        {...createButtonAnimation()}
+                      >
+                        <Button variant="outline" size="sm">
+                          <Github className={`mr-2 ${ICON_SIZES.SMALL_RESPONSIVE}`} />
+                          {PROJECTS_LABELS.BUTTONS.SOURCE}
+                        </Button>
+                      </motion.a>
+                    )}
+                  </CardFooter>
+                </Card>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>

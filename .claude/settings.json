@@ -1,5 +1,16 @@
 {
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash(git commit*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "APPROVAL=/tmp/production-review-approved; if find \"$APPROVAL\" -mmin -10 2>/dev/null | grep -q .; then rm -f \"$APPROVAL\"; exit 0; else echo 'BLOCKED: Production review required before committing.\\n\\nRun the pre-commit skill:\\n  /pre-commit\\n\\nThis runs all 4 review agents in parallel (architecture, clean code, security/a11y, performance).\\nThe skill creates /tmp/production-review-approved when all checks pass.'; exit 2; fi"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",
@@ -11,6 +22,10 @@
           {
             "type": "command",
             "command": "cd /Users/yoavsborovsky/Documents/GitHub/private-website && npm run type-check 2>&1 | tail -8"
+          },
+          {
+            "type": "command",
+            "command": "cd /Users/yoavsborovsky/Documents/GitHub/private-website && npm run lint 2>&1 | tail -20"
           }
         ]
       }

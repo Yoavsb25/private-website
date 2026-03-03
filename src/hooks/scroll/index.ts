@@ -4,3 +4,4 @@
  */
 export { useScrollProgress, useScrollPosition } from './useScrollAnimation'
 export { useScrollToSection } from './useScrollToSection'
+export { useLenis } from './useLenis'
