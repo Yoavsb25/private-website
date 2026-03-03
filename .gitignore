@@ -88,3 +88,6 @@ temp/
 .cursor/
 specs/
 
+# Git worktrees
+.worktrees/
+
