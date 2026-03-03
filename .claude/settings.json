@@ -1,5 +1,16 @@
 {
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash(git commit*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "APPROVAL=/tmp/arch-review-approved; if find \"$APPROVAL\" -mmin -10 2>/dev/null | grep -q .; then rm -f \"$APPROVAL\"; exit 0; else echo 'BLOCKED: Architecture review required before committing.\\n\\nInvoke the architecture-reviewer agent:\\n  Use the architecture-reviewer agent to review staged changes\\n\\nThe agent creates /tmp/arch-review-approved when it finds no violations.'; exit 2; fi"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",

@@ -91,3 +91,5 @@ specs/
 # Git worktrees
 .worktrees/
 
+docs/
+

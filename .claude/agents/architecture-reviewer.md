@@ -47,7 +47,12 @@ Review code changes for architectural compliance before they are committed.
 Spawn this agent after implementing a feature or fix to verify architectural compliance:
 
 ```
-Use the architecture-reviewer agent to review my changes before I commit.
+Use the architecture-reviewer agent to review my staged changes before I commit.
 ```
 
-The agent will read changed files, check each item on the checklist, and report any violations with file paths and line numbers.
+The agent will read changed files (`git diff --cached`), check each item on the checklist, and report any violations with file paths and line numbers.
+
+## Approval Protocol
+
+- If **all checks pass**: run `touch /tmp/arch-review-approved` and report "Approved — commit may proceed."
+- If **any check fails**: report each violation with file path and line number. Do NOT create the approval token. The commit will remain blocked until violations are fixed and the agent is re-run.
