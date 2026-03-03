@@ -22,15 +22,8 @@ export function Container({
   }[size]
 
   return (
-    <div
-      className={cn(
-        sizeClass,
-        withPadding && SPACING.PADDING.CONTAINER,
-        className
-      )}
-    >
+    <div className={cn(sizeClass, withPadding && SPACING.PADDING.CONTAINER, className)}>
       {children}
     </div>
   )
 }
-

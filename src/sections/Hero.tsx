@@ -5,12 +5,17 @@ import { Button } from '@/components/ui/button'
 import { SocialIcons } from '@/components/features'
 import { portfolio } from '@/data/portfolio'
 import profileImg from '@/assets/images/profile.jpg'
-import { slideInLeft, slideInRight, staggerContainer, staggerItem, getAnimationVariants } from '@/lib/animations'
+import {
+  slideInLeft,
+  slideInRight,
+  staggerContainer,
+  staggerItem,
+  getAnimationVariants,
+} from '@/lib/animations'
 import { createButtonAnimation } from '@/lib/helpers'
 import { SECTION_IDS, ANIMATION_CONFIG, HERO, HERO_LABELS } from '@/lib/constants'
 
 export function Hero() {
-
   return (
     <Section id={SECTION_IDS.HERO} className={HERO.SECTION.CLASS_NAME}>
       <Container size={HERO.CONTAINER.SIZE}>
@@ -89,10 +94,7 @@ export function Hero() {
                   className={HERO.BUTTONS.LINK}
                   {...createButtonAnimation()}
                 >
-                  <Button
-                    variant="outline"
-                    className={HERO.BUTTONS.CLASS_NAME}
-                  >
+                  <Button variant="outline" className={HERO.BUTTONS.CLASS_NAME}>
                     {HERO_LABELS.BUTTONS.DOWNLOAD_CV}
                   </Button>
                 </motion.a>

@@ -40,4 +40,3 @@ export function useScrollPosition(threshold: number = 100) {
 
   return hasScrolledPast
 }
-

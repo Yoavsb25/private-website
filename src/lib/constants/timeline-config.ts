@@ -26,4 +26,3 @@ export const STYLES = {
   BULLET: 'mr-3 mt-1.5 text-primary font-bold',
   DIVIDER: 'h-px bg-gradient-to-r from-transparent via-border/80 to-transparent',
 } as const
-

@@ -9,11 +9,7 @@ interface SectionHeaderProps {
   as?: 'h1' | 'h2' | 'h3'
 }
 
-export function SectionHeader({
-  children,
-  className,
-  as: Component = 'h2',
-}: SectionHeaderProps) {
+export function SectionHeader({ children, className, as: Component = 'h2' }: SectionHeaderProps) {
   const baseClasses = cn(
     SPACING.SECTION.HEADER,
     TYPOGRAPHY.HEADING.H2,
@@ -27,4 +23,3 @@ export function SectionHeader({
     </motion.div>
   )
 }
-

@@ -8,14 +8,10 @@ import { getEducationData, getExperienceData } from '../utils'
 
 export function TimelineCardHeader({ item }: TimelineCardHeaderProps) {
   const title =
-    item.type === 'education'
-      ? getEducationData(item).degree
-      : getExperienceData(item).title
+    item.type === 'education' ? getEducationData(item).degree : getExperienceData(item).title
 
   const description =
-    item.type === 'education'
-      ? getEducationData(item).institution
-      : getExperienceData(item).company
+    item.type === 'education' ? getEducationData(item).institution : getExperienceData(item).company
 
   return (
     <CardHeader>

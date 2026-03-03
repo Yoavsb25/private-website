@@ -52,7 +52,7 @@ export function Navigation() {
 
     window.addEventListener('hashchange', handleHashChange)
     return () => window.removeEventListener('hashchange', handleHashChange)
-  }, [])
+  }, [scrollToSection])
 
   return (
     <>
@@ -75,7 +75,7 @@ export function Navigation() {
             >
               <Link
                 to={`#${SECTION_IDS.HERO}`}
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault()
                   handleScrollToSection(SECTION_IDS.HERO)
                 }}
@@ -97,7 +97,7 @@ export function Navigation() {
                 >
                   <Link
                     to={`#${item.id}`}
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault()
                       handleScrollToSection(item.id)
                     }}
@@ -133,11 +133,12 @@ export function Navigation() {
                 aria-label="Toggle menu"
                 aria-expanded={isOpen}
               >
-                <motion.div
-                  animate={{ rotate: isOpen ? 90 : 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {isOpen ? <X className="w-[clamp(1rem,3vw,1.5rem)] h-[clamp(1rem,3vw,1.5rem)]" /> : <Menu className="w-[clamp(1rem,3vw,1.5rem)] h-[clamp(1rem,3vw,1.5rem)]" />}
+                <motion.div animate={{ rotate: isOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
+                  {isOpen ? (
+                    <X className="w-[clamp(1rem,3vw,1.5rem)] h-[clamp(1rem,3vw,1.5rem)]" />
+                  ) : (
+                    <Menu className="w-[clamp(1rem,3vw,1.5rem)] h-[clamp(1rem,3vw,1.5rem)]" />
+                  )}
                 </motion.div>
               </Button>
             </div>
@@ -179,7 +180,7 @@ export function Navigation() {
                 >
                   <Link
                     to={`#${item.id}`}
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault()
                       handleScrollToSection(item.id)
                     }}
@@ -200,4 +201,3 @@ export function Navigation() {
     </>
   )
 }
-

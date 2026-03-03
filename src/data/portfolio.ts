@@ -31,8 +31,10 @@ export const portfolio: PortfolioContent = {
     'Data Analysis',
   ],
   bio: 'Data Analyst and Automation Engineer with hands-on experience building scalable test infrastructures, automating workflows, and developing web applications. Passionate about leveraging software engineering and automation to optimize processes and drive business impact.',
-  problemSolving: 'I specialize in building automated solutions that improve efficiency and reliability. From designing scalable test frameworks to automating internal workflows, I solve complex technical challenges using Python, modern web technologies, and CI/CD best practices.',
-  professionalPhilosophy: 'I believe in writing clean, maintainable code and building systems that are both robust and scalable. Quality automation and thoughtful engineering can transform how teams work.',
+  problemSolving:
+    'I specialize in building automated solutions that improve efficiency and reliability. From designing scalable test frameworks to automating internal workflows, I solve complex technical challenges using Python, modern web technologies, and CI/CD best practices.',
+  professionalPhilosophy:
+    'I believe in writing clean, maintainable code and building systems that are both robust and scalable. Quality automation and thoughtful engineering can transform how teams work.',
   availableFor: ['Full-time Software Developer roles', 'Automation Engineering positions'],
   imageUrl: '/assets/profile.jpg',
   imageAlt: 'Yoav Sborovsky - Automation Engineer & Software Developer',
@@ -42,4 +44,3 @@ export const portfolio: PortfolioContent = {
     github: 'https://github.com/Yoavsb25',
   },
 }
-

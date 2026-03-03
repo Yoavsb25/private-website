@@ -53,4 +53,3 @@ export interface TimelineCardProps {
   onHoverChange: (id: string | null) => void
   onToggleActive: (id: string) => void
 }
-

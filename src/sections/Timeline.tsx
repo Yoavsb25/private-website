@@ -1,11 +1,23 @@
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Section, SectionHeader, Container } from '@/components/layout'
-import { SECTION_IDS, SECTION_TITLES, TIMELINE_LABELS, SECTION_CLASSES, SECTION_SPACING } from '@/lib/constants'
+import {
+  SECTION_IDS,
+  SECTION_TITLES,
+  TIMELINE_LABELS,
+  SECTION_CLASSES,
+  SECTION_SPACING,
+} from '@/lib/constants'
 import { createTimelineItems } from '@/lib/helpers'
 import { ANIMATION } from '@/lib/constants'
 import type { FilterType } from '@/lib/types'
-import { FilterChips, TimelinePoint, YearLabelMobile, TimelineCard, TimelineSpine } from '@/components/timeline'
+import {
+  FilterChips,
+  TimelinePoint,
+  YearLabelMobile,
+  TimelineCard,
+  TimelineSpine,
+} from '@/components/timeline'
 
 export function Timeline() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
@@ -14,19 +26,14 @@ export function Timeline() {
 
   const allItems = useMemo(() => createTimelineItems(), [])
   const filteredItems = useMemo(
-    () =>
-      filter === 'all'
-        ? allItems
-        : allItems.filter(item => item.type === filter),
-    [allItems, filter],
+    () => (filter === 'all' ? allItems : allItems.filter(item => item.type === filter)),
+    [allItems, filter]
   )
 
   return (
     <Section id={SECTION_IDS.TIMELINE} background="mutedLight">
       <Container size="small">
-        <SectionHeader>
-          {SECTION_TITLES.TIMELINE}
-        </SectionHeader>
+        <SectionHeader>{SECTION_TITLES.TIMELINE}</SectionHeader>
 
         <p className={`${SECTION_SPACING.TIMELINE_DESCRIPTION} text-center text-muted-foreground`}>
           {TIMELINE_LABELS.DESCRIPTION}
@@ -66,9 +73,7 @@ export function Timeline() {
                     isActive={isActive}
                     index={idx}
                     onHoverChange={setHoveredItem}
-                    onToggleActive={id =>
-                      setActiveItem(prev => (prev === id ? null : id))
-                    }
+                    onToggleActive={id => setActiveItem(prev => (prev === id ? null : id))}
                   />
 
                   <div
@@ -80,9 +85,7 @@ export function Timeline() {
                       isHovered={isHovered}
                       index={idx}
                       type={item.type}
-                      onClick={() =>
-                        setActiveItem(prev => (prev === item.id ? null : item.id))
-                      }
+                      onClick={() => setActiveItem(prev => (prev === item.id ? null : item.id))}
                     />
                   </div>
                 </motion.div>

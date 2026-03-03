@@ -31,4 +31,3 @@ export const SECTION_TITLES = {
   CONTACT: 'Get In Touch',
   TIMELINE: 'Timeline',
 } as const
-

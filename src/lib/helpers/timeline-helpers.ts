@@ -77,4 +77,3 @@ export function createTimelineItems(): TimelineItem[] {
     return b.year - a.year
   })
 }
-

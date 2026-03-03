@@ -38,7 +38,8 @@ export const HERO = {
   IMAGE: {
     WRAPPER: 'relative',
     // Using clamp for fluid sizing - automatically scales between min and max
-    FRAME: 'w-[clamp(12rem,20vw,20rem)] h-[clamp(16rem,25vw,28rem)] rounded-2xl overflow-hidden bg-[#C6D2FF] p-2 shadow-lg',
+    FRAME:
+      'w-[clamp(12rem,20vw,20rem)] h-[clamp(16rem,25vw,28rem)] rounded-2xl overflow-hidden bg-[#C6D2FF] p-2 shadow-lg',
     CLASS_NAME: 'w-full h-full object-cover rounded-xl',
   },
   RIGHT_SIDE: {
@@ -56,7 +57,7 @@ export const HERO = {
     CONTAINER: 'flex flex-wrap items-center gap-3 sm:gap-4 pt-4 justify-center sm:justify-start',
     LINK: 'min-w-[min(100%,300px)]',
     // Match the height of social icon buttons (h-10 sm:h-12) for alignment
-    CLASS_NAME: 'h-10 sm:h-12 w-full sm:w-auto px-[clamp(1rem,4vw,2rem)] text-sm sm:text-base rounded-md flex items-center justify-center',
+    CLASS_NAME:
+      'h-10 sm:h-12 w-full sm:w-auto px-[clamp(1rem,4vw,2rem)] text-sm sm:text-base rounded-md flex items-center justify-center',
   },
 } as const
-

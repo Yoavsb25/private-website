@@ -30,12 +30,7 @@ function EnergyGlow() {
   )
 }
 
-export function TimelinePoint({
-  isActive,
-  isHovered,
-  type,
-  onClick,
-}: TimelinePointProps) {
+export function TimelinePoint({ isActive, isHovered, type, onClick }: TimelinePointProps) {
   const Icon = type === 'education' ? GraduationCap : Briefcase
   const showGlow = isActive || isHovered
 
@@ -45,9 +40,7 @@ export function TimelinePoint({
       className="absolute left-1/2 z-20 hidden -translate-x-1/2 md:flex"
       aria-label={`${type} timeline point`}
     >
-      <AnimatePresence>
-        {showGlow && <EnergyGlow />}
-      </AnimatePresence>
+      <AnimatePresence>{showGlow && <EnergyGlow />}</AnimatePresence>
 
       <motion.div
         variants={iconHover}

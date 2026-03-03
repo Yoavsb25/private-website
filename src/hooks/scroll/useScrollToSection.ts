@@ -21,4 +21,3 @@ export function useScrollToSection() {
 
   return scrollToSection
 }
-

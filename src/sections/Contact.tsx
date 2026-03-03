@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion'
 import { Section, SectionHeader, Container } from '@/components/layout'
 import { Text } from '@/components/typography'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
+import { Button, Card, CardContent, CardDescription, CardHeader } from '@/components/ui'
 import { contact } from '@/data/contact'
 import { staggerContainer, staggerItem, iconHover, getAnimationVariants } from '@/lib/animations'
 import {
@@ -14,7 +13,18 @@ import {
   createButtonAnimation,
   createFadeInAnimation,
 } from '@/lib/helpers'
-import { SECTION_TITLES, SECTION_IDS, ANIMATION_CONFIG, LAYOUT, SPACING, COMPONENT_CLASSES, CONTACT_LABELS, ICON_SIZES, SECTION_CLASSES, SECTION_SPACING } from '@/lib/constants'
+import {
+  SECTION_TITLES,
+  SECTION_IDS,
+  ANIMATION_CONFIG,
+  LAYOUT,
+  SPACING,
+  COMPONENT_CLASSES,
+  CONTACT_LABELS,
+  ICON_SIZES,
+  SECTION_CLASSES,
+  SECTION_SPACING,
+} from '@/lib/constants'
 
 export function Contact() {
   if (!hasItems(contact.methods)) return null
@@ -24,9 +34,13 @@ export function Contact() {
       <Container size="small" className={`text-center ${SPACING.SECTION.LARGE}`}>
         {/* Header */}
         <div>
-          <SectionHeader className={SECTION_SPACING.CONTACT_HEADER}>{SECTION_TITLES.CONTACT}</SectionHeader>
+          <SectionHeader className={SECTION_SPACING.CONTACT_HEADER}>
+            {SECTION_TITLES.CONTACT}
+          </SectionHeader>
           {contact.availability && (
-            <Text variant="bodyLarge" color="muted">{contact.availability}</Text>
+            <Text variant="bodyLarge" color="muted">
+              {contact.availability}
+            </Text>
           )}
         </div>
 
@@ -37,8 +51,7 @@ export function Contact() {
         >
           {contact.methods.map((method, index) => {
             const Icon = getIcon(method.icon)
-            const href =
-              method.type === 'email' ? `mailto:${method.value}` : method.value
+            const href = method.type === 'email' ? `mailto:${method.value}` : method.value
 
             return (
               <motion.div
@@ -46,7 +59,9 @@ export function Contact() {
                 {...createStaggerItemAnimation(staggerItem)}
                 {...createCardHoverAnimation('medium')}
               >
-                <Card className={`${LAYOUT.FLEX.COL_CENTER} justify-between ${COMPONENT_CLASSES.CARD.HOVER_LARGE}`}>
+                <Card
+                  className={`${LAYOUT.FLEX.COL_CENTER} justify-between ${COMPONENT_CLASSES.CARD.HOVER_LARGE}`}
+                >
                   <CardHeader className={LAYOUT.FLEX.COL_CENTER}>
                     <motion.div
                       className={SECTION_CLASSES.CONTACT_CARD_HEADER}
@@ -70,7 +85,9 @@ export function Contact() {
                     {method.available !== undefined && (
                       <CardDescription>
                         <Text color="muted">
-                          {method.available ? CONTACT_LABELS.AVAILABILITY.AVAILABLE : CONTACT_LABELS.AVAILABILITY.NOT_AVAILABLE}
+                          {method.available
+                            ? CONTACT_LABELS.AVAILABILITY.AVAILABLE
+                            : CONTACT_LABELS.AVAILABILITY.NOT_AVAILABLE}
                         </Text>
                       </CardDescription>
                     )}
@@ -80,19 +97,14 @@ export function Contact() {
                     <motion.a
                       href={href}
                       target={method.type === 'email' ? undefined : '_blank'}
-                      rel={
-                        method.type === 'email'
-                          ? undefined
-                          : 'noopener noreferrer'
-                      }
+                      rel={method.type === 'email' ? undefined : 'noopener noreferrer'}
                       aria-label={CONTACT_LABELS.ARIA_LABEL(method.label)}
                       {...createButtonAnimation()}
                     >
-                      <Button
-                        variant="outline"
-                        className="w-full"
-                      >
-                        {method.type === 'email' ? CONTACT_LABELS.BUTTONS.SEND_EMAIL : CONTACT_LABELS.BUTTONS.VISIT_PROFILE}
+                      <Button variant="outline" className="w-full">
+                        {method.type === 'email'
+                          ? CONTACT_LABELS.BUTTONS.SEND_EMAIL
+                          : CONTACT_LABELS.BUTTONS.VISIT_PROFILE}
                       </Button>
                     </motion.a>
                   </CardContent>

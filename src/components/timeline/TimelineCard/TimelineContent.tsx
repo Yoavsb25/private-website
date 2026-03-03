@@ -88,7 +88,11 @@ export function ExperienceContent({ data }: ExperienceContentProps) {
 
       {data.technologies && data.technologies.length > 0 && (
         <ContentSection title={CONTENT_SECTIONS.TECHNOLOGIES} delay={ANIMATION_DELAYS.TECHNOLOGIES}>
-          <BadgeGrid items={data.technologies} delay={ANIMATION_DELAYS.TECHNOLOGIES} variant="outline" />
+          <BadgeGrid
+            items={data.technologies}
+            delay={ANIMATION_DELAYS.TECHNOLOGIES}
+            variant="outline"
+          />
         </ContentSection>
       )}
     </>

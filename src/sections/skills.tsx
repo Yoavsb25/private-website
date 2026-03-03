@@ -3,18 +3,19 @@ import { useState } from 'react'
 import { Section, SectionHeader, Container } from '@/components/layout'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { skills } from '@/data/skills'
-import {
-  staggerContainer,
-  staggerItem,
-  iconHover,
-  getAnimationVariants,
-} from '@/lib/animations'
+import { staggerContainer, staggerItem, iconHover, getAnimationVariants } from '@/lib/animations'
 import {
   createStaggerContainerAnimation,
   createStaggerItemAnimation,
   createCardHoverAnimation,
 } from '@/lib/helpers'
-import { SECTION_TITLES, SECTION_IDS, LAYOUT, COMPONENT_CLASSES, SKILLS_CONFIG } from '@/lib/constants'
+import {
+  SECTION_TITLES,
+  SECTION_IDS,
+  LAYOUT,
+  COMPONENT_CLASSES,
+  SKILLS_CONFIG,
+} from '@/lib/constants'
 
 export function Skills() {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null)
@@ -34,7 +35,9 @@ export function Skills() {
               {...createStaggerItemAnimation(staggerItem)}
               {...createCardHoverAnimation('small')}
             >
-              <Card className={`${COMPONENT_CLASSES.CARD.BACKDROP} ${COMPONENT_CLASSES.CARD.HOVER} flex flex-col h-full w-full`}>
+              <Card
+                className={`${COMPONENT_CLASSES.CARD.BACKDROP} ${COMPONENT_CLASSES.CARD.HOVER} flex flex-col h-full w-full`}
+              >
                 <CardHeader>
                   <CardTitle className="text-lg font-semibold">{group.category}</CardTitle>
                 </CardHeader>
@@ -57,7 +60,7 @@ export function Skills() {
                           whileHover="hover"
                           whileTap="tap"
                         >
-                          <Icon 
+                          <Icon
                             className={`${SKILLS_CONFIG.ICON_SIZES.FULL} ${color === 'currentColor' ? 'text-foreground' : ''}`}
                             style={color !== 'currentColor' ? { color } : undefined}
                           />

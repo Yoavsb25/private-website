@@ -9,10 +9,7 @@ import type { EducationData, ExperienceData, TimelineItem } from '@/lib/types'
  * Generates className for timeline card wrapper based on position
  */
 export function cardWrapperClass(isEven: boolean): string {
-  return cn(
-    'relative w-full sm:w-[calc(50%-3rem)]',
-    isEven ? 'sm:mr-auto' : 'sm:ml-auto'
-  )
+  return cn('relative w-full sm:w-[calc(50%-3rem)]', isEven ? 'sm:mr-auto' : 'sm:ml-auto')
 }
 
 /**

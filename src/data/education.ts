@@ -27,9 +27,7 @@ export const education: EducationItem[] = [
     ],
     programmingLanguages: ['Python', 'Java', 'C', 'JavaScript', 'HTML', 'CSS'],
     developmentTools: ['Git', 'GitHub', 'Flask', 'Django', 'React'],
-    details: [
-      'Hands-on projects in programming, data analysis, and database management',
-    ],
+    details: ['Hands-on projects in programming, data analysis, and database management'],
     grades: [
       'Machine Learning final: 88',
       'Operating Systems final: 92',

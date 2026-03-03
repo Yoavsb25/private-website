@@ -8,14 +8,14 @@ export const ANIMATION_CONFIG = {
     CONTAINER: { once: true, margin: '-50px' } as const,
     NESTED: { once: true } as const,
   },
-  
+
   // Common initial states
   INITIAL: {
     FADE_UP: { opacity: 0, y: -20 },
     FADE_DOWN: { opacity: 0, y: 20 },
     SCALE: { opacity: 0, scale: 0.8 },
   },
-  
+
   // Common hover states
   HOVER: {
     LIFT_SMALL: { y: -4 },
@@ -23,13 +23,13 @@ export const ANIMATION_CONFIG = {
     SCALE_UP: { scale: 1.05 },
     SCALE_UP_LARGE: { scale: 1.1 },
   },
-  
+
   // Common tap states
   TAP: {
     SCALE_DOWN: { scale: 0.95 },
     SCALE_DOWN_SMALL: { scale: 0.98 },
   },
-  
+
   // Transition durations (in seconds)
   DURATION: {
     FAST: 0.2,
@@ -38,7 +38,7 @@ export const ANIMATION_CONFIG = {
     SLOW: 0.5,
     SLOWER: 0.6,
   },
-  
+
   // Animation delays (in seconds)
   DELAY: {
     SHORT: 0.2,
@@ -46,4 +46,3 @@ export const ANIMATION_CONFIG = {
     LONG: 0.4,
   },
 } as const
-

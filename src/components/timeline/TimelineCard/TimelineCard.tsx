@@ -24,14 +24,7 @@ const HOVER_TRANSITION = {
 } as const
 
 export function TimelineCard(props: TimelineCardProps) {
-  const {
-    item,
-    isEven,
-    isActive,
-    isHovered,
-    onHoverChange,
-    onToggleActive,
-  } = props
+  const { item, isEven, isActive, isHovered, onHoverChange, onToggleActive } = props
 
   const expanded = isActive || isHovered
   const colors = TIMELINE_COLORS[item.type]
@@ -50,10 +43,7 @@ export function TimelineCard(props: TimelineCardProps) {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <motion.div
-          whileHover={HOVER_ANIMATION}
-          transition={HOVER_TRANSITION}
-        >
+        <motion.div whileHover={HOVER_ANIMATION} transition={HOVER_TRANSITION}>
           <Card
             onClick={() => onToggleActive(item.id)}
             className={cardClass(expanded, colors.glow)}

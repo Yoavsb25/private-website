@@ -16,9 +16,8 @@ export const createSectionHeaderAnimation = () => ({
  * Creates a standard card hover animation
  */
 export const createCardHoverAnimation = (liftAmount: 'small' | 'medium' = 'small') => ({
-  whileHover: liftAmount === 'small' 
-    ? ANIMATION_CONFIG.HOVER.LIFT_SMALL 
-    : ANIMATION_CONFIG.HOVER.LIFT_MEDIUM,
+  whileHover:
+    liftAmount === 'small' ? ANIMATION_CONFIG.HOVER.LIFT_SMALL : ANIMATION_CONFIG.HOVER.LIFT_MEDIUM,
   transition: { duration: ANIMATION_CONFIG.DURATION.NORMAL },
 })
 
@@ -34,9 +33,9 @@ export const createButtonAnimation = () => ({
  * Creates a standard badge hover animation
  */
 export const createBadgeAnimation = () => ({
-  whileHover: { 
-    scale: ANIMATION_CONFIG.HOVER.SCALE_UP_LARGE.scale, 
-    y: -2 
+  whileHover: {
+    scale: ANIMATION_CONFIG.HOVER.SCALE_UP_LARGE.scale,
+    y: -2,
   },
   whileTap: ANIMATION_CONFIG.TAP.SCALE_DOWN,
 })
@@ -70,4 +69,3 @@ export const createFadeInAnimation = (delay: number = 0) => ({
   viewport: ANIMATION_CONFIG.VIEWPORT.NESTED,
   transition: { delay },
 })
-

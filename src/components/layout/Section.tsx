@@ -9,12 +9,7 @@ interface SectionProps {
   background?: 'default' | 'mutedLight' | 'mutedMedium'
 }
 
-export function Section({
-  id,
-  className,
-  children,
-  background = 'default',
-}: SectionProps) {
+export function Section({ id, className, children, background = 'default' }: SectionProps) {
   const backgroundClass = {
     default: '',
     mutedLight: 'bg-muted/30',
@@ -24,15 +19,9 @@ export function Section({
   return (
     <section
       id={id}
-      className={cn(
-        'min-h-screen',
-        SPACING.PADDING.SECTION,
-        backgroundClass,
-        className
-      )}
+      className={cn('min-h-screen', SPACING.PADDING.SECTION, backgroundClass, className)}
     >
       {children}
     </section>
   )
 }
-

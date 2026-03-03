@@ -164,4 +164,3 @@ export const getAnimationVariants = (variants: Variants): Variants => {
   }
   return variants
 }
-

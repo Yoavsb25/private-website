@@ -30,13 +30,8 @@ export function Typography({
     mutedOpacity: TYPOGRAPHY.COLOR.MUTED_OPACITY,
   }[color]
 
-  return (
-    <Component className={cn(variantClass, colorClass, className)}>
-      {children}
-    </Component>
-  )
+  return <Component className={cn(variantClass, colorClass, className)}>{children}</Component>
 }
 
 // Export as Text for backward compatibility
 export const Text = Typography
-

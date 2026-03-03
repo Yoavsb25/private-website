@@ -2,12 +2,7 @@
  * Animation variants for timeline components
  */
 import { Variants } from 'framer-motion'
-import {
-  slideInLeft,
-  slideInRight,
-  staggerContainer,
-  getAnimationVariants,
-} from '@/lib/animations'
+import { slideInLeft, slideInRight, staggerContainer, getAnimationVariants } from '@/lib/animations'
 
 /**
  * Container animation variant for timeline

@@ -9,14 +9,9 @@ interface HeadingProps {
   withMargin?: boolean
 }
 
-export function Heading({
-  children,
-  level = 2,
-  className,
-  withMargin = true,
-}: HeadingProps) {
+export function Heading({ children, level = 2, className, withMargin = true }: HeadingProps) {
   const Component = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4'
-  
+
   const levelClass = {
     1: TYPOGRAPHY.HEADING.H1,
     2: TYPOGRAPHY.HEADING.H2,
@@ -26,14 +21,9 @@ export function Heading({
 
   return (
     <Component
-      className={cn(
-        levelClass,
-        withMargin && level === 4 && SPACING.TEXT.HEADING,
-        className
-      )}
+      className={cn(levelClass, withMargin && level === 4 && SPACING.TEXT.HEADING, className)}
     >
       {children}
     </Component>
   )
 }
-

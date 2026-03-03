@@ -9,4 +9,3 @@ export { TimelineSpine } from './TimelineSpine'
 export { YearLabelMobile, YearBadgeDesktop } from './YearLabel'
 export { TIMELINE_COLORS } from './constants'
 export type { TimelineCardContentProps, TimelineCardHeaderProps } from './TimelineCard/types'
-

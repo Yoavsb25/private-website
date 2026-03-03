@@ -19,19 +19,7 @@ import {
   SiCss3,
 } from 'react-icons/si'
 import { FaJava } from 'react-icons/fa'
-import PlaywrightImg from '@/assets/icons/Playwright--Streamline-Svg-Logos.svg'
-
-const PlaywrightIcon: React.FC<{ className?: string; style?: React.CSSProperties }> = ({ 
-  className, 
-  style 
-}) => (
-  <img
-    src={PlaywrightImg}
-    alt="Playwright"
-    className={className}
-    style={style}
-  />
-)
+import { PlaywrightIcon } from '@/lib/helpers'
 
 export type SkillItem = {
   name: string

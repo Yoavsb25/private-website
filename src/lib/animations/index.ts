@@ -4,4 +4,3 @@
  * Note: Animation helper functions are in @/lib/helpers
  */
 export * from './variants'
-

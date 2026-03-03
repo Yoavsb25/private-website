@@ -13,12 +13,7 @@ export function TimelineCardContent({ expanded, item }: TimelineCardContentProps
   return (
     <AnimatePresence initial={false}>
       {expanded && (
-        <motion.div
-          variants={timelineExpand}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
+        <motion.div variants={timelineExpand} initial="hidden" animate="visible" exit="exit">
           <CardContent className="pt-0">
             {item.type === 'education' ? (
               <EducationContent data={getEducationData(item)} />

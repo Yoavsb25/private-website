@@ -44,4 +44,3 @@ export const CONTENT_SECTIONS = {
   ACHIEVEMENTS: 'Achievements',
   TECHNOLOGIES: 'Technologies',
 } as const
-  

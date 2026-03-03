@@ -4,4 +4,3 @@
  */
 export { Text, Typography } from './Text'
 export { Heading } from './Heading'
-
