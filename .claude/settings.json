@@ -1,0 +1,19 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /Users/yoavsborovsky/Documents/GitHub/private-website && npm run format 2>/dev/null; true"
+          },
+          {
+            "type": "command",
+            "command": "cd /Users/yoavsborovsky/Documents/GitHub/private-website && npm run type-check 2>&1 | tail -8"
+          }
+        ]
+      }
+    ]
+  }
+}
