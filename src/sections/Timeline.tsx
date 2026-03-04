@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Section, SectionHeader, Container } from '@/components/layout'
 import {
@@ -21,8 +21,9 @@ import {
 
 export function Timeline() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
-  const [activeItem, setActiveItem] = useState<string | null>(null)
+  const [flippedItem, setFlippedItem] = useState<string | null>(null)
   const [filter, setFilter] = useState<FilterType>('all')
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const allItems = useMemo(() => createTimelineItems(), [])
   const filteredItems = useMemo(
@@ -41,15 +42,15 @@ export function Timeline() {
 
         <FilterChips activeFilter={filter} onChange={setFilter} />
 
-        <div className={`relative ${SECTION_SPACING.TIMELINE_CONTAINER}`}>
-          <TimelineSpine />
+        <div ref={containerRef} className={`relative ${SECTION_SPACING.TIMELINE_CONTAINER}`}>
+          <TimelineSpine containerRef={containerRef} />
 
           {/* Items */}
           <div className={`relative ${SECTION_SPACING.TIMELINE_ITEMS}`}>
             {filteredItems.map((item, idx) => {
               const isEven = idx % 2 === 0
               const isHovered = hoveredItem === item.id
-              const isActive = activeItem === item.id
+              const isFlipped = flippedItem === item.id
 
               return (
                 <motion.div
@@ -70,10 +71,10 @@ export function Timeline() {
                     item={item}
                     isEven={isEven}
                     isHovered={isHovered}
-                    isActive={isActive}
+                    isFlipped={isFlipped}
                     index={idx}
                     onHoverChange={setHoveredItem}
-                    onToggleActive={id => setActiveItem(prev => (prev === id ? null : id))}
+                    onToggleFlipped={id => setFlippedItem(prev => (prev === id ? null : id))}
                   />
 
                   <div
@@ -81,11 +82,11 @@ export function Timeline() {
                     onMouseLeave={() => setHoveredItem(null)}
                   >
                     <TimelinePoint
-                      isActive={isActive}
+                      isActive={isFlipped}
                       isHovered={isHovered}
                       index={idx}
                       type={item.type}
-                      onClick={() => setActiveItem(prev => (prev === item.id ? null : item.id))}
+                      onClick={() => setFlippedItem(prev => (prev === item.id ? null : item.id))}
                     />
                   </div>
                 </motion.div>
