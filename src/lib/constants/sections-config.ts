@@ -114,6 +114,4 @@ export const SECTION_CLASSES = {
   PROJECTS_IMAGE_WRAPPER: 'overflow-hidden rounded-t-lg relative',
   PROJECTS_IMAGE: 'h-full w-full object-cover',
   CONTACT_CARD_HEADER: 'flex items-center gap-2 text-[clamp(1rem,2.5vw,1.125rem)] font-semibold',
-  SKILLS_ICON_CONTAINER:
-    'flex h-[clamp(3rem,6vw,4rem)] w-[clamp(3rem,6vw,4rem)] items-center justify-center rounded-xl border border-border bg-card shadow-sm cursor-pointer relative',
 } as const
