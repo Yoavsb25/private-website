@@ -18,7 +18,6 @@ export function TimelineCardHeader({ item }: TimelineCardHeaderProps) {
   const logoUrl = data.logoUrl
   const Icon = isEducation ? GraduationCap : Briefcase
   const colors = TIMELINE_COLORS[item.type]
-  const badgeLabel = isEducation ? 'Education' : 'Experience'
 
   return (
     <CardHeader className="flex flex-col items-center gap-3 pt-6 pb-5 text-center">
@@ -39,10 +38,8 @@ export function TimelineCardHeader({ item }: TimelineCardHeaderProps) {
         <CardDescription className="mt-0.5">{subtitle}</CardDescription>
       </div>
 
-      {/* Type badge */}
-      <span className={`rounded-full px-3 py-0.5 text-xs font-semibold ${colors.badge}`}>
-        {badgeLabel}
-      </span>
+      {/* Year */}
+      <span className="text-xs text-muted-foreground">{item.yearDisplay}</span>
     </CardHeader>
   )
 }

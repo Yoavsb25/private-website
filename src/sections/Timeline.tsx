@@ -11,13 +11,7 @@ import {
 import { createTimelineItems } from '@/lib/helpers'
 import { ANIMATION } from '@/lib/constants'
 import type { FilterType } from '@/lib/types'
-import {
-  FilterChips,
-  TimelinePoint,
-  YearLabelMobile,
-  TimelineCard,
-  TimelineSpine,
-} from '@/components/timeline'
+import { FilterChips, TimelinePoint, TimelineCard, TimelineSpine } from '@/components/timeline'
 
 export function Timeline() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
@@ -65,8 +59,6 @@ export function Timeline() {
                     ...ANIMATION.SPRING,
                   }}
                 >
-                  <YearLabelMobile yearDisplay={item.yearDisplay} />
-
                   <TimelineCard
                     item={item}
                     isEven={isEven}

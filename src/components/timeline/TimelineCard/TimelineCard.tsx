@@ -11,7 +11,6 @@ import { timelineItem } from '../variants'
 import { cardClass, cardWrapperClass } from '../utils'
 import { TimelineCardHeader } from './TimelineCardHeader'
 import { TimelineCardContent } from './TimelineCardContent'
-import { YearBadgeDesktop } from '../YearLabel'
 
 const FLIP_TRANSITION = {
   type: 'spring' as const,
@@ -29,8 +28,6 @@ export function TimelineCard(props: TimelineCardProps) {
       onMouseEnter={() => onHoverChange(item.id)}
       onMouseLeave={() => onHoverChange(null)}
     >
-      <YearBadgeDesktop yearDisplay={item.yearDisplay} />
-
       <motion.div
         variants={timelineItem(isEven)}
         initial="hidden"
