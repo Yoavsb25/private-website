@@ -1,6 +1,6 @@
 /**
  * TimelineCard component
- * Displays a timeline item card with expandable content and hover effects
+ * 3D flip card with front face (logo + title) and back face (details)
  */
 import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/card'
@@ -12,21 +12,14 @@ import { TimelineCardHeader } from './TimelineCardHeader'
 import { TimelineCardContent } from './TimelineCardContent'
 import { YearBadgeDesktop } from '../YearLabel'
 
-const HOVER_ANIMATION = {
-  y: -4,
-  scale: 1.015,
-} as const
-
-const HOVER_TRANSITION = {
+const FLIP_TRANSITION = {
   type: 'spring' as const,
-  stiffness: 250,
-  damping: 18,
-} as const
+  stiffness: 200,
+  damping: 22,
+}
 
 export function TimelineCard(props: TimelineCardProps) {
-  const { item, isEven, isActive, isHovered, onHoverChange, onToggleActive } = props
-
-  const expanded = isActive || isHovered
+  const { item, isEven, isFlipped, isHovered, onHoverChange, onToggleFlipped } = props
   const colors = TIMELINE_COLORS[item.type]
 
   return (
@@ -43,18 +36,45 @@ export function TimelineCard(props: TimelineCardProps) {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <motion.div whileHover={HOVER_ANIMATION} transition={HOVER_TRANSITION}>
-          <Card
-            onClick={() => onToggleActive(item.id)}
-            className={cardClass(expanded, colors.glow)}
+        {/* Perspective wrapper — must be a plain div, not motion.div, to preserve 3D */}
+        <div
+          style={{ perspective: '1000px' }}
+          className="cursor-pointer"
+          onClick={() => onToggleFlipped(item.id)}
+        >
+          {/* Flip target — rotates in 3D */}
+          <motion.div
+            style={{ transformStyle: 'preserve-3d' }}
+            animate={{ rotateY: isFlipped ? 180 : 0 }}
+            transition={FLIP_TRANSITION}
+            className="relative"
           >
+            {/* Front face — sets the container height */}
+            <div style={{ backfaceVisibility: 'hidden' }}>
+              <Card className={cardClass(isHovered, colors.glow)}>
+                <div
+                  className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${colors.accent} opacity-20`}
+                />
+                <TimelineCardHeader item={item} />
+              </Card>
+            </div>
+
+            {/* Back face — absolute, matches front height, scrollable */}
             <div
-              className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${colors.accent} opacity-20`}
-            />
-            <TimelineCardHeader item={item} />
-            <TimelineCardContent expanded={expanded} item={item} />
-          </Card>
-        </motion.div>
+              className="absolute inset-0 overflow-hidden"
+              style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+            >
+              <Card className={`${cardClass(true, colors.glow)} h-full`}>
+                <div
+                  className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${colors.accent} opacity-20`}
+                />
+                <div className="h-full overflow-y-auto">
+                  <TimelineCardContent item={item} />
+                </div>
+              </Card>
+            </div>
+          </motion.div>
+        </div>
       </motion.div>
     </div>
   )
