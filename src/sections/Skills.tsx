@@ -3,7 +3,7 @@ import { Section, SectionHeader, Container } from '@/components/layout'
 import { skills } from '@/data/skills'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 import { createStaggerContainerAnimation, createStaggerItemAnimation } from '@/lib/helpers'
-import { SECTION_TITLES, SECTION_IDS, SKILLS_CONFIG } from '@/lib/constants'
+import { SECTION_TITLES, SECTION_IDS, SKILLS_CONFIG, ANIMATION_CONFIG } from '@/lib/constants'
 
 const COL_SPAN: Record<1 | 2 | 3, string> = {
   1: 'md:col-span-1',
@@ -29,19 +29,16 @@ export function Skills() {
               <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground text-left">
                 {group.category}
               </p>
-              <motion.div
-                className={`grid ${SKILLS_CONFIG.GRID.COLS} ${SKILLS_CONFIG.GRID.GAP}`}
-                {...createStaggerContainerAnimation(staggerContainer)}
-              >
+              <div className={`grid ${SKILLS_CONFIG.GRID.COLS} ${SKILLS_CONFIG.GRID.GAP}`}>
                 {group.items.map(({ name, icon: Icon, color }) => (
                   <div key={name} className="flex flex-col items-center gap-2">
                     <motion.div
-                      className={`flex ${SKILLS_CONFIG.CONTAINER_SIZES.FULL} items-center justify-center rounded-xl border border-border bg-card shadow-sm cursor-pointer`}
+                      className={`flex ${SKILLS_CONFIG.CONTAINER_SIZES.FULL} items-center justify-center rounded-xl border border-border bg-card shadow-sm`}
                       whileHover={{
                         scale: 1.1,
                         ...(color !== 'currentColor' ? { boxShadow: `0 0 20px ${color}55` } : {}),
                       }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: ANIMATION_CONFIG.DURATION.FAST }}
                     >
                       <Icon
                         className={`${SKILLS_CONFIG.ICON_SIZES.FULL} ${color === 'currentColor' ? 'text-foreground' : ''}`}
@@ -51,7 +48,7 @@ export function Skills() {
                     <p className="text-xs text-foreground/80">{name}</p>
                   </div>
                 ))}
-              </motion.div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
