@@ -38,14 +38,14 @@ export function TimelineCard(props: TimelineCardProps) {
         <div style={{ perspective: '1000px' }}>
           {/* Flip target — rotates in 3D */}
           <motion.div
-            style={{ transformStyle: 'preserve-3d' }}
+            style={{ transformStyle: 'preserve-3d', WebkitTransformStyle: 'preserve-3d' }}
             animate={{ rotateY: isFlipped ? 180 : 0 }}
             transition={FLIP_TRANSITION}
             className="relative"
           >
             {/* Front face — sets container height; click to flip open */}
             <div
-              style={{ backfaceVisibility: 'hidden' }}
+              style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
               className="cursor-pointer"
               onClick={() => onToggleFlipped(item.id)}
             >
@@ -60,7 +60,11 @@ export function TimelineCard(props: TimelineCardProps) {
             {/* Back face — absolute, matches front height; scroll area + flip-back footer */}
             <div
               className="absolute inset-0 overflow-hidden"
-              style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+              style={{
+                backfaceVisibility: 'hidden',
+                WebkitBackfaceVisibility: 'hidden',
+                transform: 'rotateY(180deg)',
+              }}
             >
               <Card className={`${cardClass(true, colors.glow)} flex h-full flex-col`}>
                 <div
