@@ -13,14 +13,14 @@ export function cardWrapperClass(isEven: boolean): string {
 }
 
 /**
- * Generates className for timeline card based on expanded state and glow color
+ * Generates className for timeline card based on hover state and glow color
  */
-export function cardClass(expanded: boolean, glow: string): string {
+export function cardClass(isHovered: boolean, glow: string): string {
   return cn(
     STYLES.CARD_BASE,
     STYLES.CARD_DEFAULT,
     'relative overflow-hidden',
-    expanded && `ring-1 ${glow}`
+    isHovered && `ring-1 ${glow}`
   )
 }
 
