@@ -17,10 +17,6 @@ export const LAYOUT = {
       'grid gap-[clamp(1rem,2.5vw,1.5rem)] [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]',
     AUTO_FIT_LARGE:
       'grid gap-[clamp(1rem,3vw,2rem)] [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]',
-    // Skills grid: 1 column on mobile, always 3 on desktop (768px+)
-    // Forces exactly 3 columns for the category cards (Languages, Frameworks, DevOps)
-    SKILLS:
-      'grid gap-[clamp(1rem,3vw,2rem)] [grid-template-columns:repeat(auto-fit,minmax(250px,1fr))] md:[grid-template-columns:repeat(3,1fr)]',
     CONTACT:
       'grid gap-[clamp(1rem,2.5vw,1.5rem)] [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]',
     // Legacy - kept for backward compatibility, but prefer AUTO_FIT variants
