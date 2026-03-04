@@ -8,6 +8,5 @@ export interface TimelineCardHeaderProps {
 }
 
 export interface TimelineCardContentProps {
-  expanded: boolean
   item: TimelineItem
 }
