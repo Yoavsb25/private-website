@@ -29,42 +29,46 @@ export type SkillItem = {
 
 export type SkillGroup = {
   category: string
+  colSpan: 1 | 2 | 3
   items: SkillItem[]
 }
 
 export const skills: SkillGroup[] = [
   {
-    category: 'Languages',
+    category: 'Frontend',
+    colSpan: 2,
     items: [
-      { name: 'Python', icon: SiPython, color: '#3776AB' },
       { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
       { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
-      { name: 'Java', icon: FaJava, color: '#007396' },
       { name: 'HTML', icon: SiHtml5, color: '#E34F26' },
       { name: 'CSS', icon: SiCss3, color: '#1572B6' },
-    ],
-  },
-  {
-    category: 'Frameworks & Libraries',
-    items: [
       { name: 'React', icon: SiReact, color: '#61DAFB' },
       { name: 'Next.js', icon: SiNextdotjs, color: 'currentColor' },
-      { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
       { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
-      { name: 'Django', icon: SiDjango, color: '#0FA47A' },
-      { name: 'Flask', icon: SiFlask, color: 'currentColor' },
-      { name: 'Playwright', icon: PlaywrightIcon, color: '#2EAD33' },
     ],
   },
   {
-    category: 'DevOps & Tools',
+    category: 'Backend',
+    colSpan: 1,
+    items: [
+      { name: 'Python', icon: SiPython, color: '#3776AB' },
+      { name: 'Java', icon: FaJava, color: '#007396' },
+      { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
+      { name: 'Django', icon: SiDjango, color: '#0FA47A' },
+      { name: 'Flask', icon: SiFlask, color: 'currentColor' },
+    ],
+  },
+  {
+    category: 'Infrastructure',
+    colSpan: 3,
     items: [
       { name: 'Git', icon: SiGit, color: '#F05032' },
       { name: 'Docker', icon: SiDocker, color: '#2496ED' },
-      { name: 'SQLite', icon: SiSqlite, color: '#0F80D5' },
-      { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
       { name: 'PostgreSQL', icon: SiPostgresql, color: '#31648C' },
+      { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
+      { name: 'SQLite', icon: SiSqlite, color: '#0F80D5' },
       { name: 'Jenkins', icon: SiJenkins, color: '#D24939' },
+      { name: 'Playwright', icon: PlaywrightIcon, color: '#2EAD33' },
     ],
   },
 ]
