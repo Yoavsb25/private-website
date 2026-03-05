@@ -113,7 +113,7 @@ export function Contact() {
                       variants={getAnimationVariants(iconHover)}
                     >
                       {/* Large icon circle */}
-                      <div className="rounded-full bg-primary/10 p-3">
+                      <div aria-hidden="true" className="rounded-full bg-primary/10 p-3">
                         <Icon className="h-10 w-10 text-primary" />
                       </div>
                       <span className="text-base font-semibold text-foreground">
