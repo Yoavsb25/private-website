@@ -16,9 +16,8 @@ import {
   SiFlask,
   SiDocker,
   SiHtml5,
-  SiCss3,
 } from 'react-icons/si'
-import { FaJava } from 'react-icons/fa'
+import { FaCss3, FaJava } from 'react-icons/fa'
 import { PlaywrightIcon } from '@/lib/helpers'
 
 export type SkillItem = {
@@ -41,7 +40,7 @@ export const skills: SkillGroup[] = [
       { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
       { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
       { name: 'HTML', icon: SiHtml5, color: '#E34F26' },
-      { name: 'CSS', icon: SiCss3, color: '#1572B6' },
+      { name: 'CSS', icon: FaCss3, color: '#1572B6' },
       { name: 'React', icon: SiReact, color: '#61DAFB' },
       { name: 'Next.js', icon: SiNextdotjs, color: 'currentColor' },
       { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
