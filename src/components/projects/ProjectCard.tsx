@@ -4,13 +4,7 @@ import { ExternalLink, Github } from 'lucide-react'
 import { prefersReducedMotion } from '@/lib/animations'
 import { Card, Button } from '@/components/ui'
 import { createButtonAnimation, getTechIcon, getTechIconColor } from '@/lib/helpers'
-import {
-  ANIMATION_CONFIG,
-  SECTION_CLASSES,
-  SECTION_SPACING,
-  PROJECTS_LABELS,
-  ICON_SIZES,
-} from '@/lib/constants'
+import { ANIMATION_CONFIG, SECTION_SPACING, PROJECTS_LABELS, ICON_SIZES } from '@/lib/constants'
 import type { WorkItem } from '@/data/projects'
 
 // ---------------------------------------------------------------------------
@@ -99,9 +93,10 @@ function CardBack({
   onFlipBack: (e: React.MouseEvent) => void
   isVisible: boolean
 }) {
+  const hasButtons = project.liveUrl || project.sourceUrl
   return (
     <div
-      className="flex flex-col h-full bg-card border border-border rounded-lg overflow-hidden cursor-pointer"
+      className="flex flex-col bg-card border border-border rounded-lg overflow-hidden cursor-pointer"
       role="button"
       tabIndex={isVisible ? 0 : -1}
       aria-hidden={!isVisible}
@@ -122,58 +117,82 @@ function CardBack({
         } as React.CSSProperties
       }
     >
-      <div className="flex flex-col flex-1 px-5 py-4 gap-4 overflow-y-auto">
-        <div>
-          <p className="text-[0.65rem] font-semibold uppercase tracking-widest text-primary/70 mb-1">
-            {PROJECTS_LABELS.SECTIONS.PROBLEM}
+      {/* Header strip with project title */}
+      <div className="px-5 pt-5 pb-4 border-b border-border/50">
+        <h3 className="font-bold text-base leading-tight text-foreground line-clamp-1">
+          {project.title}
+        </h3>
+        {project.tagline && (
+          <p className="text-xs text-muted-foreground mt-1 line-clamp-1">{project.tagline}</p>
+        )}
+      </div>
+
+      {/* Problem + Solution */}
+      <div className="flex flex-col flex-1 px-5 py-4 gap-5 overflow-y-auto">
+        <div className="flex flex-col gap-1.5">
+          <div className="flex items-center gap-2">
+            <span className="w-1 h-4 rounded-full bg-destructive/70 shrink-0" />
+            <p className="text-[0.65rem] font-semibold uppercase tracking-widest text-muted-foreground">
+              {PROJECTS_LABELS.SECTIONS.PROBLEM}
+            </p>
+          </div>
+          <p className="text-sm text-foreground/85 leading-relaxed pl-3 border-l border-border">
+            {project.problem}
           </p>
-          <p className="text-sm text-foreground/90 leading-relaxed">{project.problem}</p>
         </div>
-        <div>
-          <p className="text-[0.65rem] font-semibold uppercase tracking-widest text-primary/70 mb-1">
-            {PROJECTS_LABELS.SECTIONS.SOLUTION}
+
+        <div className="flex flex-col gap-1.5">
+          <div className="flex items-center gap-2">
+            <span className="w-1 h-4 rounded-full bg-primary/70 shrink-0" />
+            <p className="text-[0.65rem] font-semibold uppercase tracking-widest text-muted-foreground">
+              {PROJECTS_LABELS.SECTIONS.SOLUTION}
+            </p>
+          </div>
+          <p className="text-sm text-foreground/85 leading-relaxed pl-3 border-l border-border">
+            {project.solution}
           </p>
-          <p className="text-sm text-foreground/90 leading-relaxed">{project.solution}</p>
         </div>
       </div>
 
-      {/* Action buttons */}
-      <div
-        className={`pb-4 px-4 flex ${SECTION_SPACING.PROJECTS_FOOTER} border-t border-border pt-3`}
-      >
-        {project.liveUrl && (
-          <motion.a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            tabIndex={isVisible ? 0 : -1}
-            aria-label={PROJECTS_LABELS.ARIA_LABELS.LIVE_SITE(project.title)}
-            onClick={e => e.stopPropagation()}
-            {...createButtonAnimation()}
-          >
-            <Button variant="outline" size="sm">
-              <ExternalLink className={`mr-2 ${ICON_SIZES.SMALL_RESPONSIVE}`} />
-              {PROJECTS_LABELS.BUTTONS.LIVE_SITE}
-            </Button>
-          </motion.a>
-        )}
-        {project.sourceUrl && (
-          <motion.a
-            href={project.sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            tabIndex={isVisible ? 0 : -1}
-            aria-label={PROJECTS_LABELS.ARIA_LABELS.SOURCE_CODE(project.title)}
-            onClick={e => e.stopPropagation()}
-            {...createButtonAnimation()}
-          >
-            <Button variant="outline" size="sm">
-              <Github className={`mr-2 ${ICON_SIZES.SMALL_RESPONSIVE}`} />
-              {PROJECTS_LABELS.BUTTONS.SOURCE}
-            </Button>
-          </motion.a>
-        )}
-      </div>
+      {/* Action buttons — only rendered when links exist */}
+      {hasButtons && (
+        <div
+          className={`pb-4 px-5 flex ${SECTION_SPACING.PROJECTS_FOOTER} border-t border-border pt-3`}
+        >
+          {project.liveUrl && (
+            <motion.a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              tabIndex={isVisible ? 0 : -1}
+              aria-label={PROJECTS_LABELS.ARIA_LABELS.LIVE_SITE(project.title)}
+              onClick={e => e.stopPropagation()}
+              {...createButtonAnimation()}
+            >
+              <Button variant="outline" size="sm">
+                <ExternalLink className={`mr-2 ${ICON_SIZES.SMALL_RESPONSIVE}`} />
+                {PROJECTS_LABELS.BUTTONS.LIVE_SITE}
+              </Button>
+            </motion.a>
+          )}
+          {project.sourceUrl && (
+            <motion.a
+              href={project.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              tabIndex={isVisible ? 0 : -1}
+              aria-label={PROJECTS_LABELS.ARIA_LABELS.SOURCE_CODE(project.title)}
+              onClick={e => e.stopPropagation()}
+              {...createButtonAnimation()}
+            >
+              <Button variant="outline" size="sm">
+                <Github className={`mr-2 ${ICON_SIZES.SMALL_RESPONSIVE}`} />
+                {PROJECTS_LABELS.BUTTONS.SOURCE}
+              </Button>
+            </motion.a>
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -236,19 +255,19 @@ export function ProjectCard({ project }: ProjectCardProps) {
               }
             }}
           >
-            {/* Image area */}
+            {/* Image area — flex-1 so it fills the card, no z-index to avoid bleed-through */}
             {project.imageUrl && (
-              <div className={SECTION_CLASSES.PROJECTS_IMAGE_WRAPPER}>
-                <motion.img
+              <div className="relative flex-1 overflow-hidden">
+                <img
                   src={project.imageUrl}
                   alt={project.imageAlt || project.title}
-                  className={SECTION_CLASSES.PROJECTS_IMAGE}
+                  className="h-full w-full object-cover"
                   loading="lazy"
                 />
-                {/* Bottom gradient */}
-                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/75 to-transparent z-10 pointer-events-none" />
-                {/* Title + tagline */}
-                <div className={SECTION_CLASSES.PROJECTS_TITLE_AREA}>
+                {/* Bottom gradient — no z-index, stacks by DOM order */}
+                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/75 to-transparent pointer-events-none" />
+                {/* Title + tagline — no z-index, naturally above gradient */}
+                <div className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-8">
                   <h3 className="text-white font-bold text-[clamp(1rem,2.5vw,1.25rem)] leading-tight drop-shadow">
                     {project.title}
                   </h3>
