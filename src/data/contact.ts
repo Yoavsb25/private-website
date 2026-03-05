@@ -17,7 +17,6 @@ export interface ContactInformation {
   availability?: string
 }
 
-// Placeholder data - to be populated with actual contact information
 export const contact: ContactInformation = {
   methods: [
     {
@@ -25,6 +24,13 @@ export const contact: ContactInformation = {
       label: 'Email',
       value: 'Yoavsb25@gmail.com',
       icon: 'Mail',
+      available: true,
+    },
+    {
+      type: 'social',
+      label: 'LinkedIn',
+      value: 'https://www.linkedin.com/in/yoav-sborovsky/',
+      icon: 'Linkedin',
       available: true,
     },
   ],
