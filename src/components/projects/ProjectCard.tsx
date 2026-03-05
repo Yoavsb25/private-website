@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { ExternalLink, Github } from 'lucide-react'
 import { prefersReducedMotion } from '@/lib/animations'
 import { Card, Button } from '@/components/ui'
-import { createButtonAnimation, getTechIcon } from '@/lib/helpers'
+import { createButtonAnimation, getTechIcon, getTechIconColor } from '@/lib/helpers'
 import {
   ANIMATION_CONFIG,
   SECTION_CLASSES,
@@ -73,10 +73,12 @@ function TechIconRow({ technologies }: { technologies: string[] }) {
     <div className="flex flex-wrap gap-2 px-4 py-3 bg-background">
       {technologies.map(tech => {
         const Icon = getTechIcon(tech)
+        const color = getTechIconColor(tech)
         return (
           <Icon
             key={tech}
-            className="w-5 h-5 text-foreground/70 hover:text-foreground transition-colors"
+            className="w-5 h-5 transition-opacity hover:opacity-80"
+            style={{ color }}
             title={tech}
           />
         )
@@ -91,14 +93,25 @@ function TechIconRow({ technologies }: { technologies: string[] }) {
 function CardBack({
   project,
   onFlipBack,
+  isVisible,
 }: {
   project: WorkItem
   onFlipBack: (e: React.MouseEvent) => void
+  isVisible: boolean
 }) {
   return (
     <div
       className="flex flex-col h-full bg-card border border-border rounded-lg overflow-hidden cursor-pointer"
+      role="button"
+      tabIndex={isVisible ? 0 : -1}
+      aria-hidden={!isVisible}
       onClick={onFlipBack}
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onFlipBack(e as unknown as React.MouseEvent)
+        }
+      }}
       style={
         {
           backfaceVisibility: 'hidden',
@@ -133,6 +146,7 @@ function CardBack({
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
+            tabIndex={isVisible ? 0 : -1}
             aria-label={PROJECTS_LABELS.ARIA_LABELS.LIVE_SITE(project.title)}
             onClick={e => e.stopPropagation()}
             {...createButtonAnimation()}
@@ -148,6 +162,7 @@ function CardBack({
             href={project.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
+            tabIndex={isVisible ? 0 : -1}
             aria-label={PROJECTS_LABELS.ARIA_LABELS.SOURCE_CODE(project.title)}
             onClick={e => e.stopPropagation()}
             {...createButtonAnimation()}
@@ -200,6 +215,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {/* FRONT FACE */}
         <div
           className="absolute inset-0"
+          aria-hidden={isFlipped}
           style={
             {
               backfaceVisibility: 'hidden',
@@ -209,7 +225,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
         >
           <Card
             className="flex h-full flex-col overflow-hidden cursor-pointer"
+            role="button"
+            tabIndex={isFlipped ? -1 : 0}
+            aria-label={`View details for ${project.title}`}
             onClick={handleFlip}
+            onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                handleFlip()
+              }
+            }}
           >
             {/* Image area */}
             {project.imageUrl && (
@@ -239,7 +264,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         {/* BACK FACE */}
-        <CardBack project={project} onFlipBack={handleFlipBack} />
+        <CardBack project={project} onFlipBack={handleFlipBack} isVisible={isFlipped} />
       </motion.div>
     </TiltCard>
   )

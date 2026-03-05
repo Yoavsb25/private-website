@@ -48,7 +48,11 @@ export function getIcon(iconName?: string): IconComponent {
 /**
  * Devicon component type — react-icons SVG components
  */
-type TechIconComponent = React.ComponentType<{ className?: string; title?: string }>
+type TechIconComponent = React.ComponentType<{
+  className?: string
+  title?: string
+  style?: React.CSSProperties
+}>
 
 /**
  * Map from technology name string (lowercase) to devicon component
@@ -75,4 +79,31 @@ const TECH_ICON_MAP: Record<string, TechIconComponent> = {
  */
 export function getTechIcon(tech: string): TechIconComponent {
   return TECH_ICON_MAP[tech.toLowerCase()] ?? (Code2 as TechIconComponent)
+}
+
+/**
+ * Brand colours for technology icons
+ */
+const TECH_ICON_COLORS: Record<string, string> = {
+  python: '#3776AB',
+  django: '#092E20',
+  flask: '#000000',
+  mysql: '#4479A1',
+  javascript: '#F7DF1E',
+  html: '#E34F26',
+  css: '#1572B6',
+  sql: '#336791',
+  typescript: '#3178C6',
+  react: '#61DAFB',
+  'node.js': '#339933',
+  nodejs: '#339933',
+  git: '#F05032',
+}
+
+/**
+ * Get the brand colour for a technology name.
+ * Falls back to a muted grey for unknown techs.
+ */
+export function getTechIconColor(tech: string): string {
+  return TECH_ICON_COLORS[tech.toLowerCase()] ?? '#6B7280'
 }
