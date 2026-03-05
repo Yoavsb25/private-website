@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion'
 import { ExternalLink, Github } from 'lucide-react'
-import { prefersReducedMotion } from '@/lib/animations'
 import { Card, Button } from '@/components/ui'
 import { createButtonAnimation, getTechIcon, getTechIconColor } from '@/lib/helpers'
 import { ANIMATION_CONFIG, SECTION_SPACING, PROJECTS_LABELS, ICON_SIZES } from '@/lib/constants'
@@ -12,6 +11,7 @@ import type { WorkItem } from '@/data/projects'
 // ---------------------------------------------------------------------------
 function TiltCard({ children, disabled }: { children: React.ReactNode; disabled: boolean }) {
   const ref = useRef<HTMLDivElement>(null)
+  const reducedMotion = useReducedMotion()
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
@@ -30,7 +30,7 @@ function TiltCard({ children, disabled }: { children: React.ReactNode; disabled:
     ([x, y]) => `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.08), transparent 60%)`
   )
 
-  if (prefersReducedMotion() || disabled) {
+  if (reducedMotion || disabled) {
     return <div>{children}</div>
   }
 
@@ -71,9 +71,10 @@ function TechIconRow({ technologies }: { technologies: string[] }) {
         return (
           <Icon
             key={tech}
+            role="img"
+            aria-label={tech}
             className="w-5 h-5 transition-opacity hover:opacity-80"
             style={{ color }}
-            title={tech}
           />
         )
       })}
@@ -90,7 +91,7 @@ function CardBack({
   isVisible,
 }: {
   project: WorkItem
-  onFlipBack: (e: React.MouseEvent) => void
+  onFlipBack: () => void
   isVisible: boolean
 }) {
   const hasButtons = project.liveUrl || project.sourceUrl
@@ -100,11 +101,14 @@ function CardBack({
       role="button"
       tabIndex={isVisible ? 0 : -1}
       aria-hidden={!isVisible}
-      onClick={onFlipBack}
+      onClick={e => {
+        e.stopPropagation()
+        onFlipBack()
+      }}
       onKeyDown={e => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault()
-          onFlipBack(e as unknown as React.MouseEvent)
+          onFlipBack()
         }
       }}
       style={
@@ -206,15 +210,12 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const [isFlipped, setIsFlipped] = useState(false)
-  const reduced = prefersReducedMotion()
+  const reducedMotion = useReducedMotion()
 
-  const flipTransition = reduced ? { duration: 0 } : ANIMATION_CONFIG.FLIP.SPRING
+  const flipTransition = reducedMotion ? { duration: 0 } : ANIMATION_CONFIG.FLIP.SPRING
 
   const handleFlip = () => setIsFlipped(true)
-  const handleFlipBack = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    setIsFlipped(false)
-  }
+  const handleFlipBack = () => setIsFlipped(false)
 
   return (
     <TiltCard disabled={isFlipped}>

@@ -15,7 +15,7 @@ import {
   SiNodedotjs,
   SiGit,
 } from 'react-icons/si'
-import { CONTACT_ICON_MAP } from '../constants'
+import { CONTACT_ICON_MAP } from '@/lib/constants'
 import PlaywrightImg from '@/assets/icons/Playwright--Streamline-Svg-Logos.svg'
 
 export const PlaywrightIcon: React.FC<{ className?: string; style?: React.CSSProperties }> = ({
@@ -52,6 +52,8 @@ type TechIconComponent = React.ComponentType<{
   className?: string
   title?: string
   style?: React.CSSProperties
+  role?: string
+  'aria-label'?: string
 }>
 
 /**
