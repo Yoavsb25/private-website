@@ -9,6 +9,15 @@
             "command": "APPROVAL=/tmp/production-review-approved; if find \"$APPROVAL\" -mmin -10 2>/dev/null | grep -q .; then rm -f \"$APPROVAL\"; exit 0; else echo 'BLOCKED: Production review required before committing.\\n\\nRun the pre-commit skill:\\n  /pre-commit\\n\\nThis runs all 4 review agents in parallel (architecture, clean code, security/a11y, performance).\\nThe skill creates /tmp/production-review-approved when all checks pass.'; exit 2; fi"
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); file=$(echo \"$input\" | jq -r '.file_path // empty' 2>/dev/null); if [[ \"$file\" == *\"package-lock.json\"* ]]; then echo 'BLOCKED: Never edit package-lock.json directly. Use npm install/uninstall instead.' && exit 2; fi"
+          }
+        ]
       }
     ],
     "PostToolUse": [
