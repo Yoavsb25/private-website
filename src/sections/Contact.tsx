@@ -90,12 +90,12 @@ export function Contact() {
             ease: [0, 0, 0.2, 1],
           }}
         >
-          {contact.methods.map((method, index) => {
+          {contact.methods.map(method => {
             const Icon = getIcon(method.icon)
             const href = method.type === 'email' ? `mailto:${method.value}` : method.value
 
             return (
-              <motion.div key={index} {...createCardHoverAnimation('medium')}>
+              <motion.div key={method.value} {...createCardHoverAnimation('medium')}>
                 <Card
                   className={`${LAYOUT.FLEX.COL_CENTER} justify-between ${COMPONENT_CLASSES.CARD.HOVER_LARGE}`}
                 >
@@ -114,6 +114,7 @@ export function Contact() {
                         {method.available ? (
                           <span className="inline-flex items-center gap-1.5">
                             <motion.span
+                              aria-hidden="true"
                               className="inline-block h-2 w-2 rounded-full bg-green-500"
                               animate={{ scale: [1, 1.4, 1] }}
                               transition={{
