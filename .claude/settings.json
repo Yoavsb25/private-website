@@ -29,7 +29,7 @@
           },
           {
             "type": "command",
-            "command": "input=$(cat); file=$(echo \"$input\" | jq -r '.file_path // empty' 2>/dev/null); [[ \"$file\" == *\".test.\"* ]] && cd /Users/yoavsborovsky/Documents/GitHub/private-website && npm run test -- --run 2>&1 | tail -20 || true"
+            "command": "input=$(cat); file=$(echo \"$input\" | jq -r '.file_path // empty' 2>/dev/null); if [[ \"$file\" == *\".test.\"* ]]; then cd /Users/yoavsborovsky/Documents/GitHub/private-website && npm run test -- --run 2>&1 | tail -20; fi"
           }
         ]
       }
