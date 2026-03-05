@@ -48,8 +48,8 @@ export interface TimelineCardProps {
   item: TimelineItem
   isEven: boolean
   isHovered: boolean
-  isActive: boolean
+  isFlipped: boolean
   index: number
   onHoverChange: (id: string | null) => void
-  onToggleActive: (id: string) => void
+  onToggleFlipped: (id: string) => void
 }

@@ -1,28 +1,20 @@
 /**
- * TimelineCardContent component
- * Handles the expandable content section of timeline cards
+ * TimelineCardContent — back face of the 3D flip card
+ * Always rendered; hidden via CSS backfaceVisibility when card is not flipped
  */
-import { motion, AnimatePresence } from 'framer-motion'
 import { CardContent } from '@/components/ui/card'
-import { timelineExpand } from '../variants'
 import { getEducationData, getExperienceData } from '../utils'
 import { EducationContent, ExperienceContent } from './TimelineContent'
 import type { TimelineCardContentProps } from './types'
 
-export function TimelineCardContent({ expanded, item }: TimelineCardContentProps) {
+export function TimelineCardContent({ item }: TimelineCardContentProps) {
   return (
-    <AnimatePresence initial={false}>
-      {expanded && (
-        <motion.div variants={timelineExpand} initial="hidden" animate="visible" exit="exit">
-          <CardContent className="pt-0">
-            {item.type === 'education' ? (
-              <EducationContent data={getEducationData(item)} />
-            ) : (
-              <ExperienceContent data={getExperienceData(item)} />
-            )}
-          </CardContent>
-        </motion.div>
+    <CardContent className="pt-0">
+      {item.type === 'education' ? (
+        <EducationContent data={getEducationData(item)} />
+      ) : (
+        <ExperienceContent data={getExperienceData(item)} />
       )}
-    </AnimatePresence>
+    </CardContent>
   )
 }

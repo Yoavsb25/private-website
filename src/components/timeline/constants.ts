@@ -10,10 +10,14 @@ export const TIMELINE_COLORS = {
   experience: {
     accent: 'from-indigo-500 to-cyan-400',
     glow: 'ring-indigo-500/40',
+    ring: 'border-indigo-500/40',
+    badge: 'bg-indigo-500/20 text-indigo-600 dark:text-indigo-400',
   },
   education: {
     accent: 'from-fuchsia-500 to-pink-400',
     glow: 'ring-fuchsia-500/40',
+    ring: 'border-fuchsia-500/40',
+    badge: 'bg-fuchsia-500/20 text-fuchsia-600 dark:text-fuchsia-400',
   },
 } as const
 
