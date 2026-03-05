@@ -19,10 +19,13 @@ import {
   SPACING,
   COMPONENT_CLASSES,
   CONTACT_LABELS,
-  ICON_SIZES,
-  SECTION_CLASSES,
   SECTION_SPACING,
 } from '@/lib/constants'
+
+function getDisplayValue(method: { type: string; value: string }): string {
+  if (method.type === 'email') return method.value
+  return method.value.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+}
 
 export function Contact() {
   if (!hasItems(contact.methods)) return null
@@ -93,20 +96,32 @@ export function Contact() {
           {contact.methods.map(method => {
             const Icon = getIcon(method.icon)
             const href = method.type === 'email' ? `mailto:${method.value}` : method.value
+            const displayValue = getDisplayValue(method)
 
             return (
               <motion.div key={method.value} {...createCardHoverAnimation('medium')}>
                 <Card
-                  className={`${LAYOUT.FLEX.COL_CENTER} justify-between ${COMPONENT_CLASSES.CARD.HOVER_LARGE}`}
+                  className={`${LAYOUT.FLEX.COL_CENTER} justify-between overflow-hidden ${COMPONENT_CLASSES.CARD.HOVER_LARGE}`}
                 >
+                  {/* Gradient top accent bar */}
+                  <div className="h-1 w-full bg-gradient-to-r from-primary to-primary/50" />
+
                   <CardHeader className={LAYOUT.FLEX.COL_CENTER}>
                     <motion.div
-                      className={SECTION_CLASSES.CONTACT_CARD_HEADER}
+                      className="flex flex-col items-center gap-3"
                       whileHover="hover"
                       variants={getAnimationVariants(iconHover)}
                     >
-                      <Icon className={`${ICON_SIZES.MEDIUM_RESPONSIVE} text-primary`} />
-                      {method.label}
+                      {/* Large icon circle */}
+                      <div className="rounded-full bg-primary/10 p-3">
+                        <Icon className="h-10 w-10 text-primary" />
+                      </div>
+                      <span className="text-base font-semibold text-foreground">
+                        {method.label}
+                      </span>
+                      <span className="max-w-full truncate text-sm text-muted-foreground">
+                        {displayValue}
+                      </span>
                     </motion.div>
 
                     {method.available !== undefined && (
@@ -145,7 +160,7 @@ export function Contact() {
                       aria-label={CONTACT_LABELS.ARIA_LABEL(method.label)}
                       {...createButtonAnimation()}
                     >
-                      <Button variant="outline" className="w-full">
+                      <Button variant="default" className="w-full">
                         {method.type === 'email'
                           ? CONTACT_LABELS.BUTTONS.SEND_EMAIL
                           : CONTACT_LABELS.BUTTONS.VISIT_PROFILE}
