@@ -34,47 +34,57 @@ export function TimelineCard(props: TimelineCardProps) {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        {/* Perspective wrapper — plain div to preserve 3D context */}
-        <div style={{ perspective: '1000px' }}>
-          {/* Flip target — rotates in 3D */}
-          <motion.div
-            style={{ transformStyle: 'preserve-3d', WebkitTransformStyle: 'preserve-3d' }}
-            animate={{ rotateY: isFlipped ? 180 : 0 }}
-            transition={FLIP_TRANSITION}
-            className="relative"
+        {/* Grid wrapper — both faces share the same cell; height = max(front, back) */}
+        <div style={{ display: 'grid' }}>
+          {/* Front face — own perspective; backface-visibility on the rotating element avoids
+              the display:grid + transform-style:preserve-3d browser conflict */}
+          <div
+            style={{
+              gridArea: '1 / 1',
+              perspective: '1000px',
+              pointerEvents: isFlipped ? 'none' : 'auto',
+            }}
+            className="h-full"
           >
-            {/* Front face — sets container height; click to flip open */}
-            <div
+            <motion.div
               style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
-              className="cursor-pointer"
+              animate={{ rotateY: isFlipped ? 180 : 0 }}
+              transition={FLIP_TRANSITION}
+              className="h-full cursor-pointer"
               onClick={() => onToggleFlipped(item.id)}
             >
-              <Card className={cardClass(isHovered, colors.glow)}>
+              <Card
+                className={`${cardClass(isHovered, colors.glow)} flex h-full flex-col justify-center`}
+              >
                 <div
                   className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${colors.accent} opacity-20`}
                 />
                 <TimelineCardHeader item={item} />
               </Card>
-            </div>
+            </motion.div>
+          </div>
 
-            {/* Back face — absolute, matches front height; scroll area + flip-back footer */}
-            <div
-              className="absolute inset-0 overflow-hidden"
-              style={{
-                backfaceVisibility: 'hidden',
-                WebkitBackfaceVisibility: 'hidden',
-                transform: 'rotateY(180deg)',
-              }}
+          {/* Back face — own perspective; starts at rotateY(-180), animates to 0 when flipped.
+              Natural height sets the grid cell size for both faces. */}
+          <div
+            style={{
+              gridArea: '1 / 1',
+              perspective: '1000px',
+              pointerEvents: isFlipped ? 'auto' : 'none',
+            }}
+          >
+            <motion.div
+              style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+              animate={{ rotateY: isFlipped ? 0 : -180 }}
+              transition={FLIP_TRANSITION}
             >
-              <Card className={`${cardClass(true, colors.glow)} flex h-full flex-col`}>
+              <Card className={`${cardClass(true, colors.glow)} flex flex-col`}>
                 <div
                   className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${colors.accent} opacity-20`}
                 />
-                {/* Scrollable content — isolated from click-to-flip */}
-                <div className="min-h-0 flex-1 overflow-y-auto">
+                <div className="flex-1">
                   <TimelineCardContent item={item} />
                 </div>
-                {/* Flip-back footer — outside scroll area so it always stays visible */}
                 <button
                   className="flex shrink-0 cursor-pointer items-center justify-center gap-1 border-t border-border/30 py-2 text-xs text-muted-foreground/50 hover:text-muted-foreground/80"
                   onClick={() => onToggleFlipped(item.id)}
@@ -83,8 +93,8 @@ export function TimelineCard(props: TimelineCardProps) {
                   <span>click to flip back</span>
                 </button>
               </Card>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </motion.div>
     </div>
