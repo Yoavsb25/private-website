@@ -93,9 +93,9 @@ export function Hero() {
       />
 
       <Container>
-        <div className="relative z-10 flex flex-row items-center gap-12 py-32">
+        <div className="relative z-10 flex flex-col items-center gap-8 py-20 sm:flex-row sm:gap-12 sm:py-32">
           {/* Left — text content */}
-          <div className="flex flex-1 flex-col gap-6">
+          <div className="flex flex-1 flex-col gap-6 text-center sm:text-left">
             {/* Name — last name in nowrap so it never breaks */}
             <h1
               className="font-extrabold leading-none tracking-tight"
@@ -121,13 +121,16 @@ export function Hero() {
             {/* Tagline */}
             <motion.p
               {...fadeIn(1.0)}
-              className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+              className="mx-auto max-w-xl text-base leading-relaxed text-muted-foreground sm:mx-0 sm:text-lg"
             >
               {portfolio.bio}
             </motion.p>
 
             {/* CTA row */}
-            <motion.div {...fadeIn(1.2)} className="flex flex-wrap items-center gap-4 pt-2">
+            <motion.div
+              {...fadeIn(1.2)}
+              className="flex flex-wrap items-center justify-center gap-4 pt-2 sm:justify-start"
+            >
               <SocialIcons className="flex gap-4 items-center" />
               {portfolio.cvUrl && (
                 <motion.a
@@ -152,7 +155,7 @@ export function Hero() {
 
           {/* Right — profile photo */}
           <motion.div {...fadeIn(0.3)} className="flex-shrink-0">
-            <div className="relative h-64 w-64">
+            <div className="relative h-48 w-48 sm:h-64 sm:w-64">
               {/* Accent ring */}
               <div
                 className="absolute inset-0 rounded-2xl opacity-30 blur-xl"

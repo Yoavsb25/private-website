@@ -59,6 +59,9 @@ export function Timeline() {
                     ...ANIMATION.SPRING,
                   }}
                 >
+                  {/* Mobile spine dot — visible only below md */}
+                  <div className="absolute left-[1.125rem] top-6 z-10 h-3 w-3 -translate-x-1/2 rounded-full bg-primary md:hidden" />
+
                   <TimelineCard
                     item={item}
                     isEven={isEven}
