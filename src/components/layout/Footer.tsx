@@ -1,13 +1,22 @@
-import { type ReactElement } from 'react'
-import { motion } from 'framer-motion'
+import { type ReactElement, type MouseEvent } from 'react'
+import { motion, type Variants } from 'framer-motion'
 import { Github, Linkedin } from 'lucide-react'
 import { portfolio } from '@/data/portfolio'
 import { ANIMATION_CONFIG } from '@/lib/constants'
 
+const socialIconVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.6 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: ANIMATION_CONFIG.DURATION.NORMAL, ease: [0, 0, 0.2, 1] },
+  },
+}
+
 export function Footer(): ReactElement {
   const year = new Date().getFullYear()
 
-  const handleLetsTalk = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleLetsTalk = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
   }
@@ -59,7 +68,10 @@ export function Footer(): ReactElement {
               Let&apos;s talk
               <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-current transition-transform duration-200 group-hover:scale-x-100" />
             </span>
-            <span className="inline-block translate-x-0 transition-transform duration-200 group-hover:translate-x-1">
+            <span
+              aria-hidden="true"
+              className="inline-block translate-x-0 transition-transform duration-200 group-hover:translate-x-1"
+            >
               →
             </span>
           </a>
@@ -94,17 +106,7 @@ export function Footer(): ReactElement {
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
                   className="text-muted-foreground transition-colors hover:text-foreground"
-                  variants={{
-                    hidden: { opacity: 0, scale: 0.6 },
-                    visible: {
-                      opacity: 1,
-                      scale: 1,
-                      transition: {
-                        duration: ANIMATION_CONFIG.DURATION.NORMAL,
-                        ease: [0, 0, 0.2, 1],
-                      },
-                    },
-                  }}
+                  variants={socialIconVariants}
                   whileHover={ANIMATION_CONFIG.HOVER.ICON}
                 >
                   <Linkedin className="h-4 w-4" />
@@ -117,17 +119,7 @@ export function Footer(): ReactElement {
                   rel="noopener noreferrer"
                   aria-label="GitHub"
                   className="text-muted-foreground transition-colors hover:text-foreground"
-                  variants={{
-                    hidden: { opacity: 0, scale: 0.6 },
-                    visible: {
-                      opacity: 1,
-                      scale: 1,
-                      transition: {
-                        duration: ANIMATION_CONFIG.DURATION.NORMAL,
-                        ease: [0, 0, 0.2, 1],
-                      },
-                    },
-                  }}
+                  variants={socialIconVariants}
                   whileHover={ANIMATION_CONFIG.HOVER.ICON}
                 >
                   <Github className="h-4 w-4" />
