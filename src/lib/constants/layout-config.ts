@@ -19,6 +19,7 @@ export const LAYOUT = {
       'grid gap-[clamp(1rem,3vw,2rem)] [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]',
     CONTACT:
       'grid gap-[clamp(1rem,2.5vw,1.5rem)] [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]',
+    PROJECTS_2COL: 'grid gap-[clamp(1.5rem,3vw,2.5rem)] grid-cols-1 md:grid-cols-2',
     // Legacy - kept for backward compatibility, but prefer AUTO_FIT variants
     RESPONSIVE_2:
       'grid gap-[clamp(1rem,2.5vw,1.5rem)] [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))]',

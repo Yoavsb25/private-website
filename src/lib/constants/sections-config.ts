@@ -23,6 +23,7 @@ export const PROJECTS_LABELS = {
     SOLUTION: 'Solution',
     TECHNOLOGIES: 'Technologies',
     OUTCOMES: 'Outcomes',
+    VIEW_PROJECT: 'View Project',
   },
   BUTTONS: {
     LIVE_SITE: 'Live Site',
