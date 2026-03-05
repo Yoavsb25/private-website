@@ -45,4 +45,10 @@ export const ANIMATION_CONFIG = {
     MEDIUM: 0.3,
     LONG: 0.4,
   },
+
+  // Card flip animation config (used by ProjectCard)
+  FLIP: {
+    SPRING: { type: 'spring' as const, stiffness: 260, damping: 30 },
+    DURATION: 0.5,
+  },
 } as const
