@@ -15,10 +15,10 @@ Stage changes and create a git commit following project conventions.
 
 1. **Check if pre-commit is approved**
 
-   Run: `ls -la /tmp/production-review-approved 2>/dev/null`
+   Run: `find /tmp/production-review-approved -mmin -10 2>/dev/null | grep -q . && echo "APPROVED (fresh)" || echo "MISSING or STALE"`
 
-   - If the file exists AND is less than 10 minutes old: skip to step 3
-   - If missing or stale: run the `/pre-commit` skill first, then return here once it creates the token
+   - If output is `APPROVED (fresh)`: skip to step 3
+   - If output is `MISSING or STALE`: run the `/pre-commit` skill first, then return here once it creates the token
 
 2. **Stage the relevant files**
 
