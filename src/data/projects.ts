@@ -6,6 +6,7 @@
 export interface WorkItem {
   id: string
   title: string
+  tagline?: string
   description: string
   problem: string
   solution: string
@@ -25,6 +26,7 @@ export const projects: WorkItem[] = [
   {
     id: 'alert-buddy',
     title: 'Alert Buddy - Emergency Safety Platform',
+    tagline: 'Real-time emergency safety check-ins for friends & family',
     description:
       'A platform for users to mark themselves safe during emergencies, allowing real-time updates on the safety of friends and family.',
     problem:
@@ -42,6 +44,7 @@ export const projects: WorkItem[] = [
   {
     id: 'team-balancer',
     title: 'Team Balancer - Skill-Based Group Balancing',
+    tagline: 'Automatically balances teams by skill level — no spreadsheets needed',
     description:
       'Web application to balance groups based on skill levels, ensuring fair team distribution.',
     problem:
