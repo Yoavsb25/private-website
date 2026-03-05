@@ -18,7 +18,7 @@ import {
   SiHtml5,
   SiCss,
 } from 'react-icons/si'
-import { FaCss3, FaJava } from 'react-icons/fa'
+import { FaJava } from 'react-icons/fa'
 import { PlaywrightIcon } from '@/lib/helpers'
 
 export type SkillItem = {

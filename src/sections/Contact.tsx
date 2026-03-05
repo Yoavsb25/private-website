@@ -124,10 +124,14 @@ export function Contact() {
                                 ease: 'easeInOut',
                               }}
                             />
-                            <Text color="muted">{CONTACT_LABELS.AVAILABILITY.AVAILABLE}</Text>
+                            <Text as="span" color="muted">
+                              {CONTACT_LABELS.AVAILABILITY.AVAILABLE}
+                            </Text>
                           </span>
                         ) : (
-                          <Text color="muted">{CONTACT_LABELS.AVAILABILITY.NOT_AVAILABLE}</Text>
+                          <Text as="span" color="muted">
+                            {CONTACT_LABELS.AVAILABILITY.NOT_AVAILABLE}
+                          </Text>
                         )}
                       </CardDescription>
                     )}
@@ -157,7 +161,7 @@ export function Contact() {
         {/* Response Time */}
         {contact.responseTime && (
           <motion.div {...createFadeInAnimation(ANIMATION_CONFIG.DELAY.LONG)}>
-            <Text color="muted">
+            <Text as="span" color="muted">
               {CONTACT_LABELS.RESPONSE_TIME_PREFIX} {contact.responseTime}
             </Text>
           </motion.div>
