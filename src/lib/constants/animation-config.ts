@@ -46,13 +46,6 @@ export const ANIMATION_CONFIG = {
     LONG: 0.4,
   },
 
-  // Overlay animation config (used by ProjectCard)
-  OVERLAY: {
-    SPRING: { type: 'spring' as const, stiffness: 380, damping: 38 },
-    STAGGER_DELAY: 0.06,
-    ITEM_DURATION: 0.2,
-  },
-
   // Card flip animation config (used by ProjectCard)
   FLIP: {
     SPRING: { type: 'spring' as const, stiffness: 260, damping: 30 },

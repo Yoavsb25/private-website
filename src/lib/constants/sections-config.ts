@@ -23,6 +23,7 @@ export const PROJECTS_LABELS = {
     SOLUTION: 'Solution',
     TECHNOLOGIES: 'Technologies',
     OUTCOMES: 'Outcomes',
+    VIEW_PROJECT: 'View Project',
   },
   BUTTONS: {
     LIVE_SITE: 'Live Site',
@@ -111,7 +112,8 @@ export const SECTION_SPACING = {
  */
 export const SECTION_CLASSES = {
   TIMELINE_ITEM_CONTAINER: 'relative flex flex-col items-center sm:flex-row sm:items-start w-full',
-  PROJECTS_IMAGE_WRAPPER: 'overflow-hidden rounded-t-lg relative',
+  PROJECTS_IMAGE_WRAPPER: 'relative overflow-hidden h-[clamp(220px,35vw,340px)]',
   PROJECTS_IMAGE: 'h-full w-full object-cover',
+  PROJECTS_TITLE_AREA: 'absolute bottom-0 left-0 right-0 px-4 pb-4 pt-8 z-20',
   CONTACT_CARD_HEADER: 'flex items-center gap-2 text-[clamp(1rem,2.5vw,1.125rem)] font-semibold',
 } as const
