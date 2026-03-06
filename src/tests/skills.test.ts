@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { skills } from './skills'
+import { skills } from '../data/skills'
 
 describe('skills data structure', () => {
   it('has exactly 3 categories', () => {

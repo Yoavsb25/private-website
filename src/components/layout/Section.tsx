@@ -19,7 +19,7 @@ export function Section({ id, className, children, background = 'default' }: Sec
   return (
     <section
       id={id}
-      className={cn('min-h-screen', SPACING.PADDING.SECTION, backgroundClass, className)}
+      className={cn('relative min-h-screen', SPACING.PADDING.SECTION, backgroundClass, className)}
     >
       {children}
     </section>

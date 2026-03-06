@@ -26,7 +26,7 @@ function App() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
           >
-            <HashRouter>
+            <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
               <div className="min-h-screen bg-background transition-colors duration-300">
                 <ScrollProgress />
                 <Navigation />

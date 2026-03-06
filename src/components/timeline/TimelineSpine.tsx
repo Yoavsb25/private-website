@@ -18,15 +18,24 @@ export function TimelineSpine({ containerRef }: TimelineSpineProps) {
   const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1])
 
   return (
-    <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-[2px] -translate-x-1/2 md:block">
-      {/* Base line — always visible */}
-      <div className="absolute inset-0 bg-border/40" />
+    <>
+      {/* Desktop — centered spine */}
+      <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-[2px] -translate-x-1/2 md:block">
+        <div className="absolute inset-0 bg-border/40" />
+        <motion.div
+          className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-indigo-500 via-fuchsia-500 to-cyan-400"
+          style={{ scaleY, transformOrigin: 'top', filter: 'blur(0.5px)' }}
+        />
+      </div>
 
-      {/* Scroll-driven fill — grows from top as user scrolls */}
-      <motion.div
-        className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-indigo-500 via-fuchsia-500 to-cyan-400"
-        style={{ scaleY, transformOrigin: 'top', filter: 'blur(0.5px)' }}
-      />
-    </div>
+      {/* Mobile — left-aligned spine */}
+      <div className="pointer-events-none absolute left-5 top-0 block h-full w-[2px] md:hidden">
+        <div className="absolute inset-0 bg-border/40" />
+        <motion.div
+          className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-indigo-500 via-fuchsia-500 to-cyan-400"
+          style={{ scaleY, transformOrigin: 'top', filter: 'blur(0.5px)' }}
+        />
+      </div>
+    </>
   )
 }

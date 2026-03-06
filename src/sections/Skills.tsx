@@ -17,8 +17,8 @@ const COL_SPAN: Record<1 | 2 | 3, string> = {
 // Infra    (3-col bento, 7 items) → 7 cols = 1 row
 const INNER_COLS: Record<1 | 2 | 3, string> = {
   1: 'grid-cols-3',
-  2: 'grid-cols-4',
-  3: 'grid-cols-7',
+  2: 'grid-cols-3 sm:grid-cols-4',
+  3: 'grid-cols-4 sm:grid-cols-7',
 }
 
 export function Skills() {

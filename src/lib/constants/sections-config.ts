@@ -111,7 +111,8 @@ export const SECTION_SPACING = {
  * Common class combinations
  */
 export const SECTION_CLASSES = {
-  TIMELINE_ITEM_CONTAINER: 'relative flex flex-col items-center sm:flex-row sm:items-start w-full',
+  TIMELINE_ITEM_CONTAINER:
+    'relative flex flex-col items-start pl-14 md:items-center md:pl-0 md:flex-row md:items-start w-full',
   PROJECTS_IMAGE_WRAPPER: 'overflow-hidden rounded-t-lg relative',
   PROJECTS_IMAGE: 'h-full w-full object-cover',
   CONTACT_CARD_HEADER: 'flex items-center gap-2 text-[clamp(1rem,2.5vw,1.125rem)] font-semibold',
