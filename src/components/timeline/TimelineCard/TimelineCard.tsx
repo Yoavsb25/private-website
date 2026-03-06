@@ -43,6 +43,10 @@ export function TimelineCard(props: TimelineCardProps) {
               gridArea: '1 / 1',
               perspective: '1000px',
               pointerEvents: isFlipped ? 'none' : 'auto',
+              // visibility toggle ensures the inactive face is truly hidden on
+              // mobile browsers where backfaceVisibility alone doesn't work
+              visibility: isFlipped ? 'hidden' : 'visible',
+              transition: isFlipped ? 'visibility 0s linear 0.15s' : 'visibility 0s',
             }}
             className="h-full"
           >
@@ -71,6 +75,8 @@ export function TimelineCard(props: TimelineCardProps) {
               gridArea: '1 / 1',
               perspective: '1000px',
               pointerEvents: isFlipped ? 'auto' : 'none',
+              visibility: isFlipped ? 'visible' : 'hidden',
+              transition: isFlipped ? 'visibility 0s' : 'visibility 0s linear 0.15s',
             }}
           >
             <motion.div
