@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { cardWrapperClass, cardClass } from './utils'
+import { cardWrapperClass, cardClass } from '../components/timeline/utils'
 
 describe('cardWrapperClass', () => {
   it('positions even cards on the left (mr-auto)', () => {
