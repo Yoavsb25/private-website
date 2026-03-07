@@ -1,5 +1,12 @@
 import { describe, it, expect } from 'vitest'
-import { cardWrapperClass, cardClass, isEducationData, isExperienceData, getEducationData, getExperienceData } from '../components/timeline/utils'
+import {
+  cardWrapperClass,
+  cardClass,
+  isEducationData,
+  isExperienceData,
+  getEducationData,
+  getExperienceData,
+} from '../components/timeline/utils'
 import type { TimelineItem } from '../lib/types'
 import type { EducationData, ExperienceData } from '../lib/types'
 

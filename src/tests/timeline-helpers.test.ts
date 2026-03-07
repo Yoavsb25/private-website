@@ -53,7 +53,8 @@ describe('createTimelineItems', () => {
     const firstUnorderedIndex = items.findIndex(
       i => (i.data as { order?: number }).order === undefined
     )
-    const lastOrderedIndex = items.map(i => (i.data as { order?: number }).order !== undefined)
+    const lastOrderedIndex = items
+      .map(i => (i.data as { order?: number }).order !== undefined)
       .lastIndexOf(true)
     expect(lastOrderedIndex).toBeLessThan(firstUnorderedIndex)
   })

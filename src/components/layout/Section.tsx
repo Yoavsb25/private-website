@@ -10,7 +10,13 @@ interface SectionProps {
   'aria-labelledby'?: string
 }
 
-export function Section({ id, className, children, background = 'default', 'aria-labelledby': ariaLabelledBy }: SectionProps) {
+export function Section({
+  id,
+  className,
+  children,
+  background = 'default',
+  'aria-labelledby': ariaLabelledBy,
+}: SectionProps) {
   const backgroundClass = {
     default: '',
     mutedLight: 'bg-muted/30',

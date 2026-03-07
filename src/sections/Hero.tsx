@@ -84,7 +84,11 @@ export function Hero() {
     }) as const
 
   return (
-    <Section id={SECTION_IDS.HERO} aria-labelledby="hero-heading" className="relative min-h-screen flex items-center">
+    <Section
+      id={SECTION_IDS.HERO}
+      aria-labelledby="hero-heading"
+      className="relative min-h-screen flex items-center"
+    >
       {/* Background */}
       <DotGrid />
       <div

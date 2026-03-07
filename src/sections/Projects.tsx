@@ -27,7 +27,11 @@ export function Projects() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: ANIMATION_CONFIG.DURATION.SLOW, delay: index * ANIMATION_CONFIG.DELAY.STAGGER_CARD, ease: ANIMATION_CONFIG.EASE.CUBIC }}
+              transition={{
+                duration: ANIMATION_CONFIG.DURATION.SLOW,
+                delay: index * ANIMATION_CONFIG.DELAY.STAGGER_CARD,
+                ease: ANIMATION_CONFIG.EASE.CUBIC,
+              }}
             >
               <ProjectCard project={project} />
             </motion.div>
