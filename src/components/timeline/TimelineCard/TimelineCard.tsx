@@ -2,6 +2,7 @@
  * TimelineCard component
  * 3D flip card with front face (logo + title) and back face (details)
  */
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { RotateCcw } from 'lucide-react'
 import { Card } from '@/components/ui/card'
@@ -21,6 +22,21 @@ const FLIP_TRANSITION = {
 export function TimelineCard(props: TimelineCardProps) {
   const { item, isEven, isFlipped, isHovered, onHoverChange, onToggleFlipped } = props
   const colors = TIMELINE_COLORS[item.type]
+  const frontTriggerRef = useRef<HTMLDivElement>(null)
+  const backButtonRef = useRef<HTMLButtonElement>(null)
+  const hasMounted = useRef(false)
+
+  useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true
+      return
+    }
+    if (isFlipped) {
+      backButtonRef.current?.focus()
+    } else {
+      frontTriggerRef.current?.focus()
+    }
+  }, [isFlipped])
 
   return (
     <div
@@ -51,6 +67,7 @@ export function TimelineCard(props: TimelineCardProps) {
             className="h-full"
           >
             <motion.div
+              ref={frontTriggerRef}
               style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
               animate={{ rotateY: isFlipped ? 180 : 0 }}
               transition={FLIP_TRANSITION}
@@ -101,6 +118,7 @@ export function TimelineCard(props: TimelineCardProps) {
                   <TimelineCardContent item={item} />
                 </div>
                 <button
+                  ref={backButtonRef}
                   className="flex shrink-0 cursor-pointer items-center justify-center gap-1 border-t border-border/30 py-2 text-xs text-muted-foreground/50 hover:text-muted-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   onClick={() => onToggleFlipped(item.id)}
                 >
