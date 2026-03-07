@@ -38,7 +38,7 @@ describe('parseYear', () => {
     expect(parseYear('Graduated 2025')).toBe(2025)
   })
 
-  it('returns 2016 for military period string', () => {
+  it('extracts last year from a range string', () => {
     expect(parseYear('Military Service 2014-2016')).toBe(2016)
   })
 

@@ -122,7 +122,7 @@ export function TimelineCard(props: TimelineCardProps) {
                   className="flex shrink-0 cursor-pointer items-center justify-center gap-1 border-t border-border/30 py-2 text-xs text-muted-foreground/50 hover:text-muted-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   onClick={() => onToggleFlipped(item.id)}
                 >
-                  <RotateCcw className="h-3 w-3" />
+                  <RotateCcw aria-hidden="true" className="h-3 w-3" />
                   <span>click to flip back</span>
                 </button>
               </Card>

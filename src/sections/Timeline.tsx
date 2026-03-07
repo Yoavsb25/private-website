@@ -85,7 +85,8 @@ export function Timeline() {
                       isHovered={isHovered}
                       index={idx}
                       type={item.type}
-                      onClick={() => handleToggleFlipped(item.id)}
+                      id={item.id}
+                      onToggle={handleToggleFlipped}
                     />
                   </div>
                 </motion.div>
