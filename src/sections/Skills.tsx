@@ -51,6 +51,7 @@ export function Skills() {
                       transition={{ duration: ANIMATION_CONFIG.DURATION.FAST }}
                     >
                       <Icon
+                        aria-hidden="true"
                         className={`h-5 w-5 ${color === 'currentColor' ? 'text-foreground' : ''}`}
                         style={color !== 'currentColor' ? { color } : undefined}
                       />

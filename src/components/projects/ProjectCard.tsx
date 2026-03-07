@@ -174,7 +174,10 @@ function CardBack({
               {...createButtonAnimation()}
             >
               <Button variant="outline" size="sm">
-                <ExternalLink className={`mr-2 ${ICON_SIZES.SMALL_RESPONSIVE}`} />
+                <ExternalLink
+                  aria-hidden="true"
+                  className={`mr-2 ${ICON_SIZES.SMALL_RESPONSIVE}`}
+                />
                 {PROJECTS_LABELS.BUTTONS.LIVE_SITE}
               </Button>
             </motion.a>
@@ -190,7 +193,7 @@ function CardBack({
               {...createButtonAnimation()}
             >
               <Button variant="outline" size="sm">
-                <Github className={`mr-2 ${ICON_SIZES.SMALL_RESPONSIVE}`} />
+                <Github aria-hidden="true" className={`mr-2 ${ICON_SIZES.SMALL_RESPONSIVE}`} />
                 {PROJECTS_LABELS.BUTTONS.SOURCE}
               </Button>
             </motion.a>

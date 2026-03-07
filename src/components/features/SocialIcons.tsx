@@ -29,6 +29,7 @@ export const SocialIcons: React.FC<SocialIconsProps> = ({ className }) => {
           whileTap="tap"
         >
           <Linkedin
+            aria-hidden="true"
             className={`${HERO.SOCIAL_ICONS.ICON_SIZE} ${HERO.SOCIAL_ICONS.LINKEDIN_COLOR}`}
           />
         </motion.a>
@@ -45,7 +46,7 @@ export const SocialIcons: React.FC<SocialIconsProps> = ({ className }) => {
           whileHover="hover"
           whileTap="tap"
         >
-          <Github className={HERO.SOCIAL_ICONS.ICON_SIZE} />
+          <Github aria-hidden="true" className={HERO.SOCIAL_ICONS.ICON_SIZE} />
         </motion.a>
       )}
     </motion.div>

@@ -32,7 +32,10 @@ export function Footer(): ReactElement {
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.FOOTER}
-          transition={{ duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER, ease: ANIMATION_CONFIG.EASE.OUT }}
+          transition={{
+            duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER,
+            ease: ANIMATION_CONFIG.EASE.OUT,
+          }}
           style={{ transformOrigin: 'left' }}
         />
         <motion.div
@@ -40,7 +43,10 @@ export function Footer(): ReactElement {
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.FOOTER}
-          transition={{ duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER, ease: ANIMATION_CONFIG.EASE.OUT }}
+          transition={{
+            duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER,
+            ease: ANIMATION_CONFIG.EASE.OUT,
+          }}
           style={{ transformOrigin: 'right' }}
         />
       </div>
@@ -111,7 +117,7 @@ export function Footer(): ReactElement {
                   variants={socialIconVariants}
                   whileHover={ANIMATION_CONFIG.HOVER.ICON}
                 >
-                  <Linkedin className="h-4 w-4" />
+                  <Linkedin aria-hidden="true" className="h-4 w-4" />
                 </motion.a>
               )}
               {portfolio.socialLinks?.github && (
@@ -124,7 +130,7 @@ export function Footer(): ReactElement {
                   variants={socialIconVariants}
                   whileHover={ANIMATION_CONFIG.HOVER.ICON}
                 >
-                  <Github className="h-4 w-4" />
+                  <Github aria-hidden="true" className="h-4 w-4" />
                 </motion.a>
               )}
             </motion.div>
