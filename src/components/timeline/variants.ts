@@ -9,9 +9,11 @@ import { slideInLeft, slideInRight, staggerContainer, getAnimationVariants } fro
  */
 export const timelineContainer: Variants = getAnimationVariants(staggerContainer)
 
-/**
- * Item animation variant based on position (even/odd)
- */
+// Pre-computed — no new object created per render
+export const EVEN_ITEM: Variants = getAnimationVariants(slideInLeft)
+export const ODD_ITEM: Variants = getAnimationVariants(slideInRight)
+
+/** @deprecated Use EVEN_ITEM / ODD_ITEM directly */
 export function timelineItem(isEven: boolean): Variants {
-  return getAnimationVariants(isEven ? slideInLeft : slideInRight)
+  return isEven ? EVEN_ITEM : ODD_ITEM
 }
