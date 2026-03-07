@@ -69,3 +69,20 @@ export const createFadeInAnimation = (delay: number = 0) => ({
   viewport: ANIMATION_CONFIG.VIEWPORT.NESTED,
   transition: { delay },
 })
+
+/**
+ * Creates a standard fade-up animation prop object for motion elements.
+ * @param delay - Delay in seconds before animation starts
+ * @param yOffset - Vertical offset to start from (positive = below, negative = above)
+ */
+export function createSlideUpAnimation(delay = 0, yOffset = 20) {
+  return {
+    initial: { opacity: 0, y: yOffset },
+    whileInView: { opacity: 1, y: 0 },
+    transition: {
+      duration: ANIMATION_CONFIG.DURATION.SLOW,
+      delay,
+      ease: ANIMATION_CONFIG.EASE.OUT,
+    },
+  }
+}

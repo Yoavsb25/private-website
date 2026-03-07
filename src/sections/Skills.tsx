@@ -23,9 +23,9 @@ const INNER_COLS: Record<1 | 2 | 3, string> = {
 
 export function Skills() {
   return (
-    <Section id={SECTION_IDS.SKILLS}>
+    <Section id={SECTION_IDS.SKILLS} aria-labelledby="skills-heading">
       <Container size="small" className="text-center w-full">
-        <SectionHeader>{SECTION_TITLES.SKILLS}</SectionHeader>
+        <SectionHeader id="skills-heading">{SECTION_TITLES.SKILLS}</SectionHeader>
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full"
           {...createStaggerContainerAnimation(staggerContainer)}

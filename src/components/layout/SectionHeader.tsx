@@ -7,9 +7,10 @@ interface SectionHeaderProps {
   children: React.ReactNode
   className?: string
   as?: 'h1' | 'h2' | 'h3'
+  id?: string
 }
 
-export function SectionHeader({ children, className, as: Component = 'h2' }: SectionHeaderProps) {
+export function SectionHeader({ children, className, as: Component = 'h2', id }: SectionHeaderProps) {
   const baseClasses = cn(
     SPACING.SECTION.HEADER,
     TYPOGRAPHY.HEADING.H2,
@@ -19,7 +20,7 @@ export function SectionHeader({ children, className, as: Component = 'h2' }: Sec
 
   return (
     <motion.div {...createSectionHeaderAnimation()}>
-      <Component className={baseClasses}>{children}</Component>
+      <Component id={id} className={baseClasses}>{children}</Component>
     </motion.div>
   )
 }

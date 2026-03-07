@@ -3,7 +3,7 @@
  * Showcase of work examples and projects
  */
 
-export interface WorkItem {
+export interface Project {
   id: string
   title: string
   tagline?: string
@@ -22,7 +22,7 @@ export interface WorkItem {
 import teamBalncerImg from '@/assets/images/Teamaker.png'
 import alertBuddyImg from '@/assets/images/alert_buddy.png'
 
-export const projects: WorkItem[] = [
+export const projects: Project[] = [
   {
     id: 'alert-buddy',
     title: 'Alert Buddy - Emergency Safety Platform',

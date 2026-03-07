@@ -7,7 +7,7 @@ import { RotateCcw } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import type { TimelineCardProps } from '@/lib/types'
 import { TIMELINE_COLORS } from '../constants'
-import { timelineItem } from '../variants'
+import { EVEN_ITEM, ODD_ITEM } from '../variants'
 import { cardClass, cardWrapperClass } from '../utils'
 import { TimelineCardHeader } from './TimelineCardHeader'
 import { TimelineCardContent } from './TimelineCardContent'
@@ -29,7 +29,7 @@ export function TimelineCard(props: TimelineCardProps) {
       onMouseLeave={() => onHoverChange(null)}
     >
       <motion.div
-        variants={timelineItem(isEven)}
+        variants={isEven ? EVEN_ITEM : ODD_ITEM}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -55,7 +55,16 @@ export function TimelineCard(props: TimelineCardProps) {
               animate={{ rotateY: isFlipped ? 180 : 0 }}
               transition={FLIP_TRANSITION}
               className="h-full cursor-pointer"
+              role="button"
+              tabIndex={0}
+              aria-label={`View details for ${'degree' in item.data ? item.data.degree : item.data.title}`}
               onClick={() => onToggleFlipped(item.id)}
+              onKeyDown={e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  onToggleFlipped(item.id)
+                }
+              }}
             >
               <Card
                 className={`${cardClass(isHovered, colors.glow)} flex h-full flex-col justify-center`}

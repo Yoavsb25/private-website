@@ -1,15 +1,17 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { HashRouter } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { Navigation, ScrollProgress, ScrollToTop, LoadingScreen } from './components/features'
 import { Footer } from './components/layout'
 import { useLenis } from './hooks/scroll'
+import { ANIMATION_CONFIG } from './lib/constants'
 import { Hero } from './sections/Hero'
-import { Timeline } from './sections/Timeline'
-import { Projects } from './sections/Projects'
 import { Contact } from './sections/Contact'
 import { Skills } from './sections/Skills'
+
+const Timeline = lazy(() => import('./sections/Timeline').then(m => ({ default: m.Timeline })))
+const Projects = lazy(() => import('./sections/Projects').then(m => ({ default: m.Projects })))
 
 function App() {
   useLenis()
@@ -24,7 +26,7 @@ function App() {
             key="app"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: ANIMATION_CONFIG.DURATION.MEDIUM, ease: ANIMATION_CONFIG.EASE.IN_OUT }}
           >
             <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
               <div className="min-h-screen bg-background transition-colors duration-300">
@@ -33,8 +35,12 @@ function App() {
                 <main>
                   <Hero />
                   <Skills />
-                  <Timeline />
-                  <Projects />
+                  <Suspense fallback={null}>
+                    <Timeline />
+                  </Suspense>
+                  <Suspense fallback={null}>
+                    <Projects />
+                  </Suspense>
                   <Contact />
                 </main>
                 <Footer />

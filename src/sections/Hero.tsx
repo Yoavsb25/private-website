@@ -5,7 +5,7 @@ import { Button } from '@/components/ui'
 import { SocialIcons } from '@/components/features'
 import { portfolio } from '@/data/portfolio'
 import { prefersReducedMotion } from '@/lib/animations'
-import { SECTION_IDS, HERO_LABELS } from '@/lib/constants'
+import { ANIMATION_CONFIG, SECTION_IDS, HERO_LABELS } from '@/lib/constants'
 import profileImg from '@/assets/images/profile.jpg'
 import { useMagnetic } from '@/hooks'
 
@@ -33,7 +33,7 @@ function AnimatedText({
               : {
                   duration: 0.4,
                   delay: delay + i * 0.03,
-                  ease: [0.2, 0.65, 0.3, 0.9],
+                  ease: ANIMATION_CONFIG.EASE.SPRING_BOUNCE,
                 }
           }
           style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : undefined }}
@@ -84,7 +84,7 @@ export function Hero() {
     }) as const
 
   return (
-    <Section id={SECTION_IDS.HERO} className="relative min-h-screen flex items-center">
+    <Section id={SECTION_IDS.HERO} aria-labelledby="hero-heading" className="relative min-h-screen flex items-center">
       {/* Background */}
       <DotGrid />
       <div
@@ -98,6 +98,7 @@ export function Hero() {
           <div className="flex flex-1 flex-col gap-6 text-center sm:text-left">
             {/* Name — last name in nowrap so it never breaks */}
             <h1
+              id="hero-heading"
               className="font-extrabold leading-none tracking-tight"
               style={{ fontSize: 'clamp(3.5rem, 8vw, 7rem)' }}
             >
@@ -164,6 +165,8 @@ export function Hero() {
               <img
                 src={profileImg}
                 alt={portfolio.imageAlt ?? portfolio.name}
+                width={256}
+                height={256}
                 className="relative h-full w-full rounded-2xl object-cover"
               />
             </div>

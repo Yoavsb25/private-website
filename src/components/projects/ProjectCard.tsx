@@ -4,7 +4,7 @@ import { ExternalLink, Github } from 'lucide-react'
 import { Card, Button } from '@/components/ui'
 import { createButtonAnimation, getTechIcon, getTechIconColor } from '@/lib/helpers'
 import { ANIMATION_CONFIG, SECTION_SPACING, PROJECTS_LABELS, ICON_SIZES } from '@/lib/constants'
-import type { WorkItem } from '@/data/projects'
+import type { Project } from '@/data/projects'
 
 // ---------------------------------------------------------------------------
 // TiltCard — 3D tilt + glare on mouse move. Disabled while card is flipped.
@@ -90,7 +90,7 @@ function CardBack({
   onFlipBack,
   isVisible,
 }: {
-  project: WorkItem
+  project: Project
   onFlipBack: () => void
   isVisible: boolean
 }) {
@@ -205,7 +205,7 @@ function CardBack({
 // ProjectCard
 // ---------------------------------------------------------------------------
 interface ProjectCardProps {
-  project: WorkItem
+  project: Project
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
