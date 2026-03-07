@@ -84,7 +84,7 @@ export function Hero() {
     }) as const
 
   return (
-    <Section id={SECTION_IDS.HERO} className="relative min-h-screen flex items-center">
+    <Section id={SECTION_IDS.HERO} aria-labelledby="hero-heading" className="relative min-h-screen flex items-center">
       {/* Background */}
       <DotGrid />
       <div
@@ -98,6 +98,7 @@ export function Hero() {
           <div className="flex flex-1 flex-col gap-6 text-center sm:text-left">
             {/* Name — last name in nowrap so it never breaks */}
             <h1
+              id="hero-heading"
               className="font-extrabold leading-none tracking-tight"
               style={{ fontSize: 'clamp(3.5rem, 8vw, 7rem)' }}
             >

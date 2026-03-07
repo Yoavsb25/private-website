@@ -26,9 +26,9 @@ export function Timeline() {
   )
 
   return (
-    <Section id={SECTION_IDS.TIMELINE} background="mutedLight">
+    <Section id={SECTION_IDS.TIMELINE} background="mutedLight" aria-labelledby="timeline-heading">
       <Container size="small">
-        <SectionHeader>{SECTION_TITLES.TIMELINE}</SectionHeader>
+        <SectionHeader id="timeline-heading">{SECTION_TITLES.TIMELINE}</SectionHeader>
 
         <p className={`${SECTION_SPACING.TIMELINE_DESCRIPTION} text-center text-muted-foreground`}>
           {TIMELINE_LABELS.DESCRIPTION}

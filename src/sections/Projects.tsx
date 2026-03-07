@@ -10,10 +10,10 @@ export function Projects() {
   if (featuredProjects.length === 0) return null
 
   return (
-    <Section id={SECTION_IDS.PROJECTS} background="mutedMedium">
+    <Section id={SECTION_IDS.PROJECTS} background="mutedMedium" aria-labelledby="projects-heading">
       <Container size="large">
         <div className="text-center mb-12">
-          <SectionHeader>Featured Projects</SectionHeader>
+          <SectionHeader id="projects-heading">Featured Projects</SectionHeader>
           <motion.span
             className="block w-12 h-0.5 bg-primary/60 rounded-full mx-auto mt-2"
             {...createFadeInAnimation(0.3)}

@@ -31,7 +31,7 @@ export function Contact() {
   if (!hasItems(contact.methods)) return null
 
   return (
-    <Section id={SECTION_IDS.CONTACT} background="mutedLight">
+    <Section id={SECTION_IDS.CONTACT} background="mutedLight" aria-labelledby="contact-heading">
       <Container size="small" className={`text-center ${SPACING.SECTION.LARGE}`}>
         {/* Animated divider line — draws from center outward on scroll */}
         <motion.div
@@ -58,7 +58,7 @@ export function Contact() {
               ease: ANIMATION_CONFIG.EASE.OUT,
             }}
           >
-            <SectionHeader className={SECTION_SPACING.CONTACT_HEADER}>
+            <SectionHeader id="contact-heading" className={SECTION_SPACING.CONTACT_HEADER}>
               {SECTION_TITLES.CONTACT}
             </SectionHeader>
           </motion.div>
