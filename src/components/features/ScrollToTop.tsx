@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUp } from 'lucide-react'
 import { useScrollPosition } from '@/hooks'
 import { prefersReducedMotion } from '@/lib/animations'
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui'
 
 export function ScrollToTop() {
   const hasScrolledPast = useScrollPosition(400)
