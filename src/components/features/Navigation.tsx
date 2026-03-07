@@ -20,27 +20,35 @@ export function Navigation() {
     setIsOpen(false)
   }
 
-  // Track active section on scroll
+  // Track active section on scroll, throttled via requestAnimationFrame
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = Object.values(SECTION_IDS)
-      const scrollPosition = window.scrollY + 100
+    let rafId: number
 
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const { offsetTop, offsetHeight } = element
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section)
-            break
+    const handleScroll = () => {
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        const sections = Object.values(SECTION_IDS)
+        const scrollPosition = window.scrollY + 100
+
+        for (const section of sections) {
+          const element = document.getElementById(section)
+          if (element) {
+            const { offsetTop, offsetHeight } = element
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              setActiveSection(prev => (prev !== section ? section : prev))
+              break
+            }
           }
         }
-      }
+      })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll() // Check initial position
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      cancelAnimationFrame(rafId)
+    }
   }, [])
 
   useEffect(() => {
