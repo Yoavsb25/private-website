@@ -2,7 +2,8 @@ import { type ReactElement, type MouseEvent } from 'react'
 import { motion, type Variants } from 'framer-motion'
 import { Github, Linkedin } from 'lucide-react'
 import { portfolio } from '@/data/portfolio'
-import { ANIMATION_CONFIG } from '@/lib/constants'
+import { ANIMATION_CONFIG, SECTION_IDS } from '@/lib/constants'
+import { useScrollToSection } from '@/hooks'
 
 const socialIconVariants: Variants = {
   hidden: { opacity: 0, scale: 0.6 },
@@ -14,11 +15,12 @@ const socialIconVariants: Variants = {
 }
 
 export function Footer(): ReactElement {
+  const scrollToSection = useScrollToSection()
   const year = new Date().getFullYear()
 
   const handleLetsTalk = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+    scrollToSection(SECTION_IDS.CONTACT)
   }
 
   return (
@@ -58,7 +60,7 @@ export function Footer(): ReactElement {
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 sm:px-6 lg:px-8">
           {/* CTA row */}
           <a
-            href="#contact"
+            href={`#${SECTION_IDS.CONTACT}`}
             onClick={handleLetsTalk}
             className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
