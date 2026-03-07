@@ -10,7 +10,7 @@ export function useScrollToSection() {
     if (!element) return
 
     const offset = NAVIGATION.SCROLL_OFFSET
-    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+    const elementPosition = element.getBoundingClientRect().top + window.scrollY
     const offsetPosition = elementPosition - offset
 
     window.scrollTo({
