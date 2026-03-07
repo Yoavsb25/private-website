@@ -24,7 +24,7 @@ export function TimelineCardHeader({ item }: TimelineCardHeaderProps) {
         className={`flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 bg-white ${colors.ring}`}
       >
         {logoUrl ? (
-          <img src={logoUrl} alt={subtitle} className="h-full w-full object-contain p-1.5" />
+          <img src={logoUrl} alt={subtitle} loading="lazy" className="h-full w-full object-contain p-1.5" />
         ) : (
           <Icon className="h-7 w-7 text-muted-foreground" />
         )}

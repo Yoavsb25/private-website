@@ -165,6 +165,8 @@ export function Hero() {
               <img
                 src={profileImg}
                 alt={portfolio.imageAlt ?? portfolio.name}
+                width={256}
+                height={256}
                 className="relative h-full w-full rounded-2xl object-cover"
               />
             </div>
