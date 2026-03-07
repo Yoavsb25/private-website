@@ -11,10 +11,8 @@ import { TIMELINE_COLORS } from '../constants'
 export function TimelineCardHeader({ item }: TimelineCardHeaderProps) {
   const isEducation = item.type === 'education'
   const data = isEducation ? getEducationData(item) : getExperienceData(item)
-  const title = isEducation ? getEducationData(item).degree : getExperienceData(item).title
-  const subtitle = isEducation
-    ? getEducationData(item).institution
-    : getExperienceData(item).company
+  const title = 'degree' in data ? data.degree : data.title
+  const subtitle = 'degree' in data ? data.institution : data.company
   const logoUrl = data.logoUrl
   const Icon = isEducation ? GraduationCap : Briefcase
   const colors = TIMELINE_COLORS[item.type]
