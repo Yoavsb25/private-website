@@ -3,7 +3,7 @@ import { Section, SectionHeader, Container } from '@/components/layout'
 import { ProjectCard } from '@/components/projects'
 import { projects } from '@/data/projects'
 import { getFeaturedItems, createFadeInAnimation } from '@/lib/helpers'
-import { SECTION_IDS, LAYOUT } from '@/lib/constants'
+import { ANIMATION_CONFIG, SECTION_IDS, LAYOUT } from '@/lib/constants'
 
 export function Projects() {
   const featuredProjects = getFeaturedItems(projects)
@@ -27,7 +27,7 @@ export function Projects() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: index * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: ANIMATION_CONFIG.DURATION.SLOW, delay: index * ANIMATION_CONFIG.DELAY.STAGGER_CARD, ease: ANIMATION_CONFIG.EASE.CUBIC }}
             >
               <ProjectCard project={project} />
             </motion.div>

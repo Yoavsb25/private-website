@@ -6,7 +6,7 @@ import { Button } from '@/components/ui'
 import { DarkModeToggle } from './DarkModeToggle'
 import { useScrollPosition, useScrollToSection } from '@/hooks'
 import { mobileMenuSlide, backdropFade, getAnimationVariants } from '@/lib/animations'
-import { NAVIGATION, SECTION_IDS } from '@/lib/constants'
+import { ANIMATION_CONFIG, NAVIGATION, SECTION_IDS } from '@/lib/constants'
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -113,7 +113,7 @@ export function Navigation() {
                         className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
                         layoutId="activeSection"
                         initial={false}
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                        transition={ANIMATION_CONFIG.NAV_INDICATOR_SPRING}
                       />
                     )}
                   </Link>

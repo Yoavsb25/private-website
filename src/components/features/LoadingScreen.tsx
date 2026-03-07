@@ -1,6 +1,7 @@
 import { useEffect, type ReactElement } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { prefersReducedMotion } from '@/lib/animations'
+import { ANIMATION_CONFIG } from '@/lib/constants'
 
 interface LoadingScreenProps {
   isVisible: boolean
@@ -34,7 +35,7 @@ export function LoadingScreen({
           className="fixed inset-0 z-[99999] flex items-center justify-center bg-background"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ duration: ANIMATION_CONFIG.DURATION.MEDIUM, ease: ANIMATION_CONFIG.EASE.IN_OUT }}
         >
           {/* Monogram */}
           <motion.span
@@ -46,7 +47,7 @@ export function LoadingScreen({
             }}
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, ease: [0.2, 0.65, 0.3, 0.9] }}
+            transition={{ duration: ANIMATION_CONFIG.DURATION.MEDIUM, ease: ANIMATION_CONFIG.EASE.SPRING_BOUNCE }}
           >
             YS
           </motion.span>

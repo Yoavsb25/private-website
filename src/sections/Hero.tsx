@@ -5,7 +5,7 @@ import { Button } from '@/components/ui'
 import { SocialIcons } from '@/components/features'
 import { portfolio } from '@/data/portfolio'
 import { prefersReducedMotion } from '@/lib/animations'
-import { SECTION_IDS, HERO_LABELS } from '@/lib/constants'
+import { ANIMATION_CONFIG, SECTION_IDS, HERO_LABELS } from '@/lib/constants'
 import profileImg from '@/assets/images/profile.jpg'
 import { useMagnetic } from '@/hooks'
 
@@ -33,7 +33,7 @@ function AnimatedText({
               : {
                   duration: 0.4,
                   delay: delay + i * 0.03,
-                  ease: [0.2, 0.65, 0.3, 0.9],
+                  ease: ANIMATION_CONFIG.EASE.SPRING_BOUNCE,
                 }
           }
           style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : undefined }}

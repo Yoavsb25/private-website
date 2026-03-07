@@ -41,7 +41,7 @@ export function Contact() {
           viewport={ANIMATION_CONFIG.VIEWPORT.HEADER}
           transition={{
             duration: ANIMATION_CONFIG.DURATION.DRAW,
-            ease: [0, 0, 0.2, 1],
+            ease: ANIMATION_CONFIG.EASE.OUT,
           }}
           style={{ transformOrigin: 'center' }}
         />
@@ -55,7 +55,7 @@ export function Contact() {
             transition={{
               duration: ANIMATION_CONFIG.DURATION.SLOW,
               delay: ANIMATION_CONFIG.DELAY.AFTER_LINE,
-              ease: [0, 0, 0.2, 1],
+              ease: ANIMATION_CONFIG.EASE.OUT,
             }}
           >
             <SectionHeader className={SECTION_SPACING.CONTACT_HEADER}>
@@ -71,7 +71,7 @@ export function Contact() {
               transition={{
                 duration: ANIMATION_CONFIG.DURATION.SLOW,
                 delay: ANIMATION_CONFIG.DELAY.AFTER_HEADER,
-                ease: [0, 0, 0.2, 1],
+                ease: ANIMATION_CONFIG.EASE.OUT,
               }}
             >
               <Text variant="bodyLarge" color="muted">
@@ -90,7 +90,7 @@ export function Contact() {
           transition={{
             duration: ANIMATION_CONFIG.DURATION.SLOW,
             delay: ANIMATION_CONFIG.DELAY.AFTER_TEXT,
-            ease: [0, 0, 0.2, 1],
+            ease: ANIMATION_CONFIG.EASE.OUT,
           }}
         >
           {contact.methods.map(method => {

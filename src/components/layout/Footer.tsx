@@ -10,7 +10,7 @@ const socialIconVariants: Variants = {
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: ANIMATION_CONFIG.DURATION.NORMAL, ease: [0, 0, 0.2, 1] },
+    transition: { duration: ANIMATION_CONFIG.DURATION.NORMAL, ease: ANIMATION_CONFIG.EASE.OUT },
   },
 }
 
@@ -32,7 +32,7 @@ export function Footer(): ReactElement {
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.FOOTER}
-          transition={{ duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER, ease: [0, 0, 0.2, 1] }}
+          transition={{ duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER, ease: ANIMATION_CONFIG.EASE.OUT }}
           style={{ transformOrigin: 'left' }}
         />
         <motion.div
@@ -40,7 +40,7 @@ export function Footer(): ReactElement {
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.FOOTER}
-          transition={{ duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER, ease: [0, 0, 0.2, 1] }}
+          transition={{ duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER, ease: ANIMATION_CONFIG.EASE.OUT }}
           style={{ transformOrigin: 'right' }}
         />
       </div>
@@ -54,7 +54,7 @@ export function Footer(): ReactElement {
         transition={{
           duration: ANIMATION_CONFIG.DURATION.SLOW,
           delay: ANIMATION_CONFIG.DELAY.SHORT,
-          ease: [0, 0, 0.2, 1],
+          ease: ANIMATION_CONFIG.EASE.OUT,
         }}
       >
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 sm:px-6 lg:px-8">

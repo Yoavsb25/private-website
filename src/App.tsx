@@ -5,6 +5,7 @@ import { ErrorBoundary } from './components/ErrorBoundary'
 import { Navigation, ScrollProgress, ScrollToTop, LoadingScreen } from './components/features'
 import { Footer } from './components/layout'
 import { useLenis } from './hooks/scroll'
+import { ANIMATION_CONFIG } from './lib/constants'
 import { Hero } from './sections/Hero'
 import { Timeline } from './sections/Timeline'
 import { Projects } from './sections/Projects'
@@ -24,7 +25,7 @@ function App() {
             key="app"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: ANIMATION_CONFIG.DURATION.MEDIUM, ease: ANIMATION_CONFIG.EASE.IN_OUT }}
           >
             <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
               <div className="min-h-screen bg-background transition-colors duration-300">
