@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { HashRouter } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ErrorBoundary } from './components/ErrorBoundary'
@@ -7,10 +7,11 @@ import { Footer } from './components/layout'
 import { useLenis } from './hooks/scroll'
 import { ANIMATION_CONFIG } from './lib/constants'
 import { Hero } from './sections/Hero'
-import { Timeline } from './sections/Timeline'
-import { Projects } from './sections/Projects'
 import { Contact } from './sections/Contact'
 import { Skills } from './sections/Skills'
+
+const Timeline = lazy(() => import('./sections/Timeline').then(m => ({ default: m.Timeline })))
+const Projects = lazy(() => import('./sections/Projects').then(m => ({ default: m.Projects })))
 
 function App() {
   useLenis()
@@ -34,8 +35,12 @@ function App() {
                 <main>
                   <Hero />
                   <Skills />
-                  <Timeline />
-                  <Projects />
+                  <Suspense fallback={null}>
+                    <Timeline />
+                  </Suspense>
+                  <Suspense fallback={null}>
+                    <Projects />
+                  </Suspense>
                   <Contact />
                 </main>
                 <Footer />
