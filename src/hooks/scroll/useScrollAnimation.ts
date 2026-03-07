@@ -8,7 +8,8 @@ export function useScrollPosition(threshold: number = 100) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setHasScrolledPast(window.scrollY > threshold)
+      const newValue = window.scrollY > threshold
+      setHasScrolledPast(prev => (prev !== newValue ? newValue : prev))
     }
 
     handleScroll()
