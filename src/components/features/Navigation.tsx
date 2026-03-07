@@ -162,7 +162,7 @@ export function Navigation() {
                 size="sm"
                 className="h-[clamp(2rem,5vw,2.5rem)] w-[clamp(2rem,5vw,2.5rem)] p-0"
                 onClick={() => setIsOpen(!isOpen)}
-                aria-label="Toggle menu"
+                aria-label={isOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={isOpen}
               >
                 <motion.div animate={{ rotate: isOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>

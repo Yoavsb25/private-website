@@ -38,7 +38,8 @@ export function TimelinePoint({ isActive, isHovered, type, onClick }: TimelinePo
     <motion.button
       onClick={onClick}
       className="absolute left-1/2 z-20 hidden -translate-x-1/2 md:flex"
-      aria-label={`Expand ${type} timeline entry`}
+      aria-label={`${isActive ? 'Collapse' : 'Expand'} ${type} timeline entry`}
+      aria-expanded={isActive}
     >
       <AnimatePresence>{showGlow && <EnergyGlow />}</AnimatePresence>
 
