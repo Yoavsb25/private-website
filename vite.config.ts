@@ -15,5 +15,10 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
   },
+  test: {
+    environment: 'happy-dom',
+    setupFiles: ['./src/tests/setup.ts'],
+    globals: true,
+  },
 })
 
