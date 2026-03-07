@@ -17,7 +17,8 @@ export function BadgeGrid({ items, delay, variant = 'secondary' }: BadgeGridProp
         <motion.div
           key={i}
           initial={{ opacity: 0, scale: 0.85, y: 4 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ delay: delay + i * 0.05 }}
         >
           <Badge
