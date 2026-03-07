@@ -37,7 +37,7 @@ export function FilterChips({ activeFilter, onChange }: FilterChipsProps) {
             onClick={() => onChange(value)}
             aria-pressed={isActive}
             className={cn(
-              'relative rounded-full px-4 py-2 text-sm font-medium border transition',
+              'relative rounded-full px-4 py-2 text-sm font-medium border transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
               isActive
                 ? 'bg-primary text-primary-foreground border-primary shadow-lg'
                 : 'bg-background/80 text-foreground/70 hover:bg-muted'
