@@ -9,22 +9,9 @@ export const LAYOUT = {
     FULL: 'mx-auto w-full',
   },
   GRID: {
-    // Modern fluid grids using auto-fit (preferred approach)
-    // Automatically adapts to container width - no explicit breakpoints needed
-    AUTO_FIT:
-      'grid gap-[clamp(1rem,3vw,2rem)] [grid-template-columns:repeat(auto-fit,minmax(340px,1fr))]',
-    AUTO_FIT_SMALL:
-      'grid gap-[clamp(1rem,2.5vw,1.5rem)] [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]',
-    AUTO_FIT_LARGE:
-      'grid gap-[clamp(1rem,3vw,2rem)] [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]',
     CONTACT:
       'grid gap-[clamp(1rem,2.5vw,1.5rem)] [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]',
     PROJECTS_2COL: 'grid gap-[clamp(1.5rem,3vw,2.5rem)] grid-cols-1 md:grid-cols-2',
-    // Legacy - kept for backward compatibility, but prefer AUTO_FIT variants
-    RESPONSIVE_2:
-      'grid gap-[clamp(1rem,2.5vw,1.5rem)] [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))]',
-    RESPONSIVE_3:
-      'grid gap-[clamp(1rem,3vw,2rem)] [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]',
   },
   FLEX: {
     CENTER: 'flex items-center justify-center',
