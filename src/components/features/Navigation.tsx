@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -13,6 +13,7 @@ export function Navigation() {
   const [activeSection, setActiveSection] = useState('')
   const hasScrolled = useScrollPosition(NAVIGATION.SCROLL_THRESHOLD)
   const scrollToSection = useScrollToSection()
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
 
   const handleScrollToSection = (id: string) => {
     scrollToSection(id)
@@ -53,6 +54,29 @@ export function Navigation() {
     window.addEventListener('hashchange', handleHashChange)
     return () => window.removeEventListener('hashchange', handleHashChange)
   }, [scrollToSection])
+
+  // Escape key closes mobile menu
+  useEffect(() => {
+    if (!isOpen) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen])
+
+  // Focus first menu item when mobile menu opens
+  useEffect(() => {
+    if (isOpen) {
+      const timer = setTimeout(() => {
+        const firstLink = mobileMenuRef.current?.querySelector('a')
+        firstLink?.focus()
+      }, 50)
+      return () => clearTimeout(timer)
+    }
+  }, [isOpen])
 
   return (
     <>
@@ -170,7 +194,7 @@ export function Navigation() {
             exit="closed"
             variants={getAnimationVariants(mobileMenuSlide)}
           >
-            <div className="flex flex-col space-y-1 p-4">
+            <div ref={mobileMenuRef} className="flex flex-col space-y-1 p-4">
               {NAVIGATION.ITEMS.map((item, index) => (
                 <motion.div
                   key={item.id}
