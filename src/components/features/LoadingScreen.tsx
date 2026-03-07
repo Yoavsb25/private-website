@@ -32,6 +32,8 @@ export function LoadingScreen({
       {isVisible && (
         <motion.div
           key="loading"
+          role="status"
+          aria-label="Loading portfolio"
           className="fixed inset-0 z-[99999] flex items-center justify-center bg-background"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
