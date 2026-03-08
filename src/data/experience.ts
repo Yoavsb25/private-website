@@ -1,20 +1,9 @@
 import sysaidImg from '@/assets/icons/sysaid_technologies_ltd_logo.jpeg'
 import affilomaniaImg from '@/assets/icons/Affilomania.png'
 import airForceImg from '@/assets/icons/IAF.png'
+import type { ExperienceData } from '@/lib/types'
 
-interface ExperienceItem {
-  title: string
-  company: string
-  period: string
-  location?: string
-  logoUrl?: string
-  type?: string
-  achievements: string[]
-  technologies?: string[]
-  order?: number // Manual order for timeline (lower numbers appear first)
-}
-
-export const experiences: ExperienceItem[] = [
+export const experiences: ExperienceData[] = [
   {
     title: 'Automation Engineer',
     company: 'SysAid',

@@ -16,7 +16,8 @@ export function BulletList({ items, delay }: BulletListProps) {
           key={i}
           className="flex items-start text-[clamp(0.75rem,2vw,1rem)] leading-relaxed"
           initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
           transition={{ delay: delay + i * 0.06 }}
         >
           <span className="mr-2 text-primary">•</span>

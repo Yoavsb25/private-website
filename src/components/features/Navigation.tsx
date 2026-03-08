@@ -1,45 +1,54 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui'
 import { DarkModeToggle } from './DarkModeToggle'
 import { useScrollPosition, useScrollToSection } from '@/hooks'
 import { mobileMenuSlide, backdropFade, getAnimationVariants } from '@/lib/animations'
-import { NAVIGATION, SECTION_IDS } from '@/lib/constants'
+import { ANIMATION_CONFIG, NAVIGATION, SECTION_IDS } from '@/lib/constants'
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
   const hasScrolled = useScrollPosition(NAVIGATION.SCROLL_THRESHOLD)
   const scrollToSection = useScrollToSection()
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
 
   const handleScrollToSection = (id: string) => {
     scrollToSection(id)
     setIsOpen(false)
   }
 
-  // Track active section on scroll
+  // Track active section on scroll, throttled via requestAnimationFrame
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = Object.values(SECTION_IDS)
-      const scrollPosition = window.scrollY + 100
+    let rafId: number
 
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const { offsetTop, offsetHeight } = element
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section)
-            break
+    const handleScroll = () => {
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        const sections = Object.values(SECTION_IDS)
+        const scrollPosition = window.scrollY + 100
+
+        for (const section of sections) {
+          const element = document.getElementById(section)
+          if (element) {
+            const { offsetTop, offsetHeight } = element
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              setActiveSection(prev => (prev !== section ? section : prev))
+              break
+            }
           }
         }
-      }
+      })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll() // Check initial position
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      cancelAnimationFrame(rafId)
+    }
   }, [])
 
   useEffect(() => {
@@ -53,6 +62,29 @@ export function Navigation() {
     window.addEventListener('hashchange', handleHashChange)
     return () => window.removeEventListener('hashchange', handleHashChange)
   }, [scrollToSection])
+
+  // Escape key closes mobile menu
+  useEffect(() => {
+    if (!isOpen) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen])
+
+  // Focus first menu item when mobile menu opens
+  useEffect(() => {
+    if (isOpen) {
+      const timer = setTimeout(() => {
+        const firstLink = mobileMenuRef.current?.querySelector('a')
+        firstLink?.focus()
+      }, 50)
+      return () => clearTimeout(timer)
+    }
+  }, [isOpen])
 
   return (
     <>
@@ -113,7 +145,7 @@ export function Navigation() {
                         className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
                         layoutId="activeSection"
                         initial={false}
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                        transition={ANIMATION_CONFIG.NAV_INDICATOR_SPRING}
                       />
                     )}
                   </Link>
@@ -130,7 +162,7 @@ export function Navigation() {
                 size="sm"
                 className="h-[clamp(2rem,5vw,2.5rem)] w-[clamp(2rem,5vw,2.5rem)] p-0"
                 onClick={() => setIsOpen(!isOpen)}
-                aria-label="Toggle menu"
+                aria-label={isOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={isOpen}
               >
                 <motion.div animate={{ rotate: isOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
@@ -170,7 +202,7 @@ export function Navigation() {
             exit="closed"
             variants={getAnimationVariants(mobileMenuSlide)}
           >
-            <div className="flex flex-col space-y-1 p-4">
+            <div ref={mobileMenuRef} className="flex flex-col space-y-1 p-4">
               {NAVIGATION.ITEMS.map((item, index) => (
                 <motion.div
                   key={item.id}

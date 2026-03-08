@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from 'react'
+import { useState, useMemo, useRef, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Section, SectionHeader, Container } from '@/components/layout'
 import {
@@ -25,10 +25,14 @@ export function Timeline() {
     [allItems, filter]
   )
 
+  const handleToggleFlipped = useCallback((id: string) => {
+    setFlippedItem(prev => (prev === id ? null : id))
+  }, [])
+
   return (
-    <Section id={SECTION_IDS.TIMELINE} background="mutedLight">
+    <Section id={SECTION_IDS.TIMELINE} background="mutedLight" aria-labelledby="timeline-heading">
       <Container size="small">
-        <SectionHeader>{SECTION_TITLES.TIMELINE}</SectionHeader>
+        <SectionHeader id="timeline-heading">{SECTION_TITLES.TIMELINE}</SectionHeader>
 
         <p className={`${SECTION_SPACING.TIMELINE_DESCRIPTION} text-center text-muted-foreground`}>
           {TIMELINE_LABELS.DESCRIPTION}
@@ -69,7 +73,7 @@ export function Timeline() {
                     isFlipped={isFlipped}
                     index={idx}
                     onHoverChange={setHoveredItem}
-                    onToggleFlipped={id => setFlippedItem(prev => (prev === id ? null : id))}
+                    onToggleFlipped={handleToggleFlipped}
                   />
 
                   <div
@@ -81,7 +85,8 @@ export function Timeline() {
                       isHovered={isHovered}
                       index={idx}
                       type={item.type}
-                      onClick={() => setFlippedItem(prev => (prev === item.id ? null : item.id))}
+                      id={item.id}
+                      onToggle={handleToggleFlipped}
                     />
                   </div>
                 </motion.div>

@@ -24,10 +24,6 @@ export function parseYear(period: string | undefined): number {
     return parseInt(graduatedMatch[1], 10)
   }
 
-  if (lowerPeriod.includes('military')) {
-    return 2016
-  }
-
   return 0
 }
 

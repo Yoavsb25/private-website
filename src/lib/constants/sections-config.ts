@@ -7,10 +7,8 @@
  * Hero section constants
  */
 export const HERO_LABELS = {
-  GREETING: "Hello, I'm",
   BUTTONS: {
     DOWNLOAD_CV: 'Download CV',
-    CONTACT_INFO: 'Contact Info',
   },
 } as const
 
@@ -21,9 +19,6 @@ export const PROJECTS_LABELS = {
   SECTIONS: {
     PROBLEM: 'Problem',
     SOLUTION: 'Solution',
-    TECHNOLOGIES: 'Technologies',
-    OUTCOMES: 'Outcomes',
-    VIEW_PROJECT: 'View Project',
   },
   BUTTONS: {
     LIVE_SITE: 'Live Site',
@@ -55,33 +50,8 @@ export const CONTACT_LABELS = {
  * Timeline section constants
  */
 export const TIMELINE_LABELS = {
-  TITLE: 'Timeline',
   DESCRIPTION:
     'A single track that connects my education and experience into one story—hover or tap each milestone to dive into that chapter.',
-} as const
-
-/**
- * Skills section constants
- */
-export const SKILLS_CONFIG = {
-  ICON_SIZES: {
-    BASE: 'h-5 w-5',
-    SM: 'h-[clamp(1.25rem,3vw,1.75rem)] w-[clamp(1.25rem,3vw,1.75rem)]',
-    MD: 'h-[clamp(1.5rem,4vw,2rem)] w-[clamp(1.5rem,4vw,2rem)]',
-    FULL: 'h-[clamp(1.25rem,3vw,2rem)] w-[clamp(1.25rem,3vw,2rem)]',
-  },
-  CONTAINER_SIZES: {
-    BASE: 'h-10 w-10',
-    SM: 'h-[clamp(2.5rem,6vw,3.5rem)] w-[clamp(2.5rem,6vw,3.5rem)]',
-    MD: 'h-[clamp(3rem,8vw,4rem)] w-[clamp(3rem,8vw,4rem)]',
-    FULL: 'h-[clamp(2.5rem,6vw,4rem)] w-[clamp(2.5rem,6vw,4rem)]',
-  },
-  GRID: {
-    // Skill items grid: 1 column on mobile, 2 on tablet, always 3 on desktop (1024px+)
-    // This controls the individual skill icons within each category card
-    COLS: 'grid [grid-template-columns:repeat(auto-fit,minmax(80px,1fr))] md:[grid-template-columns:repeat(2,1fr)] lg:[grid-template-columns:repeat(3,1fr)]',
-    GAP: 'gap-[clamp(0.75rem,2vw,1.25rem)]',
-  },
 } as const
 
 /**

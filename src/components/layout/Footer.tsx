@@ -2,23 +2,25 @@ import { type ReactElement, type MouseEvent } from 'react'
 import { motion, type Variants } from 'framer-motion'
 import { Github, Linkedin } from 'lucide-react'
 import { portfolio } from '@/data/portfolio'
-import { ANIMATION_CONFIG } from '@/lib/constants'
+import { ANIMATION_CONFIG, SECTION_IDS } from '@/lib/constants'
+import { useScrollToSection } from '@/hooks'
 
 const socialIconVariants: Variants = {
   hidden: { opacity: 0, scale: 0.6 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: ANIMATION_CONFIG.DURATION.NORMAL, ease: [0, 0, 0.2, 1] },
+    transition: { duration: ANIMATION_CONFIG.DURATION.NORMAL, ease: ANIMATION_CONFIG.EASE.OUT },
   },
 }
 
 export function Footer(): ReactElement {
+  const scrollToSection = useScrollToSection()
   const year = new Date().getFullYear()
 
   const handleLetsTalk = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+    scrollToSection(SECTION_IDS.CONTACT)
   }
 
   return (
@@ -30,7 +32,10 @@ export function Footer(): ReactElement {
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.FOOTER}
-          transition={{ duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER, ease: [0, 0, 0.2, 1] }}
+          transition={{
+            duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER,
+            ease: ANIMATION_CONFIG.EASE.OUT,
+          }}
           style={{ transformOrigin: 'left' }}
         />
         <motion.div
@@ -38,7 +43,10 @@ export function Footer(): ReactElement {
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.FOOTER}
-          transition={{ duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER, ease: [0, 0, 0.2, 1] }}
+          transition={{
+            duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER,
+            ease: ANIMATION_CONFIG.EASE.OUT,
+          }}
           style={{ transformOrigin: 'right' }}
         />
       </div>
@@ -52,13 +60,13 @@ export function Footer(): ReactElement {
         transition={{
           duration: ANIMATION_CONFIG.DURATION.SLOW,
           delay: ANIMATION_CONFIG.DELAY.SHORT,
-          ease: [0, 0, 0.2, 1],
+          ease: ANIMATION_CONFIG.EASE.OUT,
         }}
       >
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 sm:px-6 lg:px-8">
           {/* CTA row */}
           <a
-            href="#contact"
+            href={`#${SECTION_IDS.CONTACT}`}
             onClick={handleLetsTalk}
             className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
@@ -109,7 +117,7 @@ export function Footer(): ReactElement {
                   variants={socialIconVariants}
                   whileHover={ANIMATION_CONFIG.HOVER.ICON}
                 >
-                  <Linkedin className="h-4 w-4" />
+                  <Linkedin aria-hidden="true" className="h-4 w-4" />
                 </motion.a>
               )}
               {portfolio.socialLinks?.github && (
@@ -122,7 +130,7 @@ export function Footer(): ReactElement {
                   variants={socialIconVariants}
                   whileHover={ANIMATION_CONFIG.HOVER.ICON}
                 >
-                  <Github className="h-4 w-4" />
+                  <Github aria-hidden="true" className="h-4 w-4" />
                 </motion.a>
               )}
             </motion.div>

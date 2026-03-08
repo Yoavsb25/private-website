@@ -2,12 +2,13 @@
  * TimelineCard component
  * 3D flip card with front face (logo + title) and back face (details)
  */
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { RotateCcw } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import type { TimelineCardProps } from '@/lib/types'
 import { TIMELINE_COLORS } from '../constants'
-import { timelineItem } from '../variants'
+import { EVEN_ITEM, ODD_ITEM } from '../variants'
 import { cardClass, cardWrapperClass } from '../utils'
 import { TimelineCardHeader } from './TimelineCardHeader'
 import { TimelineCardContent } from './TimelineCardContent'
@@ -21,6 +22,21 @@ const FLIP_TRANSITION = {
 export function TimelineCard(props: TimelineCardProps) {
   const { item, isEven, isFlipped, isHovered, onHoverChange, onToggleFlipped } = props
   const colors = TIMELINE_COLORS[item.type]
+  const frontTriggerRef = useRef<HTMLDivElement>(null)
+  const backButtonRef = useRef<HTMLButtonElement>(null)
+  const hasMounted = useRef(false)
+
+  useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true
+      return
+    }
+    if (isFlipped) {
+      backButtonRef.current?.focus()
+    } else {
+      frontTriggerRef.current?.focus()
+    }
+  }, [isFlipped])
 
   return (
     <div
@@ -29,7 +45,7 @@ export function TimelineCard(props: TimelineCardProps) {
       onMouseLeave={() => onHoverChange(null)}
     >
       <motion.div
-        variants={timelineItem(isEven)}
+        variants={isEven ? EVEN_ITEM : ODD_ITEM}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -51,11 +67,21 @@ export function TimelineCard(props: TimelineCardProps) {
             className="h-full"
           >
             <motion.div
+              ref={frontTriggerRef}
               style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
               animate={{ rotateY: isFlipped ? 180 : 0 }}
               transition={FLIP_TRANSITION}
               className="h-full cursor-pointer"
+              role="button"
+              tabIndex={0}
+              aria-label={`View details for ${'degree' in item.data ? item.data.degree : item.data.title}`}
               onClick={() => onToggleFlipped(item.id)}
+              onKeyDown={e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  onToggleFlipped(item.id)
+                }
+              }}
             >
               <Card
                 className={`${cardClass(isHovered, colors.glow)} flex h-full flex-col justify-center`}
@@ -92,10 +118,11 @@ export function TimelineCard(props: TimelineCardProps) {
                   <TimelineCardContent item={item} />
                 </div>
                 <button
-                  className="flex shrink-0 cursor-pointer items-center justify-center gap-1 border-t border-border/30 py-2 text-xs text-muted-foreground/50 hover:text-muted-foreground/80"
+                  ref={backButtonRef}
+                  className="flex shrink-0 cursor-pointer items-center justify-center gap-1 border-t border-border/30 py-2 text-xs text-muted-foreground/50 hover:text-muted-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   onClick={() => onToggleFlipped(item.id)}
                 >
-                  <RotateCcw className="h-3 w-3" />
+                  <RotateCcw aria-hidden="true" className="h-3 w-3" />
                   <span>click to flip back</span>
                 </button>
               </Card>

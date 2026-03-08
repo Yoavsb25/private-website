@@ -1,17 +1,6 @@
-/**
- * Animation variants for timeline components
- */
 import { Variants } from 'framer-motion'
-import { slideInLeft, slideInRight, staggerContainer, getAnimationVariants } from '@/lib/animations'
+import { slideInLeft, slideInRight, getAnimationVariants } from '@/lib/animations'
 
-/**
- * Container animation variant for timeline
- */
-export const timelineContainer: Variants = getAnimationVariants(staggerContainer)
-
-/**
- * Item animation variant based on position (even/odd)
- */
-export function timelineItem(isEven: boolean): Variants {
-  return getAnimationVariants(isEven ? slideInLeft : slideInRight)
-}
+// Pre-computed — no new object created per render
+export const EVEN_ITEM: Variants = getAnimationVariants(slideInLeft)
+export const ODD_ITEM: Variants = getAnimationVariants(slideInRight)

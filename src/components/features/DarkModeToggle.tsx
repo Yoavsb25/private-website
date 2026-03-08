@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Moon, Sun } from 'lucide-react'
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui'
 import { prefersReducedMotion } from '@/lib/animations'
 
 export function DarkModeToggle() {
@@ -39,7 +39,7 @@ export function DarkModeToggle() {
         className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 p-0"
         aria-label="Toggle dark mode"
       >
-        <Sun className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+        <Sun aria-hidden="true" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
       </Button>
     )
   }
@@ -70,7 +70,7 @@ export function DarkModeToggle() {
           }}
           className="absolute inset-0 flex items-center justify-center"
         >
-          <Moon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+          <Moon aria-hidden="true" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
         </motion.div>
         <motion.div
           initial={false}
@@ -85,7 +85,7 @@ export function DarkModeToggle() {
           }}
           className="absolute inset-0 flex items-center justify-center"
         >
-          <Sun className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+          <Sun aria-hidden="true" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
         </motion.div>
       </Button>
     </motion.div>

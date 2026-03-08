@@ -41,7 +41,8 @@ export interface TimelinePointProps {
   isHovered: boolean
   index: number
   type: TimelineType
-  onClick: () => void
+  id: string
+  onToggle: (id: string) => void
 }
 
 export interface TimelineCardProps {

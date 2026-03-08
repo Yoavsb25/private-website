@@ -1,21 +1,8 @@
 import reichmanImg from '@/assets/icons/reichman_logo.png'
 import rothbergImg from '@/assets/icons/rothberg_logo.png'
+import type { EducationData } from '@/lib/types'
 
-interface EducationItem {
-  degree: string
-  institution: string
-  period?: string
-  logoUrl?: string
-  activities?: string[]
-  details?: string[]
-  programmingLanguages?: string[]
-  developmentTools?: string[]
-  majors?: string[]
-  grades?: string[]
-  order?: number // Manual order for timeline (lower numbers appear first)
-}
-
-export const education: EducationItem[] = [
+export const education: EducationData[] = [
   {
     degree: 'Computer Science & Entrepreneurship',
     institution: 'Reichman University',

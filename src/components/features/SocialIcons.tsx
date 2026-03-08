@@ -3,7 +3,11 @@ import { motion } from 'framer-motion'
 import { Linkedin, Github } from 'lucide-react'
 import { portfolio } from '@/data/portfolio'
 import { iconHover, staggerItem, getAnimationVariants } from '@/lib/animations'
-import { COMPONENT_CLASSES, HERO } from '@/lib/constants'
+import { COMPONENT_CLASSES } from '@/lib/constants'
+
+const SOCIAL_ICONS_DEFAULT = 'flex gap-4 justify-center sm:justify-start pt-4'
+const SOCIAL_ICON_SIZE = 'w-[clamp(1.25rem,3vw,1.75rem)] h-[clamp(1.25rem,3vw,1.75rem)]'
+const LINKEDIN_COLOR = 'text-blue-600'
 
 interface SocialIconsProps {
   className?: string
@@ -14,7 +18,7 @@ export const SocialIcons: React.FC<SocialIconsProps> = ({ className }) => {
 
   return (
     <motion.div
-      className={className ?? HERO.SOCIAL_ICONS.DEFAULT}
+      className={className ?? SOCIAL_ICONS_DEFAULT}
       variants={getAnimationVariants(staggerItem)}
     >
       {portfolio.socialLinks.linkedin && (
@@ -28,9 +32,7 @@ export const SocialIcons: React.FC<SocialIconsProps> = ({ className }) => {
           whileHover="hover"
           whileTap="tap"
         >
-          <Linkedin
-            className={`${HERO.SOCIAL_ICONS.ICON_SIZE} ${HERO.SOCIAL_ICONS.LINKEDIN_COLOR}`}
-          />
+          <Linkedin aria-hidden="true" className={`${SOCIAL_ICON_SIZE} ${LINKEDIN_COLOR}`} />
         </motion.a>
       )}
 
@@ -45,7 +47,7 @@ export const SocialIcons: React.FC<SocialIconsProps> = ({ className }) => {
           whileHover="hover"
           whileTap="tap"
         >
-          <Github className={HERO.SOCIAL_ICONS.ICON_SIZE} />
+          <Github aria-hidden="true" className={SOCIAL_ICON_SIZE} />
         </motion.a>
       )}
     </motion.div>

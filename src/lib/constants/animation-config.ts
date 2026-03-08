@@ -53,6 +53,7 @@ export const ANIMATION_CONFIG = {
     AFTER_TEXT: 0.75,
     STAGGER_ICON: 0.05,
     ICON_DELAY: 0.3,
+    STAGGER_CARD: 0.15,
   },
 
   // Card flip animation config (used by ProjectCard)
@@ -60,4 +61,15 @@ export const ANIMATION_CONFIG = {
     SPRING: { type: 'spring' as const, stiffness: 260, damping: 30 },
     DURATION: 0.5,
   },
+
+  // Named ease curves (use these instead of raw cubic bezier literals)
+  EASE: {
+    OUT: [0, 0, 0.2, 1] as [number, number, number, number],
+    IN_OUT: [0.4, 0, 0.2, 1] as [number, number, number, number],
+    CUBIC: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
+    SPRING_BOUNCE: [0.2, 0.65, 0.3, 0.9] as [number, number, number, number],
+  },
+
+  // Spring transition for the nav active-section underline
+  NAV_INDICATOR_SPRING: { type: 'spring' as const, stiffness: 380, damping: 30 },
 } as const

@@ -11,10 +11,8 @@ import { TIMELINE_COLORS } from '../constants'
 export function TimelineCardHeader({ item }: TimelineCardHeaderProps) {
   const isEducation = item.type === 'education'
   const data = isEducation ? getEducationData(item) : getExperienceData(item)
-  const title = isEducation ? getEducationData(item).degree : getExperienceData(item).title
-  const subtitle = isEducation
-    ? getEducationData(item).institution
-    : getExperienceData(item).company
+  const title = 'degree' in data ? data.degree : data.title
+  const subtitle = 'degree' in data ? data.institution : data.company
   const logoUrl = data.logoUrl
   const Icon = isEducation ? GraduationCap : Briefcase
   const colors = TIMELINE_COLORS[item.type]
@@ -26,9 +24,14 @@ export function TimelineCardHeader({ item }: TimelineCardHeaderProps) {
         className={`flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 bg-white ${colors.ring}`}
       >
         {logoUrl ? (
-          <img src={logoUrl} alt={subtitle} className="h-full w-full object-contain p-1.5" />
+          <img
+            src={logoUrl}
+            alt={subtitle}
+            loading="lazy"
+            className="h-full w-full object-contain p-1.5"
+          />
         ) : (
-          <Icon className="h-7 w-7 text-muted-foreground" />
+          <Icon aria-hidden="true" className="h-7 w-7 text-muted-foreground" />
         )}
       </div>
 

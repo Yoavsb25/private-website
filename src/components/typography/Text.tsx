@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 import { TYPOGRAPHY } from '@/lib/constants'
 
-interface TypographyProps {
+interface TextProps {
   children: ReactNode
   variant?: 'body' | 'bodyLarge' | 'small' | 'xs'
   color?: 'default' | 'muted' | 'mutedOpacity'
@@ -10,13 +10,13 @@ interface TypographyProps {
   as?: 'p' | 'span' | 'div'
 }
 
-export function Typography({
+export function Text({
   children,
   variant = 'body',
   color = 'default',
   className,
   as: Component = 'p',
-}: TypographyProps) {
+}: TextProps) {
   const variantClass = {
     body: TYPOGRAPHY.BODY.BASE,
     bodyLarge: TYPOGRAPHY.BODY.LARGE,
@@ -32,6 +32,3 @@ export function Typography({
 
   return <Component className={cn(variantClass, colorClass, className)}>{children}</Component>
 }
-
-// Export as Text for backward compatibility
-export const Text = Typography
