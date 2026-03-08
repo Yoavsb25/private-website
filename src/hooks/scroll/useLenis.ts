@@ -5,9 +5,6 @@ import { prefersReducedMotion } from '@/lib/animations'
 
 export function useLenis(): void {
   useEffect(() => {
-    history.scrollRestoration = 'manual'
-    window.scrollTo(0, 0)
-
     if (prefersReducedMotion()) return
 
     const lenis = new Lenis({
