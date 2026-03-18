@@ -19,28 +19,64 @@ function AnimatedText({
   className?: string
 }) {
   const reduced = prefersReducedMotion()
+  // Split by spaces but keep words separate to prevent mid-word line breaks.
+  // Each word is wrapped in whitespace-nowrap; spaces are rendered between words.
+  const words = text.split(' ')
+  let charIdx = 0
+
   return (
     <span aria-label={text} className={className}>
-      {text.split('').map((char, i) => (
-        <motion.span
-          key={i}
-          aria-hidden
-          initial={reduced ? false : { opacity: 0, y: 40, rotateX: -30 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          transition={
-            reduced
-              ? { duration: 0 }
-              : {
-                  duration: 0.4,
-                  delay: delay + i * 0.03,
-                  ease: [0.2, 0.65, 0.3, 0.9],
+      {words.map((word, wIdx) => {
+        const wordStart = charIdx
+        charIdx += word.length
+        const spaceIdx = charIdx++
+
+        return (
+          <React.Fragment key={wIdx}>
+            <span style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+              {word.split('').map((char, cIdx) => (
+                <motion.span
+                  key={cIdx}
+                  aria-hidden
+                  initial={reduced ? false : { opacity: 0, y: 40, rotateX: -30 }}
+                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                  transition={
+                    reduced
+                      ? { duration: 0 }
+                      : {
+                          duration: 0.4,
+                          delay: delay + (wordStart + cIdx) * 0.03,
+                          ease: [0.2, 0.65, 0.3, 0.9],
+                        }
+                  }
+                  style={{ display: 'inline-block' }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </span>
+            {wIdx < words.length - 1 && (
+              <motion.span
+                aria-hidden
+                initial={reduced ? false : { opacity: 0, y: 40, rotateX: -30 }}
+                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                transition={
+                  reduced
+                    ? { duration: 0 }
+                    : {
+                        duration: 0.4,
+                        delay: delay + spaceIdx * 0.03,
+                        ease: [0.2, 0.65, 0.3, 0.9],
+                      }
                 }
-          }
-          style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : undefined }}
-        >
-          {char}
-        </motion.span>
-      ))}
+                style={{ display: 'inline-block', whiteSpace: 'pre' }}
+              >
+                {' '}
+              </motion.span>
+            )}
+          </React.Fragment>
+        )
+      })}
     </span>
   )
 }
