@@ -14,6 +14,9 @@ import {
   SiReact,
   SiNodedotjs,
   SiGit,
+  SiNumpy,
+  SiPandas,
+  SiJupyter,
 } from 'react-icons/si'
 import { CONTACT_ICON_MAP } from '@/lib/constants'
 import PlaywrightImg from '@/assets/icons/Playwright--Streamline-Svg-Logos.svg'
@@ -73,6 +76,9 @@ const TECH_ICON_MAP: Record<string, TechIconComponent> = {
   'node.js': SiNodedotjs,
   nodejs: SiNodedotjs,
   git: SiGit,
+  numpy: SiNumpy,
+  pandas: SiPandas,
+  jupyter: SiJupyter,
 }
 
 /**
@@ -100,6 +106,9 @@ const TECH_ICON_COLORS: Record<string, string> = {
   'node.js': '#339933',
   nodejs: '#339933',
   git: '#F05032',
+  numpy: '#013243',
+  pandas: '#150458',
+  jupyter: '#F37626',
 }
 
 /**
