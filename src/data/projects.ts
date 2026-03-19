@@ -21,6 +21,9 @@ export interface WorkItem {
 }
 import teamBalncerImg from '@/assets/images/Teamaker.png'
 import alertBuddyImg from '@/assets/images/alert_buddy.png'
+import mlProjectsImg from '@/assets/images/ml_projects.png'
+import calendarAnalyticsImg from '@/assets/images/calendar_analytics.png'
+import filesUnifederImg from '@/assets/images/files_unifeder.png'
 
 export const projects: WorkItem[] = [
   {
@@ -54,13 +57,14 @@ export const projects: WorkItem[] = [
     technologies: ['Python', 'NumPy', 'Pandas', 'Jupyter'],
     outcomes:
       'Built five complete algorithm implementations with step-by-step derivations and visualizations, covering supervised and unsupervised learning.',
+    imageUrl: mlProjectsImg,
+    imageAlt: 'ML Projects — scatter plot with linear regression fit on housing price data',
     sourceUrl: 'https://github.com/Yoavsb25/ml-projects',
     featured: true,
     date: '2025',
   },
   {
     id: 'calendar-analytics',
-    // TODO: add screenshot
     title: 'Calendar Analytics - Google Calendar Revenue Tracker',
     tagline:
       'Flask app that connects to Google Calendar, aggregates events, and exports revenue reports as CSV',
@@ -73,6 +77,8 @@ export const projects: WorkItem[] = [
     technologies: ['Python', 'Flask', 'HTML', 'CSS'],
     outcomes:
       'Automated calendar event aggregation and revenue reporting with one-click CSV export; deployed on Heroku.',
+    imageUrl: calendarAnalyticsImg,
+    imageAlt: 'Calendar Analytics — revenue report table showing event counts, prices, and totals',
     sourceUrl: 'https://github.com/Yoavsb25/Calendar-Analytics',
     featured: true,
     date: '2025',
@@ -91,6 +97,8 @@ export const projects: WorkItem[] = [
     technologies: ['Python', 'Tkinter', 'PyInstaller', 'CSV'],
     outcomes:
       'Fully automated PDF batch assembly pipeline with license management and observability; packaged as a standalone executable for end-user distribution.',
+    imageUrl: filesUnifederImg,
+    imageAlt: 'Files Unifeder — dark-themed desktop GUI for batch PDF merging',
     sourceUrl: 'https://github.com/Yoavsb25/files_unifeder',
     featured: true,
     date: '2026',
