@@ -256,8 +256,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               }
             }}
           >
-            {/* Image area — flex-1 so it fills the card, no z-index to avoid bleed-through */}
-            {project.imageUrl && (
+            {project.imageUrl ? (
               <div className="relative flex-1 overflow-hidden">
                 <img
                   src={project.imageUrl}
@@ -265,9 +264,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                   className="h-full w-full object-cover"
                   loading="lazy"
                 />
-                {/* Bottom gradient — no z-index, stacks by DOM order */}
                 <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/75 to-transparent pointer-events-none" />
-                {/* Title + tagline — no z-index, naturally above gradient */}
                 <div className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-8">
                   <h3 className="text-white font-bold text-[clamp(1rem,2.5vw,1.25rem)] leading-tight drop-shadow">
                     {project.title}
@@ -277,8 +274,28 @@ export function ProjectCard({ project }: ProjectCardProps) {
                   )}
                 </div>
               </div>
+            ) : (
+              <div className="flex flex-1 flex-col justify-between p-5">
+                <div>
+                  <h3 className="font-bold text-[clamp(1rem,2.5vw,1.25rem)] leading-tight text-foreground">
+                    {project.title}
+                  </h3>
+                  {project.tagline && (
+                    <p className="text-muted-foreground text-sm mt-1.5 leading-relaxed">
+                      {project.tagline}
+                    </p>
+                  )}
+                  <p className="text-foreground/80 text-sm mt-4 leading-relaxed line-clamp-5">
+                    {project.description}
+                  </p>
+                </div>
+                {project.date && (
+                  <span className="mt-4 inline-block self-start rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                    {project.date}
+                  </span>
+                )}
+              </div>
             )}
-            {/* Tech icons row */}
             <TechIconRow technologies={project.technologies} />
           </Card>
         </div>
