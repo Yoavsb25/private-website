@@ -24,8 +24,29 @@ import alertBuddyImg from '@/assets/images/alert_buddy.png'
 import mlProjectsImg from '@/assets/images/ml_projects.png'
 import calendarAnalyticsImg from '@/assets/images/calendar_analytics.png'
 import filesUnifederImg from '@/assets/images/files_unifeder.png'
+import claudeCodeToolsImg from '@/assets/images/claude_code_tools_cli.png'
 
 export const projects: WorkItem[] = [
+  {
+    id: 'claude-code-tools',
+    title: 'Claude Code Tools - Skills & Automation Registry',
+    tagline: 'A curated registry of Claude Code skills — browsable, installable, production-grade',
+    description:
+      'A monorepo registry of Claude Code skills and automation tools with a CLI for discovering and installing them. Ships 10 tools across productivity, finance, shopping, and developer-tools categories, each with a structured manifest, SKILL.md, and per-tool README.',
+    problem:
+      'Claude Code users have no standard way to discover, share, or install community-built skills and automation tools.',
+    solution:
+      'Built a manifest-driven monorepo with an auto-generated registry.json and a published npm CLI (@yoavsb25/claude-tools). Users can browse by category or complexity, get tool details, and install skills directly into ~/.claude/skills/ with pre-flight requirement checks. GitHub Actions validates manifests and updates the registry on every merge.',
+    technologies: ['TypeScript', 'Node.js', 'GitHub Actions'],
+    outcomes:
+      'Published @yoavsb25/claude-tools on npm with 10 tools across 4 categories; automated registry validation and updates via GitHub Actions CI; companion website hosted on GitHub Pages.',
+    imageUrl: claudeCodeToolsImg,
+    imageAlt: 'Claude Code Tools — CLI terminal output listing all 10 skills and tools by category',
+    liveUrl: 'https://yoavsb25.github.io/claude-code-tools/',
+    sourceUrl: 'https://github.com/Yoavsb25/claude-code-tools',
+    featured: true,
+    date: '2026',
+  },
   {
     id: 'alert-buddy',
     title: 'Alert Buddy - Emergency Safety Platform',
