@@ -39,6 +39,31 @@ Single-page portfolio site built with React 18 + TypeScript + Vite. Uses HashRou
 - All new constants should go in the appropriate file under `src/lib/constants/`
 - Icons are mapped in `src/lib/helpers/icon-helpers.tsx`
 
+## General Principles
+
+- **Keep solutions simple.** Do not add caching, prefetch logic, backoff strategies, or extra abstraction layers unless explicitly requested. Simplest approach first.
+- **Plan ≠ implement.** When asked to write a plan to a file, ONLY write it. When asked to execute a plan, ONLY execute it. Do not do both unless explicitly told to.
+
+## UI / Design Guidelines
+
+- Default to **bold, visually distinct** designs. Prefer gradient cards, strong contrast, and 3D/animation effects over subtle or conservative approaches.
+- When referencing a section for redesign, assume the goal is a clear visual upgrade — not a minor tweak.
+
+## Post-Implementation Checks
+
+After any CSS or animation change, verify:
+1. `backface-visibility` works correctly on flip cards (no text bleed-through)
+2. Scroll events are not intercepted by click handlers on animated cards
+3. Mobile responsiveness at 375px and 428px viewports
+4. Run `npm run build` and `npm run lint` before committing
+
+## Gotchas
+
+- **Flip cards:** Back face text can bleed through if `backface-visibility: hidden` is missing or overridden by a parent `transform` context. Check both `.card-front` and `.card-back`.
+- **Scroll + click conflicts:** Cards with `onClick` handlers can intercept scroll events on mobile. Use pointer event guards or touch event separation.
+- **HashRouter:** Required for GitHub Pages — do not switch to BrowserRouter without updating the deployment config.
+- **Animation variants:** All Framer Motion variants live in `src/lib/animations/variants.ts` — don't inline new variants in components.
+
 ## Deployment
 
 GitHub Actions (`.github/workflows/deploy.yml`) deploys to GitHub Pages on push to `main`. The build output is the `dist/` directory.
