@@ -2,12 +2,7 @@ import { useState } from 'react'
 import { HashRouter } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ErrorBoundary } from './components/ErrorBoundary'
-import {
-  Navigation,
-  ScrollProgress,
-  ScrollToTop,
-  LoadingScreen,
-} from './components/features'
+import { Navigation, ScrollProgress, ScrollToTop, LoadingScreen } from './components/features'
 import { Footer } from './components/layout'
 import { useLenis } from './hooks/scroll'
 import { Hero } from './sections/Hero'
