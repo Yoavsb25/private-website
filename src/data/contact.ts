@@ -34,7 +34,7 @@ export const contact: ContactInformation = {
       available: true,
     },
   ],
-  responseTime: 'Usually within 24 hours',
+  responseTime: 'I read everything — usually same day.',
   availability:
     'Available for consulting and Talking about Automation, Python, and Software Development',
 }

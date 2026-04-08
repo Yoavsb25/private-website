@@ -30,7 +30,7 @@ export const portfolio: PortfolioContent = {
     'Web Development',
     'Data Analysis',
   ],
-  bio: 'Data Analyst and Automation Engineer with hands-on experience building scalable test infrastructures, automating workflows, and developing web applications. Passionate about leveraging software engineering and automation to optimize processes and drive business impact.',
+  bio: 'Automation engineer at SysAid, where I build test infrastructure for a global ITSM platform. The projects here are mostly things I built because something was taking too long to do by hand.',
   problemSolving:
     'I specialize in building automated solutions that improve efficiency and reliability. From designing scalable test frameworks to automating internal workflows, I solve complex technical challenges using Python, modern web technologies, and CI/CD best practices.',
   professionalPhilosophy:

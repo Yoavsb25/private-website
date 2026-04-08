@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion'
-import { ExternalLink, Github } from 'lucide-react'
+import { ExternalLink, Github, RotateCcw } from 'lucide-react'
 import { Card, Button } from '@/components/ui'
 import { createButtonAnimation, getTechIcon, getTechIconColor } from '@/lib/helpers'
 import { ANIMATION_CONFIG, SECTION_SPACING, PROJECTS_LABELS, ICON_SIZES } from '@/lib/constants'
@@ -244,7 +244,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           }
         >
           <Card
-            className="flex h-full flex-col overflow-hidden cursor-pointer"
+            className="flex h-full flex-col overflow-hidden cursor-pointer group"
             role="button"
             tabIndex={isFlipped ? -1 : 0}
             aria-label={`View details for ${project.title}`}
@@ -265,6 +265,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
                   loading="lazy"
                 />
                 <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/75 to-transparent pointer-events-none" />
+                {/* Flip affordance — signals interactivity on hover */}
+                <div className="pointer-events-none absolute right-3 top-3 flex translate-y-1 items-center gap-1.5 rounded bg-black/50 px-2 py-1 opacity-0 backdrop-blur-sm transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+                  <RotateCcw className="h-3 w-3 text-white" />
+                  <span className="text-[10px] font-semibold uppercase tracking-widest text-white">
+                    Explore
+                  </span>
+                </div>
                 <div className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-8">
                   <h3 className="text-white font-bold text-[clamp(1rem,2.5vw,1.25rem)] leading-tight drop-shadow">
                     {project.title}
@@ -275,7 +282,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-1 flex-col justify-between p-5">
+              <div className="relative flex flex-1 flex-col justify-between p-5">
+                {/* Flip affordance for text-only cards */}
+                <div className="pointer-events-none absolute right-3 top-3 flex translate-y-1 items-center gap-1.5 rounded bg-accent/15 px-2 py-1 opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+                  <RotateCcw className="h-3 w-3 text-accent" />
+                  <span className="text-[10px] font-semibold uppercase tracking-widest text-accent">
+                    Explore
+                  </span>
+                </div>
                 <div>
                   <h3 className="font-bold text-[clamp(1rem,2.5vw,1.25rem)] leading-tight text-foreground">
                     {project.title}

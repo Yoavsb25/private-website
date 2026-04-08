@@ -86,8 +86,10 @@ function DotGrid() {
     <div
       className="pointer-events-none absolute inset-0"
       style={{
-        backgroundImage: `radial-gradient(circle, hsl(var(--accent) / 0.05) 1px, transparent 1px)`,
+        backgroundImage: `radial-gradient(circle, hsl(var(--accent) / 0.08) 1px, transparent 1px)`,
         backgroundSize: '28px 28px',
+        maskImage: 'radial-gradient(ellipse 55% 70% at 10% 30%, black 0%, transparent 100%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 55% 70% at 10% 30%, black 0%, transparent 100%)',
       }}
     />
   )
@@ -123,10 +125,6 @@ export function Hero() {
     <Section id={SECTION_IDS.HERO} className="relative min-h-screen flex items-center">
       {/* Background */}
       <DotGrid />
-      <div
-        className="pointer-events-none absolute -top-32 right-0 h-[600px] w-[600px] rounded-full opacity-20 blur-3xl"
-        style={{ background: `hsl(var(--accent))` }}
-      />
 
       <Container>
         <div className="relative z-10 flex flex-col items-center gap-8 py-20 sm:flex-row sm:gap-12 sm:py-32">

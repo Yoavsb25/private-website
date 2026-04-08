@@ -12,13 +12,13 @@ const COL_SPAN: Record<1 | 2 | 3, string> = {
 }
 
 // Number of columns for the inner skill icon grid per bento cell width
-// Frontend (2-col bento, 7 items) → 4 cols = 2 rows (4+3)
-// Backend  (1-col bento, 5 items) → 3 cols = 2 rows (3+2)
-// Infra    (3-col bento, 7 items) → 7 cols = 1 row
+// Frontend (2-col bento, 5 items) → 3 cols = 2 rows (3+2) → 5 cols on sm
+// Backend  (1-col bento, 4 items) → 2 cols = 2 rows (2+2) → 4 cols on sm
+// Infra    (3-col bento, 5 items) → 3 cols = 2 rows (3+2) → 5 cols on sm
 const INNER_COLS: Record<1 | 2 | 3, string> = {
-  1: 'grid-cols-3',
-  2: 'grid-cols-3 sm:grid-cols-4',
-  3: 'grid-cols-4 sm:grid-cols-7',
+  1: 'grid-cols-2 sm:grid-cols-4',
+  2: 'grid-cols-3 sm:grid-cols-5',
+  3: 'grid-cols-3 sm:grid-cols-5',
 }
 
 export function Skills() {
@@ -33,7 +33,7 @@ export function Skills() {
           {skills.map(group => (
             <motion.div
               key={group.category}
-              className={`${COL_SPAN[group.colSpan]} flex flex-col gap-4 rounded-2xl border border-border/50 bg-background/40 backdrop-blur-sm p-6 hover:bg-background/60 transition-colors duration-300`}
+              className={`${COL_SPAN[group.colSpan]} flex flex-col gap-4 rounded-xl border border-border bg-card p-6 transition-colors duration-200 hover:bg-accent/[0.03]`}
               {...createStaggerItemAnimation(staggerItem)}
             >
               <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground text-left">
