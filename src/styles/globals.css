@@ -158,6 +158,13 @@
     overflow-x: hidden;
   }
 
+  @media (pointer: fine) {
+    .custom-cursor-active,
+    .custom-cursor-active * {
+      cursor: none !important;
+    }
+  }
+
   img {
     max-width: 100%;
     height: auto;

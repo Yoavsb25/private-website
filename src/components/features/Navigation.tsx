@@ -1,18 +1,34 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import { Button } from '../ui/button'
 import { DarkModeToggle } from './DarkModeToggle'
-import { useScrollPosition, useScrollToSection } from '@/hooks'
+import { useScrollToSection } from '@/hooks'
 import { mobileMenuSlide, backdropFade, getAnimationVariants } from '@/lib/animations'
 import { NAVIGATION, SECTION_IDS, EASE_OUT_EXPO } from '@/lib/constants'
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
-  const hasScrolled = useScrollPosition(NAVIGATION.SCROLL_THRESHOLD)
+  const [hidden, setHidden] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
   const scrollToSection = useScrollToSection()
+  const { scrollY } = useScroll()
+  const lastY = useRef(0)
+
+  useMotionValueEvent(scrollY, 'change', latest => {
+    const delta = latest - lastY.current
+    lastY.current = latest
+    setHasScrolled(latest > 50)
+    if (latest < 100) {
+      setHidden(false)
+    } else if (delta > 8) {
+      setHidden(true)
+    } else if (delta < -8) {
+      setHidden(false)
+    }
+  })
 
   const handleScrollToSection = (id: string) => {
     scrollToSection(id)
@@ -56,100 +72,91 @@ export function Navigation() {
   return (
     <>
       <motion.nav
-        className={`sticky top-0 z-50 w-full border-b transition-all duration-400 ${
-          hasScrolled
-            ? 'border-border/60 bg-background/90 backdrop-blur-nav shadow-premium-sm'
-            : 'border-transparent bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/40'
-        }`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
+        className="fixed left-0 right-0 top-0 z-50 flex justify-center px-4 pt-4"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: hidden ? -100 : 0, opacity: hidden ? 0 : 1 }}
+        transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
       >
-        <div className="container mx-auto px-[clamp(0.75rem,2vw,1rem)]">
-          <div className="flex h-[clamp(3.5rem,4vw,4rem)] items-center justify-between">
-            <motion.div
-              className="flex items-center"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <Link
-                to={`#${SECTION_IDS.HERO}`}
-                onClick={e => {
-                  e.preventDefault()
-                  handleScrollToSection(SECTION_IDS.HERO)
-                }}
-                className="font-display text-[clamp(1.125rem,2.5vw,1.25rem)] font-bold tracking-tight transition-colors hover:text-accent"
-                aria-label="Home"
-              >
-                Yoav Sborovsky
-              </Link>
-            </motion.div>
+        <div
+          className={`flex items-center gap-1 rounded-full border px-2 transition-all duration-400 ${
+            hasScrolled
+              ? 'border-border/60 bg-background/85 shadow-premium-md backdrop-blur-nav'
+              : 'border-transparent bg-background/40 backdrop-blur supports-[backdrop-filter]:bg-background/30'
+          }`}
+        >
+          {/* Brand */}
+          <Link
+            to={`#${SECTION_IDS.HERO}`}
+            onClick={e => {
+              e.preventDefault()
+              handleScrollToSection(SECTION_IDS.HERO)
+            }}
+            className="rounded-full px-4 py-2.5 font-display text-sm font-bold tracking-tight transition-colors hover:text-accent"
+            aria-label="Home"
+          >
+            YS
+          </Link>
 
-            <div className="hidden sm:flex items-center gap-[clamp(1.25rem,2.5vw,2rem)]">
-              {NAVIGATION.ITEMS.map((item, index) => (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: index * 0.08,
-                    ease: EASE_OUT_EXPO,
+          {/* Desktop links */}
+          <div className="hidden items-center gap-0.5 sm:flex">
+            {NAVIGATION.ITEMS.map((item, index) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.06, ease: EASE_OUT_EXPO }}
+              >
+                <Link
+                  to={`#${item.id}`}
+                  onClick={e => {
+                    e.preventDefault()
+                    handleScrollToSection(item.id)
                   }}
+                  className={`relative rounded-full px-3.5 py-2 text-[13px] font-medium transition-all duration-300 ${
+                    activeSection === item.id
+                      ? 'text-foreground'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
                 >
-                  <Link
-                    to={`#${item.id}`}
-                    onClick={e => {
-                      e.preventDefault()
-                      handleScrollToSection(item.id)
-                    }}
-                    className={`text-sm font-medium transition-all duration-300 relative px-2 py-1 ${
-                      activeSection === item.id
-                        ? 'text-foreground'
-                        : 'text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    {item.label}
-                    {activeSection === item.id && (
-                      <motion.div
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-full"
-                        layoutId="activeSection"
-                        initial={false}
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </Link>
-                </motion.div>
-              ))}
-              <DarkModeToggle />
-            </div>
-
-            <div className="sm:hidden flex items-center gap-2">
-              <DarkModeToggle />
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-[clamp(2rem,5vw,2.5rem)] w-[clamp(2rem,5vw,2.5rem)] p-0"
-                onClick={() => setIsOpen(!isOpen)}
-                aria-label="Toggle menu"
-                aria-expanded={isOpen}
-              >
-                <motion.div animate={{ rotate: isOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
-                  {isOpen ? (
-                    <X className="w-[clamp(1rem,3vw,1.5rem)] h-[clamp(1rem,3vw,1.5rem)]" />
-                  ) : (
-                    <Menu className="w-[clamp(1rem,3vw,1.5rem)] h-[clamp(1rem,3vw,1.5rem)]" />
+                  {item.label}
+                  {activeSection === item.id && (
+                    <motion.div
+                      className="absolute inset-0 rounded-full bg-accent/8"
+                      layoutId="activeNav"
+                      initial={false}
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
                   )}
-                </motion.div>
-              </Button>
-            </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="ml-1 flex items-center gap-1">
+            <DarkModeToggle />
+
+            {/* Mobile menu button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-8 w-8 rounded-full p-0 sm:hidden"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={isOpen}
+            >
+              <motion.div animate={{ rotate: isOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
+                {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              </motion.div>
+            </Button>
           </div>
         </div>
       </motion.nav>
 
+      {/* Mobile backdrop */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 sm:hidden"
+            className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm sm:hidden"
             initial="closed"
             animate="open"
             exit="closed"
@@ -159,10 +166,11 @@ export function Navigation() {
         )}
       </AnimatePresence>
 
+      {/* Mobile drawer */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed top-[clamp(3.5rem,4vw,4rem)] right-0 bottom-0 w-[clamp(16rem,40vw,18rem)] bg-card border-l border-border z-40 sm:hidden shadow-premium-lg"
+            className="fixed bottom-0 right-0 top-16 z-40 w-64 border-l border-border bg-card shadow-premium-lg sm:hidden"
             initial="closed"
             animate="open"
             exit="closed"
@@ -174,10 +182,7 @@ export function Navigation() {
                   key={item.id}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay: index * 0.08,
-                    ease: EASE_OUT_EXPO,
-                  }}
+                  transition={{ delay: index * 0.06, ease: EASE_OUT_EXPO }}
                 >
                   <Link
                     to={`#${item.id}`}
@@ -185,7 +190,7 @@ export function Navigation() {
                       e.preventDefault()
                       handleScrollToSection(item.id)
                     }}
-                    className={`block px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 ${
+                    className={`block rounded-lg px-4 py-3 text-sm font-medium transition-all duration-300 ${
                       activeSection === item.id
                         ? 'bg-accent text-accent-foreground'
                         : 'text-foreground hover:bg-muted'

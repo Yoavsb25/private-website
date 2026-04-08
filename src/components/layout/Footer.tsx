@@ -32,10 +32,7 @@ export function Footer(): ReactElement {
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.FOOTER}
-          transition={{
-            duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER,
-            ease: EASE_OUT_EXPO,
-          }}
+          transition={{ duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER, ease: EASE_OUT_EXPO }}
           style={{ transformOrigin: 'left' }}
         />
         <motion.div
@@ -43,17 +40,14 @@ export function Footer(): ReactElement {
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.FOOTER}
-          transition={{
-            duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER,
-            ease: EASE_OUT_EXPO,
-          }}
+          transition={{ duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER, ease: EASE_OUT_EXPO }}
           style={{ transformOrigin: 'right' }}
         />
       </div>
 
       <motion.div
-        className="py-10"
-        initial={{ opacity: 0, y: 20 }}
+        className="py-8"
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={ANIMATION_CONFIG.VIEWPORT.FOOTER}
         transition={{
@@ -62,31 +56,34 @@ export function Footer(): ReactElement {
           ease: EASE_OUT_EXPO,
         }}
       >
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-5 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 sm:px-6 lg:px-8">
           <a
             href="#contact"
             onClick={handleLetsTalk}
             className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground"
           >
             <span>Open to new opportunities</span>
-            <span className="opacity-40">·</span>
+            <span className="opacity-40">&middot;</span>
             <span className="relative">
               Let&apos;s talk
               <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-300 group-hover:scale-x-100" />
             </span>
             <span
-              aria-hidden="true"
+              aria-hidden
               className="inline-block translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
             >
-              →
+              &rarr;
             </span>
           </a>
 
-          <div className="flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="text-sm text-muted-foreground">
-              Designed &amp; built by{' '}
-              <span className="font-semibold text-foreground">{portfolio.name}</span> &copy; {year}
-            </p>
+          <div className="flex w-full flex-col items-center justify-between gap-3 sm:flex-row">
+            <div className="flex items-center gap-3 text-xs text-muted-foreground/60">
+              <p>
+                &copy; {year} {portfolio.name}
+              </p>
+              <span>&middot;</span>
+              <p className="font-mono">React + Framer Motion</p>
+            </div>
 
             <motion.div
               className="flex items-center gap-4"

@@ -1,145 +1,149 @@
 import { motion } from 'framer-motion'
-import { Section, SectionHeader, Container } from '@/components/layout'
-import { Text } from '@/components/typography'
-import { Button } from '@/components/ui'
+import { Mail, Linkedin, ArrowUpRight } from 'lucide-react'
+import { Section, Container } from '@/components/layout'
 import { contact } from '@/data/contact'
-import { hasItems, getIcon, createButtonAnimation, createFadeInAnimation } from '@/lib/helpers'
-import {
-  SECTION_TITLES,
-  SECTION_IDS,
-  ANIMATION_CONFIG,
-  SPACING,
-  CONTACT_LABELS,
-  SECTION_SPACING,
-  EASE_OUT_EXPO,
-} from '@/lib/constants'
+import { hasItems } from '@/lib/helpers'
+import { SECTION_IDS, EASE_OUT_EXPO, ANIMATION_CONFIG } from '@/lib/constants'
+import { useMagnetic } from '@/hooks'
+import { prefersReducedMotion } from '@/lib/animations'
 
-function getDisplayValue(method: { type: string; value: string }): string {
-  if (method.type === 'email') return method.value
-  return method.value.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+function MagneticLink({
+  href,
+  children,
+  target,
+  ariaLabel,
+}: {
+  href: string
+  children: React.ReactNode
+  target?: string
+  ariaLabel: string
+}) {
+  const magnetic = useMagnetic(0.25)
+
+  return (
+    <motion.a
+      ref={magnetic.ref as React.RefObject<HTMLAnchorElement>}
+      href={href}
+      target={target}
+      rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+      aria-label={ariaLabel}
+      style={{ x: magnetic.x, y: magnetic.y, display: 'inline-flex' }}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className="group flex items-center gap-4 rounded-xl border border-border/50 bg-card px-6 py-5 shadow-premium-sm transition-all duration-400 hover:border-accent/30 hover:shadow-glow-accent sm:px-8 sm:py-6"
+    >
+      {children}
+      <ArrowUpRight className="ml-auto h-5 w-5 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
+    </motion.a>
+  )
 }
 
 export function Contact() {
   if (!hasItems(contact.methods)) return null
+  const reduced = prefersReducedMotion()
+
+  const emailMethod = contact.methods.find(m => m.type === 'email')
+  const linkedinMethod = contact.methods.find(m => m.type === 'social')
 
   return (
-    <Section id={SECTION_IDS.CONTACT} background="mutedLight">
-      <Container size="small" className={`text-center ${SPACING.SECTION.LARGE}`}>
+    <Section id={SECTION_IDS.CONTACT} background="mutedLight" className="relative overflow-hidden">
+      {/* Accent blob */}
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.05] blur-[120px]"
+        style={{ background: 'hsl(var(--accent))' }}
+      />
+
+      <Container size="small" className="relative z-10 text-center">
+        {/* Decorative line */}
         <motion.div
-          className="mx-auto mb-10 h-px max-w-xs bg-border"
+          className="mx-auto mb-12 h-px max-w-[120px] bg-border"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.HEADER}
-          transition={{
-            duration: ANIMATION_CONFIG.DURATION.DRAW,
-            ease: EASE_OUT_EXPO,
-          }}
+          transition={{ duration: 0.8, ease: EASE_OUT_EXPO }}
           style={{ transformOrigin: 'center' }}
         />
 
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
+        {/* Large typographic CTA */}
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={ANIMATION_CONFIG.VIEWPORT.HEADER}
+          transition={{ duration: 0.7, delay: 0.2, ease: EASE_OUT_EXPO }}
+        >
+          <h2
+            className="font-display font-extrabold tracking-[-0.03em]"
+            style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
+          >
+            Let&rsquo;s build something <span className="text-accent">together</span>
+          </h2>
+        </motion.div>
+
+        {contact.availability && (
+          <motion.p
+            className="mx-auto mt-5 max-w-md text-base leading-relaxed text-muted-foreground"
+            initial={reduced ? false : { opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={ANIMATION_CONFIG.VIEWPORT.HEADER}
-            transition={{
-              duration: ANIMATION_CONFIG.DURATION.SLOW,
-              delay: ANIMATION_CONFIG.DELAY.AFTER_LINE,
-              ease: EASE_OUT_EXPO,
-            }}
+            transition={{ duration: 0.6, delay: 0.4, ease: EASE_OUT_EXPO }}
           >
-            <SectionHeader className={SECTION_SPACING.CONTACT_HEADER}>
-              {SECTION_TITLES.CONTACT}
-            </SectionHeader>
-          </motion.div>
+            {contact.availability}
+          </motion.p>
+        )}
 
-          {contact.availability && (
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={ANIMATION_CONFIG.VIEWPORT.HEADER}
-              transition={{
-                duration: ANIMATION_CONFIG.DURATION.SLOW,
-                delay: ANIMATION_CONFIG.DELAY.AFTER_HEADER,
-                ease: EASE_OUT_EXPO,
-              }}
-            >
-              <Text variant="bodyLarge" color="muted">
-                {contact.availability}
-              </Text>
-            </motion.div>
-          )}
-        </div>
-
+        {/* Contact links */}
         <motion.div
-          className="mt-14 grid grid-cols-1 divide-y sm:grid-cols-2 sm:divide-x sm:divide-y-0 divide-border text-left"
-          initial={{ opacity: 0, y: 24 }}
+          className="mx-auto mt-12 flex max-w-md flex-col gap-4"
+          initial={reduced ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.CONTAINER}
-          transition={{
-            duration: ANIMATION_CONFIG.DURATION.SLOW,
-            delay: ANIMATION_CONFIG.DELAY.AFTER_TEXT,
-            ease: EASE_OUT_EXPO,
-          }}
+          transition={{ duration: 0.6, delay: 0.5, ease: EASE_OUT_EXPO }}
         >
-          {contact.methods.map(method => {
-            const Icon = getIcon(method.icon)
-            const href = method.type === 'email' ? `mailto:${method.value}` : method.value
-            const displayValue = getDisplayValue(method)
-
-            return (
-              <div key={method.value} className="py-10 first:sm:pl-0 last:sm:pr-0 sm:px-12">
-                <div className="mb-5 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <Icon className="h-3.5 w-3.5 text-muted-foreground" />
-                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                      {method.label}
-                    </span>
-                  </div>
-                  {method.available && (
-                    <span className="flex items-center gap-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                      <span className="text-xs text-muted-foreground">
-                        {CONTACT_LABELS.AVAILABILITY.AVAILABLE}
-                      </span>
-                    </span>
-                  )}
-                </div>
-
-                <a
-                  href={href}
-                  className="mb-6 block break-all font-display font-semibold text-foreground transition-colors duration-300 hover:text-accent"
-                  style={{ fontSize: 'clamp(1.0625rem, 2.5vw, 1.375rem)', lineHeight: '1.3' }}
-                  target={method.type === 'email' ? undefined : '_blank'}
-                  rel={method.type === 'email' ? undefined : 'noopener noreferrer'}
-                  aria-label={CONTACT_LABELS.ARIA_LABEL(method.label)}
-                >
-                  {displayValue}
-                </a>
-
-                <motion.a
-                  href={href}
-                  target={method.type === 'email' ? undefined : '_blank'}
-                  rel={method.type === 'email' ? undefined : 'noopener noreferrer'}
-                  {...createButtonAnimation()}
-                >
-                  <Button variant="outline" size="sm">
-                    {method.type === 'email'
-                      ? CONTACT_LABELS.BUTTONS.SEND_EMAIL
-                      : CONTACT_LABELS.BUTTONS.VISIT_PROFILE}
-                  </Button>
-                </motion.a>
+          {emailMethod && (
+            <MagneticLink href={`mailto:${emailMethod.value}`} ariaLabel="Send email">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
+                <Mail className="h-5 w-5 text-accent" />
               </div>
-            )
-          })}
+              <div className="text-left">
+                <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+                  Email
+                </p>
+                <p className="font-display text-base font-semibold">{emailMethod.value}</p>
+              </div>
+            </MagneticLink>
+          )}
+
+          {linkedinMethod && (
+            <MagneticLink
+              href={linkedinMethod.value}
+              target="_blank"
+              ariaLabel="Visit LinkedIn profile"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0A66C2]/10">
+                <Linkedin className="h-5 w-5 text-[#0A66C2]" />
+              </div>
+              <div className="text-left">
+                <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+                  LinkedIn
+                </p>
+                <p className="font-display text-base font-semibold">
+                  {linkedinMethod.value.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+                </p>
+              </div>
+            </MagneticLink>
+          )}
         </motion.div>
 
         {contact.responseTime && (
-          <motion.div className="mt-10" {...createFadeInAnimation(ANIMATION_CONFIG.DELAY.LONG)}>
-            <Text as="span" color="muted">
-              {contact.responseTime}
-            </Text>
-          </motion.div>
+          <motion.p
+            className="mt-10 font-mono text-xs tracking-wide text-muted-foreground/70"
+            initial={reduced ? false : { opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={ANIMATION_CONFIG.VIEWPORT.FOOTER}
+            transition={{ duration: 0.6, delay: 0.7, ease: EASE_OUT_EXPO }}
+          >
+            {contact.responseTime}
+          </motion.p>
         )}
       </Container>
     </Section>

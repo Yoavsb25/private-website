@@ -43,26 +43,26 @@ describe('skills data structure', () => {
     }
   })
 
-  it('has Frontend as first category with colSpan 2 and 7 items', () => {
+  it('has Frontend as first category with colSpan 2 and 5 items', () => {
     expect(skills[0].category).toBe('Frontend')
     expect(skills[0].colSpan).toBe(2)
-    expect(skills[0].items).toHaveLength(7)
+    expect(skills[0].items).toHaveLength(5)
   })
 
-  it('has Backend as second category with colSpan 1 and 5 items', () => {
+  it('has Backend as second category with colSpan 1 and 4 items', () => {
     expect(skills[1].category).toBe('Backend')
     expect(skills[1].colSpan).toBe(1)
-    expect(skills[1].items).toHaveLength(5)
+    expect(skills[1].items).toHaveLength(4)
   })
 
-  it('has Infrastructure as third category with colSpan 3 and 7 items', () => {
+  it('has Infrastructure as third category with colSpan 3 and 5 items', () => {
     expect(skills[2].category).toBe('Infrastructure')
     expect(skills[2].colSpan).toBe(3)
-    expect(skills[2].items).toHaveLength(7)
+    expect(skills[2].items).toHaveLength(5)
   })
 
-  it('all 19 skills are present across categories', () => {
+  it('all 14 skills are present across categories', () => {
     const total = skills.reduce((sum, g) => sum + g.items.length, 0)
-    expect(total).toBe(19)
+    expect(total).toBe(14)
   })
 })

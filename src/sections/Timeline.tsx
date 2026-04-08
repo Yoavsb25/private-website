@@ -1,13 +1,13 @@
 import { useState, useMemo, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Section, SectionHeader, Container } from '@/components/layout'
+import { Section, Container } from '@/components/layout'
 import {
   SECTION_IDS,
-  SECTION_TITLES,
   TIMELINE_LABELS,
   SECTION_CLASSES,
   SECTION_SPACING,
   EASE_OUT_EXPO,
+  ANIMATION_CONFIG,
 } from '@/lib/constants'
 import { createTimelineItems } from '@/lib/helpers'
 import { ANIMATION } from '@/lib/constants'
@@ -29,13 +29,23 @@ export function Timeline() {
   return (
     <Section id={SECTION_IDS.TIMELINE} background="mutedLight">
       <Container size="small">
-        <SectionHeader>{SECTION_TITLES.TIMELINE}</SectionHeader>
-
-        <p
-          className={`${SECTION_SPACING.TIMELINE_DESCRIPTION} text-center text-muted-foreground text-[clamp(0.9375rem,2vw,1.0625rem)] leading-relaxed max-w-2xl mx-auto`}
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={ANIMATION_CONFIG.VIEWPORT.HEADER}
+          transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
         >
-          {TIMELINE_LABELS.DESCRIPTION}
-        </p>
+          <p className="mb-3 font-mono text-xs uppercase tracking-[0.15em] text-accent/70">
+            Journey
+          </p>
+          <h2 className="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-tight">
+            Experience & Education
+          </h2>
+          <p className="mt-4 max-w-2xl text-[clamp(0.9375rem,2vw,1.0625rem)] leading-relaxed text-muted-foreground">
+            {TIMELINE_LABELS.DESCRIPTION}
+          </p>
+        </motion.div>
 
         <FilterChips activeFilter={filter} onChange={setFilter} />
 
@@ -52,8 +62,12 @@ export function Timeline() {
                 <motion.div
                   key={item.id}
                   className={SECTION_CLASSES.TIMELINE_ITEM_CONTAINER}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{
+                    opacity: 0,
+                    x: isEven ? -40 : 40,
+                    rotate: isEven ? -1.5 : 1.5,
+                  }}
+                  whileInView={{ opacity: 1, x: 0, rotate: 0 }}
                   viewport={{ once: true, margin: '-120px' }}
                   transition={{
                     delay: idx * ANIMATION.ITEM_STAGGER,
@@ -62,7 +76,14 @@ export function Timeline() {
                     ...ANIMATION.SPRING,
                   }}
                 >
-                  <div className="absolute left-[1.125rem] top-6 z-10 h-3 w-3 -translate-x-1/2 rounded-full bg-accent md:hidden" />
+                  {/* Mobile: colored left border instead of crude dot */}
+                  <div
+                    className="absolute left-[1.0625rem] top-4 bottom-4 w-[3px] -translate-x-1/2 rounded-full md:hidden"
+                    style={{
+                      background:
+                        'linear-gradient(to bottom, hsl(var(--accent) / 0.6), hsl(var(--accent) / 0.15))',
+                    }}
+                  />
 
                   <TimelineCard
                     item={item}

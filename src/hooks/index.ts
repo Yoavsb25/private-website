@@ -4,3 +4,4 @@
  */
 export * from './scroll'
 export { useMagnetic } from './useMagnetic'
+export { useParallax } from './useParallax'
