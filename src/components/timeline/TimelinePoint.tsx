@@ -9,21 +9,18 @@ import { iconHover } from '@/lib/animations'
 
 const GLOW_ANIMATION = {
   scale: [1, 1.4, 1],
-  opacity: [0.4, 0.7, 0.4],
+  opacity: [0.3, 0.6, 0.3],
 }
 
 const GLOW_TRANSITION = {
-  duration: 2.2,
+  duration: 2.5,
   repeat: Infinity,
 } as const
 
-/**
- * Energy glow effect that appears when point is active or hovered
- */
 function EnergyGlow() {
   return (
     <motion.div
-      className="absolute h-14 w-14 rounded-full bg-gradient-to-br from-indigo-500 to-fuchsia-500 blur-xl"
+      className="absolute h-14 w-14 rounded-full bg-accent/50 blur-xl"
       animate={GLOW_ANIMATION}
       transition={GLOW_TRANSITION}
     />
@@ -46,7 +43,7 @@ export function TimelinePoint({ isActive, isHovered, type, onClick }: TimelinePo
         variants={iconHover}
         initial="rest"
         whileHover="hover"
-        className="relative flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl"
+        className="relative flex h-10 w-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-premium-md"
       >
         <Icon className="h-5 w-5" />
       </motion.div>

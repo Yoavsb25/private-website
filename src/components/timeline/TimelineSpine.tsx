@@ -21,19 +21,29 @@ export function TimelineSpine({ containerRef }: TimelineSpineProps) {
     <>
       {/* Desktop — centered spine */}
       <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-[2px] -translate-x-1/2 md:block">
-        <div className="absolute inset-0 bg-border/40" />
+        <div className="absolute inset-0 bg-border/30 rounded-full" />
         <motion.div
-          className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-indigo-500 via-fuchsia-500 to-cyan-400"
-          style={{ scaleY, transformOrigin: 'top', filter: 'blur(0.5px)' }}
+          className="absolute inset-x-0 top-0 h-full rounded-full"
+          style={{
+            scaleY,
+            transformOrigin: 'top',
+            background:
+              'linear-gradient(to bottom, hsl(var(--accent) / 0.8), hsl(var(--accent) / 0.4), hsl(var(--accent) / 0.2))',
+          }}
         />
       </div>
 
       {/* Mobile — left-aligned spine */}
       <div className="pointer-events-none absolute left-5 top-0 block h-full w-[2px] md:hidden">
-        <div className="absolute inset-0 bg-border/40" />
+        <div className="absolute inset-0 bg-border/30 rounded-full" />
         <motion.div
-          className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-indigo-500 via-fuchsia-500 to-cyan-400"
-          style={{ scaleY, transformOrigin: 'top', filter: 'blur(0.5px)' }}
+          className="absolute inset-x-0 top-0 h-full rounded-full"
+          style={{
+            scaleY,
+            transformOrigin: 'top',
+            background:
+              'linear-gradient(to bottom, hsl(var(--accent) / 0.8), hsl(var(--accent) / 0.4), hsl(var(--accent) / 0.2))',
+          }}
         />
       </div>
     </>

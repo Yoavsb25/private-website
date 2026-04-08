@@ -1,5 +1,5 @@
 /**
- * Layout classes
+ * Layout classes — premium spatial system with generous rhythm
  */
 export const LAYOUT = {
   CONTAINER: {
@@ -9,22 +9,19 @@ export const LAYOUT = {
     FULL: 'mx-auto w-full',
   },
   GRID: {
-    // Modern fluid grids using auto-fit (preferred approach)
-    // Automatically adapts to container width - no explicit breakpoints needed
     AUTO_FIT:
-      'grid gap-[clamp(1rem,3vw,2rem)] [grid-template-columns:repeat(auto-fit,minmax(340px,1fr))]',
+      'grid gap-[clamp(1.25rem,3vw,2.5rem)] [grid-template-columns:repeat(auto-fit,minmax(340px,1fr))]',
     AUTO_FIT_SMALL:
       'grid gap-[clamp(1rem,2.5vw,1.5rem)] [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]',
     AUTO_FIT_LARGE:
-      'grid gap-[clamp(1rem,3vw,2rem)] [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]',
+      'grid gap-[clamp(1.25rem,3vw,2.5rem)] [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]',
     CONTACT:
       'grid gap-[clamp(1rem,2.5vw,1.5rem)] [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]',
     PROJECTS_2COL: 'grid gap-[clamp(1.5rem,3vw,2.5rem)] grid-cols-1 md:grid-cols-2',
-    // Legacy - kept for backward compatibility, but prefer AUTO_FIT variants
     RESPONSIVE_2:
       'grid gap-[clamp(1rem,2.5vw,1.5rem)] [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))]',
     RESPONSIVE_3:
-      'grid gap-[clamp(1rem,3vw,2rem)] [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]',
+      'grid gap-[clamp(1.25rem,3vw,2.5rem)] [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]',
   },
   FLEX: {
     CENTER: 'flex items-center justify-center',
@@ -35,13 +32,13 @@ export const LAYOUT = {
 } as const
 
 /**
- * Spacing classes
+ * Spacing classes — generous rhythm for premium breathing room
  */
 export const SPACING = {
   SECTION: {
-    HEADER: 'mb-12',
-    CONTENT: 'space-y-6',
-    LARGE: 'space-y-10',
+    HEADER: 'mb-14',
+    CONTENT: 'space-y-8',
+    LARGE: 'space-y-12',
   },
   CARD: {
     GAP: 'gap-8',
@@ -49,13 +46,12 @@ export const SPACING = {
     SMALL: 'gap-2',
   },
   TEXT: {
-    HEADING: 'mb-2',
-    PARAGRAPH: 'mb-4',
+    HEADING: 'mb-3',
+    PARAGRAPH: 'mb-5',
     LIST: 'space-y-2',
   },
   PADDING: {
-    // Using clamp for fluid padding - adapts smoothly to screen size
-    CONTAINER: 'px-[clamp(1rem,4vw,2rem)]',
-    SECTION: 'py-[clamp(3rem,8vw,5rem)]',
+    CONTAINER: 'px-[clamp(1.5rem,5vw,3rem)]',
+    SECTION: 'py-[clamp(5rem,10vw,8rem)]',
   },
 } as const

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui'
 import { SocialIcons } from '@/components/features'
 import { portfolio } from '@/data/portfolio'
 import { prefersReducedMotion } from '@/lib/animations'
-import { SECTION_IDS, HERO_LABELS } from '@/lib/constants'
+import { SECTION_IDS, HERO_LABELS, EASE_OUT_EXPO } from '@/lib/constants'
 import profileImg from '@/assets/images/profile.jpg'
 import { useMagnetic } from '@/hooks'
 
@@ -19,8 +19,6 @@ function AnimatedText({
   className?: string
 }) {
   const reduced = prefersReducedMotion()
-  // Split by spaces but keep words separate to prevent mid-word line breaks.
-  // Each word is wrapped in whitespace-nowrap; spaces are rendered between words.
   const words = text.split(' ')
   let charIdx = 0
 
@@ -44,9 +42,9 @@ function AnimatedText({
                     reduced
                       ? { duration: 0 }
                       : {
-                          duration: 0.4,
-                          delay: delay + (wordStart + cIdx) * 0.03,
-                          ease: [0.2, 0.65, 0.3, 0.9],
+                          duration: 0.5,
+                          delay: delay + (wordStart + cIdx) * 0.025,
+                          ease: [0.16, 1, 0.3, 1],
                         }
                   }
                   style={{ display: 'inline-block' }}
@@ -64,9 +62,9 @@ function AnimatedText({
                   reduced
                     ? { duration: 0 }
                     : {
-                        duration: 0.4,
-                        delay: delay + spaceIdx * 0.03,
-                        ease: [0.2, 0.65, 0.3, 0.9],
+                        duration: 0.5,
+                        delay: delay + spaceIdx * 0.025,
+                        ease: [0.16, 1, 0.3, 1],
                       }
                 }
                 style={{ display: 'inline-block', whiteSpace: 'pre' }}
@@ -86,10 +84,10 @@ function DotGrid() {
     <div
       className="pointer-events-none absolute inset-0"
       style={{
-        backgroundImage: `radial-gradient(circle, hsl(var(--accent) / 0.08) 1px, transparent 1px)`,
-        backgroundSize: '28px 28px',
-        maskImage: 'radial-gradient(ellipse 55% 70% at 10% 30%, black 0%, transparent 100%)',
-        WebkitMaskImage: 'radial-gradient(ellipse 55% 70% at 10% 30%, black 0%, transparent 100%)',
+        backgroundImage: `radial-gradient(circle, hsl(var(--accent) / 0.06) 1px, transparent 1px)`,
+        backgroundSize: '32px 32px',
+        maskImage: 'radial-gradient(ellipse 60% 75% at 8% 25%, black 0%, transparent 100%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 60% 75% at 8% 25%, black 0%, transparent 100%)',
       }}
     />
   )
@@ -108,64 +106,57 @@ export function Hero() {
   const reduced = prefersReducedMotion()
   const magnetic = useMagnetic()
   const { firstPart, lastPart } = splitNameForDisplay(portfolio.name)
-  const lastNameDelay = 0.1 + firstPart.length * 0.03
+  const lastNameDelay = 0.15 + firstPart.length * 0.025
 
   const fadeIn = (delay: number) =>
     ({
-      initial: { opacity: 0, y: reduced ? 0 : 16 },
+      initial: { opacity: 0, y: reduced ? 0 : 20 },
       animate: { opacity: 1, y: 0 },
       transition: {
-        duration: reduced ? 0 : 0.6,
+        duration: reduced ? 0 : 0.7,
         delay: reduced ? 0 : delay,
-        ease: [0.0, 0.0, 0.2, 1.0],
+        ease: EASE_OUT_EXPO,
       },
     }) as const
 
   return (
-    <Section id={SECTION_IDS.HERO} className="relative min-h-screen flex items-center">
-      {/* Background */}
+    <Section id={SECTION_IDS.HERO} className="relative flex items-center" fullHeight>
       <DotGrid />
 
       <Container>
-        <div className="relative z-10 flex flex-col items-center gap-8 py-20 sm:flex-row sm:gap-12 sm:py-32">
-          {/* Left — text content */}
-          <div className="flex flex-1 flex-col gap-6 text-center sm:text-left">
-            {/* Name — last name in nowrap so it never breaks */}
+        <div className="relative z-10 flex flex-col items-center gap-10 py-16 sm:flex-row sm:items-center sm:gap-16 sm:py-24 lg:py-32">
+          {/* Text content */}
+          <div className="flex flex-1 flex-col gap-7 text-center sm:text-left">
             <h1
-              className="font-extrabold leading-none tracking-tight"
-              style={{ fontSize: 'clamp(3.5rem, 8vw, 7rem)' }}
+              className="font-display font-extrabold leading-[0.92] tracking-[-0.03em]"
+              style={{ fontSize: 'clamp(3rem, 7.5vw, 6.5rem)' }}
             >
-              {firstPart && <AnimatedText text={firstPart} delay={0.1} />}
+              {firstPart && <AnimatedText text={firstPart} delay={0.15} />}
               <span className="whitespace-nowrap">
                 <AnimatedText text={lastPart} delay={lastNameDelay} />
               </span>
             </h1>
 
-            {/* Role */}
-            <p
-              className="font-semibold"
-              style={{
-                fontSize: 'clamp(1.125rem, 3vw, 1.75rem)',
-                color: `hsl(var(--accent))`,
-              }}
-            >
-              <AnimatedText text={portfolio.title} delay={0.5} />
-            </p>
-
-            {/* Tagline */}
             <motion.p
-              {...fadeIn(1.0)}
-              className="mx-auto max-w-xl text-base leading-relaxed text-muted-foreground sm:mx-0 sm:text-lg"
+              {...fadeIn(0.6)}
+              className="font-display font-semibold text-accent"
+              style={{ fontSize: 'clamp(1.125rem, 2.5vw, 1.625rem)' }}
+            >
+              {portfolio.title}
+            </motion.p>
+
+            <motion.p
+              {...fadeIn(0.9)}
+              className="mx-auto max-w-lg text-[clamp(0.9375rem,2vw,1.0625rem)] leading-[1.7] text-muted-foreground sm:mx-0"
             >
               {portfolio.bio}
             </motion.p>
 
-            {/* CTA row */}
             <motion.div
-              {...fadeIn(1.2)}
-              className="flex flex-wrap items-center justify-center gap-4 pt-2 sm:justify-start"
+              {...fadeIn(1.1)}
+              className="flex flex-wrap items-center justify-center gap-4 pt-1 sm:justify-start"
             >
-              <SocialIcons className="flex gap-4 items-center" />
+              <SocialIcons className="flex items-center gap-3" />
               {portfolio.cvUrl && (
                 <motion.a
                   ref={magnetic.ref as React.RefObject<HTMLAnchorElement>}
@@ -187,18 +178,17 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right — profile photo */}
-          <motion.div {...fadeIn(0.3)} className="flex-shrink-0">
-            <div className="relative h-48 w-48 sm:h-64 sm:w-64">
-              {/* Accent ring */}
+          {/* Profile photo */}
+          <motion.div {...fadeIn(0.4)} className="flex-shrink-0 order-first sm:order-last">
+            <div className="relative h-52 w-52 sm:h-72 sm:w-72">
               <div
-                className="absolute inset-0 rounded-2xl opacity-30 blur-xl"
+                className="absolute -inset-3 rounded-2xl opacity-20 blur-2xl"
                 style={{ background: `hsl(var(--accent))` }}
               />
               <img
                 src={profileImg}
                 alt={portfolio.imageAlt ?? portfolio.name}
-                className="relative h-full w-full rounded-2xl object-cover"
+                className="relative h-full w-full rounded-2xl object-cover shadow-premium-md"
               />
             </div>
           </motion.div>

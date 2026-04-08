@@ -7,6 +7,7 @@ import {
   TIMELINE_LABELS,
   SECTION_CLASSES,
   SECTION_SPACING,
+  EASE_OUT_EXPO,
 } from '@/lib/constants'
 import { createTimelineItems } from '@/lib/helpers'
 import { ANIMATION } from '@/lib/constants'
@@ -30,7 +31,9 @@ export function Timeline() {
       <Container size="small">
         <SectionHeader>{SECTION_TITLES.TIMELINE}</SectionHeader>
 
-        <p className={`${SECTION_SPACING.TIMELINE_DESCRIPTION} text-center text-muted-foreground`}>
+        <p
+          className={`${SECTION_SPACING.TIMELINE_DESCRIPTION} text-center text-muted-foreground text-[clamp(0.9375rem,2vw,1.0625rem)] leading-relaxed max-w-2xl mx-auto`}
+        >
           {TIMELINE_LABELS.DESCRIPTION}
         </p>
 
@@ -39,7 +42,6 @@ export function Timeline() {
         <div ref={containerRef} className={`relative ${SECTION_SPACING.TIMELINE_CONTAINER}`}>
           <TimelineSpine containerRef={containerRef} />
 
-          {/* Items */}
           <div className={`relative ${SECTION_SPACING.TIMELINE_ITEMS}`}>
             {filteredItems.map((item, idx) => {
               const isEven = idx % 2 === 0
@@ -56,11 +58,11 @@ export function Timeline() {
                   transition={{
                     delay: idx * ANIMATION.ITEM_STAGGER,
                     duration: ANIMATION.ITEM_DURATION,
+                    ease: EASE_OUT_EXPO,
                     ...ANIMATION.SPRING,
                   }}
                 >
-                  {/* Mobile spine dot — visible only below md */}
-                  <div className="absolute left-[1.125rem] top-6 z-10 h-3 w-3 -translate-x-1/2 rounded-full bg-primary md:hidden" />
+                  <div className="absolute left-[1.125rem] top-6 z-10 h-3 w-3 -translate-x-1/2 rounded-full bg-accent md:hidden" />
 
                   <TimelineCard
                     item={item}

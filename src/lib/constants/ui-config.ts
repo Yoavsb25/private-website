@@ -1,7 +1,5 @@
 /**
  * UI configuration constants
- * Note: Most UI config has been moved to more specific constants (TYPOGRAPHY, SPACING, LAYOUT, COMPONENT_CLASSES)
- * This remains only for SectionHeader text-center class
  */
 export const UI_CONFIG = {
   CLASSES: {
@@ -10,20 +8,20 @@ export const UI_CONFIG = {
 } as const
 
 /**
- * Typography classes
+ * Typography classes — premium type hierarchy with Bricolage Grotesque display
+ * and intentional weight/tracking contrast per level.
  */
 export const TYPOGRAPHY = {
   HEADING: {
-    // Using clamp for fluid typography - scales smoothly between sizes
-    H1: 'text-[clamp(1.875rem,5vw,3.75rem)] font-bold tracking-tight',
-    H2: 'text-[clamp(1.5rem,4vw,2.25rem)] font-bold',
-    H3: 'text-[clamp(1rem,3vw,1.125rem)] font-bold',
-    H4: 'text-[clamp(0.75rem,2vw,0.875rem)] font-semibold',
+    H1: 'font-display text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold tracking-[-0.025em] leading-[0.95]',
+    H2: 'font-display text-[clamp(1.75rem,4.5vw,2.75rem)] font-bold tracking-[-0.015em] leading-[1.1]',
+    H3: 'font-display text-[clamp(1.125rem,2.5vw,1.375rem)] font-semibold leading-[1.3]',
+    H4: 'font-display text-[clamp(0.875rem,2vw,1.0625rem)] font-semibold leading-[1.4]',
   },
   BODY: {
-    LARGE: 'text-[clamp(1rem,2.5vw,1.25rem)]',
-    BASE: 'text-[clamp(0.875rem,2vw,1rem)]',
-    SMALL: 'text-[clamp(0.75rem,1.5vw,0.875rem)]',
+    LARGE: 'text-[clamp(1.0625rem,2.5vw,1.25rem)] leading-[1.65]',
+    BASE: 'text-[clamp(0.9375rem,2vw,1.0625rem)] leading-[1.7]',
+    SMALL: 'text-[clamp(0.8125rem,1.5vw,0.875rem)] leading-[1.6]',
   },
   COLOR: {
     FOREGROUND: 'text-foreground',
@@ -33,19 +31,18 @@ export const TYPOGRAPHY = {
 } as const
 
 /**
- * Common component classes
+ * Common component classes — premium interaction patterns
  */
 export const COMPONENT_CLASSES = {
   CARD: {
-    HOVER: 'hover:shadow-lg transition-all duration-300',
-    HOVER_LARGE: 'hover:shadow-xl transition-all duration-300',
+    HOVER: 'hover:shadow-premium transition-all duration-400',
+    HOVER_LARGE: 'hover:shadow-premium-md transition-all duration-400',
     BACKDROP: 'border-border/50 bg-background/40 backdrop-blur-sm',
   },
   BUTTON: {
-    // Social icon buttons: square buttons matching height with Download CV button
     SOCIAL:
-      'w-10 h-10 sm:w-12 sm:h-12 rounded-lg border border-border flex items-center justify-center hover:bg-accent transition-colors',
+      'w-10 h-10 sm:w-12 sm:h-12 rounded-lg border border-border bg-card flex items-center justify-center hover:border-accent/30 hover:shadow-glow-accent transition-all duration-300',
   },
   TOOLTIP:
-    'absolute -top-12 left-1/2 transform -translate-x-1/2 bg-foreground text-background px-2 py-1 rounded text-xs whitespace-nowrap z-10',
+    'absolute -top-12 left-1/2 transform -translate-x-1/2 bg-foreground text-background px-3 py-1.5 rounded-md text-xs whitespace-nowrap z-10',
 } as const

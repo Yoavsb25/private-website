@@ -7,19 +7,32 @@ interface SectionProps {
   className?: string
   children: ReactNode
   background?: 'default' | 'mutedLight' | 'mutedMedium'
+  fullHeight?: boolean
 }
 
-export function Section({ id, className, children, background = 'default' }: SectionProps) {
+export function Section({
+  id,
+  className,
+  children,
+  background = 'default',
+  fullHeight = false,
+}: SectionProps) {
   const backgroundClass = {
     default: '',
-    mutedLight: 'bg-muted/30',
-    mutedMedium: 'bg-muted/50',
+    mutedLight: 'bg-muted/25',
+    mutedMedium: 'bg-muted/40',
   }[background]
 
   return (
     <section
       id={id}
-      className={cn('relative min-h-screen', SPACING.PADDING.SECTION, backgroundClass, className)}
+      className={cn(
+        'relative',
+        fullHeight && 'min-h-screen',
+        SPACING.PADDING.SECTION,
+        backgroundClass,
+        className
+      )}
     >
       {children}
     </section>

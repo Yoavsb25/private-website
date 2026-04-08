@@ -3,27 +3,21 @@
  * Color configurations and animation settings for timeline components
  */
 
-/**
- * Color configurations for different timeline item types
- */
 export const TIMELINE_COLORS = {
   experience: {
-    accent: 'from-indigo-500 to-cyan-400',
-    glow: 'ring-indigo-500/40',
-    ring: 'border-indigo-500/40',
-    badge: 'bg-indigo-500/20 text-indigo-600 dark:text-indigo-400',
+    accent: 'from-accent/30 to-accent/10',
+    glow: 'ring-accent/25',
+    ring: 'border-accent/30',
+    badge: 'bg-accent/10 text-accent',
   },
   education: {
-    accent: 'from-fuchsia-500 to-pink-400',
-    glow: 'ring-fuchsia-500/40',
-    ring: 'border-fuchsia-500/40',
-    badge: 'bg-fuchsia-500/20 text-fuchsia-600 dark:text-fuchsia-400',
+    accent: 'from-accent/20 to-accent/5',
+    glow: 'ring-accent/20',
+    ring: 'border-accent/25',
+    badge: 'bg-accent/8 text-accent',
   },
 } as const
 
-/**
- * Animation delays for timeline card content sections
- */
 export const ANIMATION_DELAYS = {
   HIGHLIGHTS: 0.3,
   ACTIVITIES: 0.4,
@@ -35,9 +29,6 @@ export const ANIMATION_DELAYS = {
   TECHNOLOGIES: 0.4,
 } as const
 
-/**
- * Content section titles for timeline cards
- */
 export const CONTENT_SECTIONS = {
   HIGHLIGHTS: 'Highlights',
   ACTIVITIES: 'Activities',

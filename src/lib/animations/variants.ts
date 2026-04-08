@@ -1,4 +1,5 @@
 import { Variants } from 'framer-motion'
+import { EASE_OUT_EXPO } from '@/lib/constants/animation-config'
 
 /**
  * Check if user prefers reduced motion
@@ -8,79 +9,54 @@ export const prefersReducedMotion = () => {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
-/**
- * Animation duration constants (internal use only)
- */
 const ANIMATION_DURATION = {
   fast: 0.2,
-  normal: 0.3,
-  slow: 0.5,
+  normal: 0.35,
+  slow: 0.55,
   slower: 0.8,
 } as const
 
-/**
- * Animation easing functions (internal use only)
- */
-const EASING = {
-  easeInOut: [0.4, 0, 0.2, 1],
-  easeOut: [0, 0, 0.2, 1],
-  easeIn: [0.4, 0, 1, 1],
-  spring: [0.68, -0.55, 0.265, 1.55],
-} as const
-
-/**
- * Slide in from left animation variant
- */
 export const slideInLeft: Variants = {
   hidden: {
     opacity: 0,
-    x: -50,
+    x: -40,
   },
   visible: {
     opacity: 1,
     x: 0,
     transition: {
       duration: prefersReducedMotion() ? 0 : ANIMATION_DURATION.normal,
-      ease: EASING.easeOut,
+      ease: EASE_OUT_EXPO,
     },
   },
 }
 
-/**
- * Slide in from right animation variant
- */
 export const slideInRight: Variants = {
   hidden: {
     opacity: 0,
-    x: 50,
+    x: 40,
   },
   visible: {
     opacity: 1,
     x: 0,
     transition: {
       duration: prefersReducedMotion() ? 0 : ANIMATION_DURATION.normal,
-      ease: EASING.easeOut,
+      ease: EASE_OUT_EXPO,
     },
   },
 }
 
-/**
- * Stagger container variant for staggered children animations
- */
 export const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: prefersReducedMotion() ? 0 : 0.1,
+      staggerChildren: prefersReducedMotion() ? 0 : 0.08,
       delayChildren: prefersReducedMotion() ? 0 : 0.1,
     },
   },
 }
 
-/**
- * Stagger item variant for use with staggerContainer
- */
 export const staggerItem: Variants = {
   hidden: {
     opacity: 0,
@@ -91,14 +67,11 @@ export const staggerItem: Variants = {
     y: 0,
     transition: {
       duration: prefersReducedMotion() ? 0 : ANIMATION_DURATION.normal,
-      ease: EASING.easeOut,
+      ease: EASE_OUT_EXPO,
     },
   },
 }
 
-/**
- * Icon hover animation variant
- */
 export const iconHover: Variants = {
   rest: {
     scale: 1,
@@ -109,34 +82,28 @@ export const iconHover: Variants = {
     rotate: 5,
     transition: {
       duration: prefersReducedMotion() ? 0 : ANIMATION_DURATION.fast,
-      ease: EASING.easeOut,
+      ease: EASE_OUT_EXPO,
     },
   },
 }
 
-/**
- * Mobile menu slide animation variant
- */
 export const mobileMenuSlide: Variants = {
   closed: {
     x: '100%',
     transition: {
       duration: prefersReducedMotion() ? 0 : ANIMATION_DURATION.normal,
-      ease: EASING.easeInOut,
+      ease: EASE_OUT_EXPO,
     },
   },
   open: {
     x: 0,
     transition: {
       duration: prefersReducedMotion() ? 0 : ANIMATION_DURATION.normal,
-      ease: EASING.easeInOut,
+      ease: EASE_OUT_EXPO,
     },
   },
 }
 
-/**
- * Backdrop fade animation variant
- */
 export const backdropFade: Variants = {
   closed: {
     opacity: 0,
@@ -156,7 +123,6 @@ export const backdropFade: Variants = {
  */
 export const getAnimationVariants = (variants: Variants): Variants => {
   if (prefersReducedMotion()) {
-    // Return simplified variants that skip animations
     return {
       hidden: { opacity: 1 },
       visible: { opacity: 1 },

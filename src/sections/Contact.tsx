@@ -11,6 +11,7 @@ import {
   SPACING,
   CONTACT_LABELS,
   SECTION_SPACING,
+  EASE_OUT_EXPO,
 } from '@/lib/constants'
 
 function getDisplayValue(method: { type: string; value: string }): string {
@@ -24,17 +25,18 @@ export function Contact() {
   return (
     <Section id={SECTION_IDS.CONTACT} background="mutedLight">
       <Container size="small" className={`text-center ${SPACING.SECTION.LARGE}`}>
-        {/* Animated divider line — draws from center outward on scroll */}
         <motion.div
-          className="mx-auto mb-8 h-px max-w-xs bg-border"
+          className="mx-auto mb-10 h-px max-w-xs bg-border"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.HEADER}
-          transition={{ duration: ANIMATION_CONFIG.DURATION.DRAW, ease: [0, 0, 0.2, 1] }}
+          transition={{
+            duration: ANIMATION_CONFIG.DURATION.DRAW,
+            ease: EASE_OUT_EXPO,
+          }}
           style={{ transformOrigin: 'center' }}
         />
 
-        {/* Header */}
         <div>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -43,7 +45,7 @@ export function Contact() {
             transition={{
               duration: ANIMATION_CONFIG.DURATION.SLOW,
               delay: ANIMATION_CONFIG.DELAY.AFTER_LINE,
-              ease: [0, 0, 0.2, 1],
+              ease: EASE_OUT_EXPO,
             }}
           >
             <SectionHeader className={SECTION_SPACING.CONTACT_HEADER}>
@@ -59,7 +61,7 @@ export function Contact() {
               transition={{
                 duration: ANIMATION_CONFIG.DURATION.SLOW,
                 delay: ANIMATION_CONFIG.DELAY.AFTER_HEADER,
-                ease: [0, 0, 0.2, 1],
+                ease: EASE_OUT_EXPO,
               }}
             >
               <Text variant="bodyLarge" color="muted">
@@ -69,16 +71,15 @@ export function Contact() {
           )}
         </div>
 
-        {/* Contact methods — flat typographic layout, no card containers */}
         <motion.div
-          className="mt-12 grid grid-cols-1 divide-y sm:grid-cols-2 sm:divide-x sm:divide-y-0 divide-border text-left"
+          className="mt-14 grid grid-cols-1 divide-y sm:grid-cols-2 sm:divide-x sm:divide-y-0 divide-border text-left"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.CONTAINER}
           transition={{
             duration: ANIMATION_CONFIG.DURATION.SLOW,
             delay: ANIMATION_CONFIG.DELAY.AFTER_TEXT,
-            ease: [0, 0, 0.2, 1],
+            ease: EASE_OUT_EXPO,
           }}
         >
           {contact.methods.map(method => {
@@ -87,18 +88,17 @@ export function Contact() {
             const displayValue = getDisplayValue(method)
 
             return (
-              <div key={method.value} className="py-8 first:sm:pl-0 last:sm:pr-0 sm:px-10">
-                {/* Label row + availability */}
-                <div className="mb-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
+              <div key={method.value} className="py-10 first:sm:pl-0 last:sm:pr-0 sm:px-12">
+                <div className="mb-5 flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
                     <Icon className="h-3.5 w-3.5 text-muted-foreground" />
-                    <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
                       {method.label}
                     </span>
                   </div>
                   {method.available && (
                     <span className="flex items-center gap-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                       <span className="text-xs text-muted-foreground">
                         {CONTACT_LABELS.AVAILABILITY.AVAILABLE}
                       </span>
@@ -106,11 +106,10 @@ export function Contact() {
                   )}
                 </div>
 
-                {/* Contact value — primary typographic element, directly clickable */}
                 <a
                   href={href}
-                  className="mb-5 block break-all font-semibold text-foreground transition-colors duration-200 hover:text-accent"
-                  style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', lineHeight: '1.3' }}
+                  className="mb-6 block break-all font-display font-semibold text-foreground transition-colors duration-300 hover:text-accent"
+                  style={{ fontSize: 'clamp(1.0625rem, 2.5vw, 1.375rem)', lineHeight: '1.3' }}
                   target={method.type === 'email' ? undefined : '_blank'}
                   rel={method.type === 'email' ? undefined : 'noopener noreferrer'}
                   aria-label={CONTACT_LABELS.ARIA_LABEL(method.label)}
@@ -118,7 +117,6 @@ export function Contact() {
                   {displayValue}
                 </a>
 
-                {/* CTA button */}
                 <motion.a
                   href={href}
                   target={method.type === 'email' ? undefined : '_blank'}
@@ -136,9 +134,8 @@ export function Contact() {
           })}
         </motion.div>
 
-        {/* Response Time */}
         {contact.responseTime && (
-          <motion.div className="mt-8" {...createFadeInAnimation(ANIMATION_CONFIG.DELAY.LONG)}>
+          <motion.div className="mt-10" {...createFadeInAnimation(ANIMATION_CONFIG.DELAY.LONG)}>
             <Text as="span" color="muted">
               {contact.responseTime}
             </Text>

@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUp } from 'lucide-react'
 import { useScrollPosition } from '@/hooks'
 import { prefersReducedMotion } from '@/lib/animations'
-import { Button } from '../ui/button'
 
 export function ScrollToTop() {
   const hasScrolledPast = useScrollPosition(400)
@@ -18,23 +17,22 @@ export function ScrollToTop() {
     <AnimatePresence>
       {hasScrolledPast && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          initial={{ opacity: 0, scale: 0.85, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.8, y: 20 }}
+          exit={{ opacity: 0, scale: 0.85, y: 20 }}
           transition={{
-            duration: prefersReducedMotion() ? 0 : 0.2,
-            ease: 'easeOut',
+            duration: prefersReducedMotion() ? 0 : 0.3,
+            ease: [0.16, 1, 0.3, 1],
           }}
-          className="fixed bottom-[clamp(1rem,3vw,2rem)] right-[clamp(1rem,3vw,2rem)] z-50"
+          className="fixed bottom-[clamp(1.25rem,3vw,2rem)] right-[clamp(1.25rem,3vw,2rem)] z-50"
         >
-          <Button
+          <button
             onClick={scrollToTop}
-            size="lg"
-            className="rounded-full h-[clamp(3rem,8vw,4rem)] w-[clamp(3rem,8vw,4rem)] p-0 shadow-lg hover:shadow-xl transition-shadow"
+            className="flex items-center justify-center rounded-full h-11 w-11 bg-accent text-accent-foreground shadow-premium-md hover:shadow-glow-accent transition-all duration-300 active:scale-95"
             aria-label="Scroll to top"
           >
-            <ArrowUp className="w-[clamp(1.25rem,4vw,1.75rem)] h-[clamp(1.25rem,4vw,1.75rem)]" />
-          </Button>
+            <ArrowUp className="w-5 h-5" />
+          </button>
         </motion.div>
       )}
     </AnimatePresence>

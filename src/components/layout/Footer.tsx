@@ -2,14 +2,17 @@ import { type ReactElement, type MouseEvent } from 'react'
 import { motion, type Variants } from 'framer-motion'
 import { Github, Linkedin } from 'lucide-react'
 import { portfolio } from '@/data/portfolio'
-import { ANIMATION_CONFIG } from '@/lib/constants'
+import { ANIMATION_CONFIG, EASE_OUT_EXPO } from '@/lib/constants'
 
 const socialIconVariants: Variants = {
   hidden: { opacity: 0, scale: 0.6 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: ANIMATION_CONFIG.DURATION.NORMAL, ease: [0, 0, 0.2, 1] },
+    transition: {
+      duration: ANIMATION_CONFIG.DURATION.NORMAL,
+      ease: EASE_OUT_EXPO,
+    },
   },
 }
 
@@ -23,14 +26,16 @@ export function Footer(): ReactElement {
 
   return (
     <footer>
-      {/* Animated border — two halves draw from outside edges inward to meet at center */}
       <div className="relative h-px overflow-hidden">
         <motion.div
           className="absolute left-0 top-0 h-px w-1/2 bg-border"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.FOOTER}
-          transition={{ duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER, ease: [0, 0, 0.2, 1] }}
+          transition={{
+            duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER,
+            ease: EASE_OUT_EXPO,
+          }}
           style={{ transformOrigin: 'left' }}
         />
         <motion.div
@@ -38,52 +43,51 @@ export function Footer(): ReactElement {
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={ANIMATION_CONFIG.VIEWPORT.FOOTER}
-          transition={{ duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER, ease: [0, 0, 0.2, 1] }}
+          transition={{
+            duration: ANIMATION_CONFIG.DURATION.DRAW_BORDER,
+            ease: EASE_OUT_EXPO,
+          }}
           style={{ transformOrigin: 'right' }}
         />
       </div>
 
-      {/* Footer content slides up on scroll */}
       <motion.div
-        className="py-8"
+        className="py-10"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={ANIMATION_CONFIG.VIEWPORT.FOOTER}
         transition={{
           duration: ANIMATION_CONFIG.DURATION.SLOW,
           delay: ANIMATION_CONFIG.DELAY.SHORT,
-          ease: [0, 0, 0.2, 1],
+          ease: EASE_OUT_EXPO,
         }}
       >
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 sm:px-6 lg:px-8">
-          {/* CTA row */}
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-5 px-4 sm:px-6 lg:px-8">
           <a
             href="#contact"
             onClick={handleLetsTalk}
-            className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground"
           >
             <span>Open to new opportunities</span>
-            <span className="opacity-50">·</span>
+            <span className="opacity-40">·</span>
             <span className="relative">
               Let&apos;s talk
-              <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-current transition-transform duration-200 group-hover:scale-x-100" />
+              <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-300 group-hover:scale-x-100" />
             </span>
             <span
               aria-hidden="true"
-              className="inline-block translate-x-0 transition-transform duration-200 group-hover:translate-x-1"
+              className="inline-block translate-x-0 transition-transform duration-300 group-hover:translate-x-1"
             >
               →
             </span>
           </a>
 
-          {/* Bottom row: copyright + social icons */}
           <div className="flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
             <p className="text-sm text-muted-foreground">
               Designed &amp; built by{' '}
               <span className="font-semibold text-foreground">{portfolio.name}</span> &copy; {year}
             </p>
 
-            {/* Staggered social icon entrance */}
             <motion.div
               className="flex items-center gap-4"
               initial="hidden"
@@ -105,7 +109,7 @@ export function Footer(): ReactElement {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-muted-foreground transition-colors duration-300 hover:text-foreground"
                   variants={socialIconVariants}
                   whileHover={ANIMATION_CONFIG.HOVER.ICON}
                 >
@@ -118,7 +122,7 @@ export function Footer(): ReactElement {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub"
-                  className="text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-muted-foreground transition-colors duration-300 hover:text-foreground"
                   variants={socialIconVariants}
                   whileHover={ANIMATION_CONFIG.HOVER.ICON}
                 >
