@@ -76,6 +76,8 @@ out/
 # Nuxt.js
 .nuxt/
 
+.mcp.json
+
 # Storybook build outputs
 .out
 .storybook-out
