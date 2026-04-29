@@ -24,7 +24,7 @@ import alertBuddyImg from '@/assets/images/alert_buddy.png'
 import mlProjectsImg from '@/assets/images/ml_projects.png'
 import calendarAnalyticsImg from '@/assets/images/calendar_analytics.png'
 import filesUnifederImg from '@/assets/images/files_unifeder.png'
-import claudeCodeToolsImg from '@/assets/images/claude_code_tools_cli.png'
+import claudeCodeToolsImg from '@/assets/images/claude_code_tools_website.png'
 
 export const projects: WorkItem[] = [
   {
@@ -32,7 +32,7 @@ export const projects: WorkItem[] = [
     title: 'Claude Code Tools - Skills & Automation Registry',
     tagline: 'CI/CD-powered registry for sharing and installing Claude Code skills',
     description:
-      'A monorepo registry of Claude Code skills and automation tools with a CLI for discovering and installing them. Ships 10 tools across productivity, finance, shopping, and developer-tools categories, each with a structured manifest, SKILL.md, and per-tool README.',
+      'A monorepo registry of Claude Code skills and automation tools with a CLI for discovering and installing them. Ships 15 tools across productivity, finance, shopping, and developer-tools categories, each with a structured manifest, SKILL.md, and per-tool README.',
     problem:
       'Claude Code users have no standard way to discover, share, or install community-built skills and automation tools.',
     solution:
@@ -41,7 +41,8 @@ export const projects: WorkItem[] = [
     outcomes:
       'Built a CI/CD-powered registry to manage and share Claude Code skills, standardizing publishing and version management; published @yoavsb25/claude-tools on npm; automated registry validation via GitHub Actions.',
     imageUrl: claudeCodeToolsImg,
-    imageAlt: 'Claude Code Tools — CLI terminal output listing all 10 skills and tools by category',
+    imageAlt:
+      'Claude Code Tools — GitHub Pages registry site listing all 15 skills and tools by category',
     liveUrl: 'https://yoavsb25.github.io/claude-code-tools/',
     sourceUrl: 'https://github.com/Yoavsb25/claude-code-tools',
     featured: true,
