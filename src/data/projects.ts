@@ -30,7 +30,7 @@ export const projects: WorkItem[] = [
   {
     id: 'claude-code-tools',
     title: 'Claude Code Tools - Skills & Automation Registry',
-    tagline: 'A curated registry of Claude Code skills — browsable, installable, production-grade',
+    tagline: 'CI/CD-powered registry for sharing and installing Claude Code skills',
     description:
       'A monorepo registry of Claude Code skills and automation tools with a CLI for discovering and installing them. Ships 10 tools across productivity, finance, shopping, and developer-tools categories, each with a structured manifest, SKILL.md, and per-tool README.',
     problem:
@@ -39,7 +39,7 @@ export const projects: WorkItem[] = [
       'Built a manifest-driven monorepo with an auto-generated registry.json and a published npm CLI (@yoavsb25/claude-tools). Users can browse by category or complexity, get tool details, and install skills directly into ~/.claude/skills/ with pre-flight requirement checks. GitHub Actions validates manifests and updates the registry on every merge.',
     technologies: ['TypeScript', 'Node.js', 'GitHub Actions'],
     outcomes:
-      'Published @yoavsb25/claude-tools on npm with 10 tools across 4 categories; automated registry validation and updates via GitHub Actions CI; companion website hosted on GitHub Pages.',
+      'Built a CI/CD-powered registry to manage and share Claude Code skills, standardizing publishing and version management; published @yoavsb25/claude-tools on npm; automated registry validation via GitHub Actions.',
     imageUrl: claudeCodeToolsImg,
     imageAlt: 'Claude Code Tools — CLI terminal output listing all 10 skills and tools by category',
     liveUrl: 'https://yoavsb25.github.io/claude-code-tools/',
@@ -108,16 +108,16 @@ export const projects: WorkItem[] = [
     id: 'files-unifeder',
     title: 'Files Unifeder - PDF Batch Merger',
     tagline:
-      'Desktop GUI app for batch merging PDFs against a CSV/Excel manifest — match, merge, report',
+      'Desktop batch-processing tool sold to an Israeli law firm — now used internally for document workflows',
     description:
       'A Python desktop application that automates high-volume PDF assembly. Given a CSV or Excel manifest and a folder of PDFs, it matches files by serial number, merges them in the configured order, and produces a detailed results report. Packaged as a standalone executable.',
     problem:
       'High-volume PDF assembly workflows require manually matching, merging, and tracking hundreds of files — time-consuming and prone to errors.',
     solution:
       'Built a Tkinter desktop app with a serial number-based matching engine, configurable merge order and page range control, and a detailed per-file results report. Includes license management, crash reporting, and opt-in telemetry. Packaged with PyInstaller.',
-    technologies: ['Python', 'Tkinter', 'PyInstaller', 'CSV'],
+    technologies: ['Python', 'Tkinter', 'PyInstaller', 'CSV', 'GitHub Actions'],
     outcomes:
-      'Fully automated PDF batch assembly pipeline with license management and observability; packaged as a standalone executable for end-user distribution.',
+      'Built and sold to an Israeli law firm; now used internally for document workflows. Modular pipeline architecture with observability, license management, and automated testing; packaged as a standalone executable.',
     imageUrl: filesUnifederImg,
     imageAlt: 'Files Unifeder — dark-themed desktop GUI for batch PDF merging',
     sourceUrl: 'https://github.com/Yoavsb25/files_unifeder',

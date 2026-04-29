@@ -2,7 +2,7 @@
  * Portfolio Content Data
  * Core personal and professional information
  */
-import cvPath from '@/assets/CV/cv.pdf'
+import cvPath from '@/assets/CV/Updated CV.pdf'
 export interface PortfolioContent {
   name: string
   title: string
@@ -24,13 +24,15 @@ export const portfolio: PortfolioContent = {
   name: 'Yoav Sborovsky',
   title: 'Automation Engineer & Software Developer',
   specialization: [
+    'Platform Engineering',
     'Test Automation',
-    'Python Development',
     'CI/CD Pipelines',
+    'Python Automation',
+    'Developer Tooling',
     'Web Development',
     'Data Analysis',
   ],
-  bio: 'Data Analyst and Automation Engineer with hands-on experience building scalable test infrastructures, automating workflows, and developing web applications. Passionate about leveraging software engineering and automation to optimize processes and drive business impact.',
+  bio: 'Experienced in architecting production-ready internal platforms, from Python automation to cloud-native web applications. A self-starter who thrives in small-team environments, building the foundational tools and CI/CD pipelines that bridge the gap between development and global deployment.',
   problemSolving:
     'I specialize in building automated solutions that improve efficiency and reliability. From designing scalable test frameworks to automating internal workflows, I solve complex technical challenges using Python, modern web technologies, and CI/CD best practices.',
   professionalPhilosophy:

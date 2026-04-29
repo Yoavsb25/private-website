@@ -28,7 +28,12 @@ export const education: EducationItem[] = [
     programmingLanguages: ['Python', 'Java', 'C', 'JavaScript', 'HTML', 'CSS'],
     developmentTools: ['Git', 'GitHub', 'Flask', 'Django', 'React'],
     details: ['Hands-on projects in programming, data analysis, and database management'],
-    grades: ['Machine Learning: 88', 'Operating Systems: 92', 'Product Management: 94'],
+    grades: [
+      'Machine Learning: 88',
+      'Operating Systems: 92',
+      'Product Management: 94',
+      'Psychometric: 721 (Top 2% nationwide)',
+    ],
     order: 2,
   },
   {
@@ -37,7 +42,7 @@ export const education: EducationItem[] = [
     period: 'Graduated 2014',
     logoUrl: rothbergImg,
     majors: ['Math', 'English', 'Biology', 'Biotechnology', 'Literature', 'Bible', 'History'],
-    grades: ['Matriculation GPA: 114.2', 'Psychometric: 721'],
+    grades: ['Matriculation GPA: 114.2'],
     order: 5,
   },
 ]
