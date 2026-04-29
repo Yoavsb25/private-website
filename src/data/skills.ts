@@ -4,6 +4,7 @@ import {
   SiJavascript,
   SiTypescript,
   SiReact,
+  SiVite,
   SiNextdotjs,
   SiNodedotjs,
   SiJenkins,
@@ -14,11 +15,16 @@ import {
   SiPostgresql,
   SiDjango,
   SiFlask,
+  SiExpress,
   SiDocker,
+  SiGithubactions,
+  SiLinux,
+  SiPytest,
+  SiVitest,
   SiHtml5,
   SiCss,
 } from 'react-icons/si'
-import { FaJava } from 'react-icons/fa'
+import { FaAws, FaJava } from 'react-icons/fa'
 import { PlaywrightIcon } from '@/lib/helpers'
 
 export type SkillItem = {
@@ -45,6 +51,7 @@ export const skills: SkillGroup[] = [
       { name: 'React', icon: SiReact, color: '#61DAFB' },
       { name: 'Next.js', icon: SiNextdotjs, color: 'currentColor' },
       { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
+      { name: 'Vite', icon: SiVite, color: '#646CFF' },
     ],
   },
   {
@@ -56,6 +63,7 @@ export const skills: SkillGroup[] = [
       { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
       { name: 'Django', icon: SiDjango, color: '#0FA47A' },
       { name: 'Flask', icon: SiFlask, color: 'currentColor' },
+      { name: 'Express', icon: SiExpress, color: 'currentColor' },
     ],
   },
   {
@@ -64,11 +72,16 @@ export const skills: SkillGroup[] = [
     items: [
       { name: 'Git', icon: SiGit, color: '#F05032' },
       { name: 'Docker', icon: SiDocker, color: '#2496ED' },
+      { name: 'AWS', icon: FaAws, color: '#FF9900' },
+      { name: 'GitHub Actions', icon: SiGithubactions, color: '#2088FF' },
+      { name: 'Linux', icon: SiLinux, color: '#FCC624' },
       { name: 'PostgreSQL', icon: SiPostgresql, color: '#31648C' },
       { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
       { name: 'SQLite', icon: SiSqlite, color: '#0F80D5' },
       { name: 'Jenkins', icon: SiJenkins, color: '#D24939' },
+      { name: 'pytest', icon: SiPytest, color: '#0A9EDC' },
       { name: 'Playwright', icon: PlaywrightIcon, color: '#2EAD33' },
+      { name: 'Vitest', icon: SiVitest, color: '#6E9F18' },
     ],
   },
 ]
