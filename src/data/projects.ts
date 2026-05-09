@@ -25,8 +25,30 @@ import mlProjectsImg from '@/assets/images/ml_projects.png'
 import calendarAnalyticsImg from '@/assets/images/calendar_analytics.png'
 import filesUnifederImg from '@/assets/images/files_unifeder.png'
 import claudeCodeToolsImg from '@/assets/images/claude_code_tools_website.png'
+import pitchStarImg from '@/assets/images/pitch-star.png'
 
 export const projects: WorkItem[] = [
+  {
+    id: 'pitch-star',
+    title: 'Pitch Star - FIFA Songs Quiz',
+    tagline:
+      'Hear 30 seconds. Guess the FIFA year. Built for anyone who learned about music from a video game.',
+    description:
+      'An iOS quiz app celebrating the iconic music library from FIFA games (FIFA 98–24). Users hear 30-second preview clips and guess which FIFA edition they came from. Features a free daily challenge, premium unlimited rounds via StoreKit 2, and a catalog browser spanning 800+ tracks across three eras.',
+    problem:
+      "There was no dedicated app for the nostalgia around FIFA's legendary soundtrack — music that introduced a generation to artists like Franz Ferdinand, Basement Jaxx, and The Streets.",
+    solution:
+      'Built a native iOS 17 app in SwiftUI with MVVM + @Observable architecture. Audio streams 30s preview URLs from the iTunes catalog via AVFoundation. Daily challenges are served from Firebase Firestore; subscriptions use StoreKit 2 with entitlement enforcement at the service layer. Song data is bundled as songs.json (800+ tracks).',
+    technologies: ['Swift', 'SwiftUI', 'Firebase', 'StoreKit 2', 'SwiftData', 'AVFoundation'],
+    outcomes:
+      'A fully-featured iOS app with a freemium model, daily challenges, streak scoring, shareable score cards, and a full catalog browser — all offline-capable except the daily challenge.',
+    imageUrl: pitchStarImg,
+    imageAlt:
+      'Pitch Star — quiz screen showing album art, audio waveform, and four FIFA year answer tiles',
+    sourceUrl: 'https://github.com/Yoavsb25/fifa-songs-app',
+    featured: true,
+    date: '2026',
+  },
   {
     id: 'claude-code-tools',
     title: 'Claude Code Tools - Skills & Automation Registry',

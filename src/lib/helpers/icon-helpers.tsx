@@ -18,6 +18,8 @@ import {
   SiPandas,
   SiJupyter,
   SiGithubactions,
+  SiSwift,
+  SiFirebase,
 } from 'react-icons/si'
 import { CONTACT_ICON_MAP } from '@/lib/constants'
 import PlaywrightImg from '@/assets/icons/Playwright--Streamline-Svg-Logos.svg'
@@ -81,6 +83,8 @@ const TECH_ICON_MAP: Record<string, TechIconComponent> = {
   pandas: SiPandas,
   jupyter: SiJupyter,
   'github actions': SiGithubactions,
+  swift: SiSwift,
+  firebase: SiFirebase,
 }
 
 /**
@@ -112,6 +116,8 @@ const TECH_ICON_COLORS: Record<string, string> = {
   pandas: '#150458',
   jupyter: '#F37626',
   'github actions': '#2088FF',
+  swift: '#F05138',
+  firebase: '#FFCA28',
 }
 
 /**
